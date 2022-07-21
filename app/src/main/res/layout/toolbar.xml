@@ -34,5 +34,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:gravity="center" />
+        <!-- 페이지마다 다른 타이틀 적용할 수 있도록 수정 필요(android:text) -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
