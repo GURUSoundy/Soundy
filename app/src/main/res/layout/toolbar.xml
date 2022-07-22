@@ -23,17 +23,17 @@
 
     <TextView
         android:id="@+id/titleText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:backgroundTint="@color/beige"
+        android:gravity="center"
         android:text="타이틀"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:gravity="center" />
-        <!-- 페이지마다 다른 타이틀 적용할 수 있도록 수정 필요(android:text) -->
+        app:layout_constraintTop_toTopOf="parent" />
+    <!-- 페이지마다 다른 타이틀 적용할 수 있도록 수정 필요(android:text) -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
