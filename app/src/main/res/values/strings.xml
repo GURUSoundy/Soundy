@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Soundy</string>
+    <string name="btn_forget_password"><u>비밀번호를 잊었다면?</u></string>
 </resources>
