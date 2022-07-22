@@ -22,7 +22,7 @@
         app:srcCompat="@drawable/back_button" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/titleText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:backgroundTint="@color/beige"
