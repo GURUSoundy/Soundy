@@ -2,13 +2,10 @@ package com.example.soundy
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.*
 
 class LoginActivity : AppCompatActivity() {
@@ -48,13 +45,13 @@ class LoginActivity : AppCompatActivity() {
 
             /* 아이디 넘기는 작업 추가 */
 
-            /* 로그인 잘 완료되면 목록 액티비티로 넘어감
-            val intent = Intent(this, listActivity::class.java)
-            startActivity(intent) */
+            /* 로그인 잘 완료되면 목록 액티비티로 넘어감 */
+            val intent = Intent(this, FileListActivity::class.java)
+            startActivity(intent)
         } else {
             id = findViewById(R.id.id)
             password = findViewById(R.id.password)
-            btnLogin = findViewById(R.id.btnLogin)
+            btnLogin = findViewById(R.id.btnCategory1)
             autoLogin = findViewById(R.id.autoLogin)
             btnForgetPassword = findViewById(R.id.btnForgetPassword)
 
@@ -81,9 +78,9 @@ class LoginActivity : AppCompatActivity() {
 
                     /* 아이디 넘기는 작업 추가 */
 
-                    /* 로그인 잘 완료되면 목록 액티비티로 넘어감
-                    val intent = Intent(this, listActivity::class.java)
-                    startActivity(intent) */
+                    /* 로그인 잘 완료되면 목록 액티비티로 넘어감 */
+                    val intent = Intent(this, FileListActivity::class.java)
+                    startActivity(intent)
 
                     cursor.close()
                     sqliteDB.close()
