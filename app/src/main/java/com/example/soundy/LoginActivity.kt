@@ -111,9 +111,9 @@ class LoginActivity : AppCompatActivity() {
             /* 비밀번호 재설정 버튼 클릭 이벤트 핸들러 */
             btnForgetPassword.setOnClickListener {
                 Toast.makeText(this@LoginActivity, "비밀번호 재설정.", Toast.LENGTH_SHORT).show()
-                /*
-                val intent = Intent(this, ForgetPasswordActivity::class.java)
-                startActivity(intent) */
+
+                val intent = Intent(this, ResetPasswordAvtivity::class.java)
+                startActivity(intent)
             }
         }
 
