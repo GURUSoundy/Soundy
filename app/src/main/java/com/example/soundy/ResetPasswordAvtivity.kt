@@ -51,15 +51,19 @@ class ResetPasswordAvtivity() : AppCompatActivity() {
             var strPwdCheck: String = pwdCheck.text.toString()
 
             /* id가 존재하는지 DB에서 확인 */
-            var cursor: Cursor = sqliteDB.rawQuery("select * from User where id = '$strId' ;", null)
+            var cursor: Cursor = sqliteDB.rawQuery("select * from User where id = '$strId' and password = '$strPwd';", null)
 
             while (cursor.moveToNext()) {
                 var validId: String = cursor.getString(0)
+                var validPassword: String = cursor.getString(1)
             }
 
             /* 비밀번호 변경 */
             if (cursor.count == 1) {
                 /* 비밀번호 변경 작업 추가 */
+                sqliteDB = dbManager.writableDatabase
+                sqliteDB.execSQL("UPDATE USER SET password = '$strPwd' WHERE where id = '$strId';")
+
                 cursor.close()
                 sqliteDB.close()
 
