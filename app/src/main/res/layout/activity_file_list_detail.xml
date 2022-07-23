@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/beige"
     android:orientation="vertical"
-    tools:context=".FileListActivity">
+    tools:context=".FileListDetailActivity">
 
     <!-- 메뉴바 구성 -->
 

@@ -68,7 +68,7 @@
     <!--리사이클러뷰로 구현-->
 
     <Button
-        android:id="@+id/btnCategory1"
+        android:id="@+id/btnWithdrawal"
         android:layout_width="350dp"
         android:layout_height="55dp"
         android:layout_gravity="center"

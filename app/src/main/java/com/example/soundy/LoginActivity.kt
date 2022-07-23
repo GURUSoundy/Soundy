@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
         } else {
             id = findViewById(R.id.id)
             password = findViewById(R.id.password)
-            btnLogin = findViewById(R.id.btnCategory1)
+            btnLogin = findViewById(R.id.btnWithdrawal)
             autoLogin = findViewById(R.id.autoLogin)
             btnForgetPassword = findViewById(R.id.btnForgetPassword)
 

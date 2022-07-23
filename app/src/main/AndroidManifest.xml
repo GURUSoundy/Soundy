@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Soundy">
-        <activity android:name=".FileListDetailActivity"></activity>
+        <activity android:name=".AccountWithdrawalActivity"></activity>
+        <activity android:name=".ResetActivity" />
+        <activity android:name=".FileListDetailActivity" />
         <activity android:name=".FileListActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
