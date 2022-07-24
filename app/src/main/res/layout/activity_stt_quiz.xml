@@ -6,12 +6,10 @@
     android:layout_height="match_parent"
     android:background="@color/beige"
     android:orientation="vertical"
-    tools:context=".ResetPasswordAvtivity">
-
-    <?xml version="1.0" encoding="utf-8"?>
+    tools:context=".SttActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +36,7 @@
             android:layout_height="match_parent"
             android:backgroundTint="@color/beige"
             android:gravity="center"
-            android:text="비밀번호 재설정"
+            android:text="복습 퀴즈"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -46,79 +44,70 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <EditText
         android:id="@+id/stt"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
+        android:layout_width="349dp"
+        android:layout_height="431dp"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="144dp"
         android:layout_marginEnd="80dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="120dp"
         android:background="@drawable/edit_text_rounded_corner_rectangle"
         android:backgroundTint="#FEFDFB"
-        android:hint="아이디 입력"
+        android:elevation="3dp"
         android:inputType="textEmailAddress"
         android:paddingLeft="20dp"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/pwd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout2" />
-
-    <EditText
-        android:id="@+id/pwd"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/edit_text_rounded_corner_rectangle"
-        android:backgroundTint="#FEFDFB"
-        android:hint="비밀번호 입력"
-        android:inputType="textPassword"
-        android:paddingLeft="20dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/pwdCheck"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/pwdCheck"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="152dp"
-        android:background="@drawable/edit_text_rounded_corner_rectangle"
-        android:backgroundTint="#FEFDFB"
-        android:hint="비밀번호 재확인"
-        android:inputType="textPassword"
-        android:paddingLeft="20dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnModify"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnModify"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="96dp"
-        android:backgroundTint="@color/mint"
-        android:elevation="4dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:text="변경"
-        android:textColor="#797A7E"
-        android:textSize="16sp"
-        app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <ImageButton
+        android:id="@+id/btnHighlight"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginBottom="27dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="@color/beige"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnUnderscore"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/Highlight" />
+
+    <ImageButton
+        android:id="@+id/btnUnderscore"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="27dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="@color/beige"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnConfirm"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnHighlight"
+        app:srcCompat="@drawable/Underscore" />
+
+    <ImageButton
+        android:id="@+id/btnConfirm"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="27dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="@color/beige"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnUnderscore"
+        app:srcCompat="@drawable/STTConfirm" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,13 +2,10 @@ package com.example.soundy
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.*
 
 class LoginActivity : AppCompatActivity() {
@@ -52,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, listActivity::class.java)
             startActivity(intent) */
         } else {
-            id = findViewById(R.id.id)
+            id = findViewById(R.id.stt)
             password = findViewById(R.id.password)
             btnLogin = findViewById(R.id.btnLogin)
             autoLogin = findViewById(R.id.autoLogin)
