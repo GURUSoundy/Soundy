@@ -34,7 +34,7 @@ class FileListActivity : AppCompatActivity() {
             /* 디렉토리 추가 로직 구현 */
         }
 
-        /* 마이페이지 이동 버튼 */
+        /* 마이페이지 이동 기능 */
         btnMypage=findViewById<ImageButton>(R.id.btnMypage)
         btnMypage.setOnClickListener {
             val intent = Intent(this, mypage::class.java)
