@@ -1,5 +1,6 @@
 package com.example.soundy
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,9 +12,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_file_list.*
 
 class FileListActivity : AppCompatActivity() {
-    /* 목록에서 뒤로가기 버튼이 필요한가?
-    lateinit var btnBack: ImageButton
-    */
     lateinit var btnPlusDirectory: FloatingActionButton
     /* 목록(상세) 테스트용 변수 */
     lateinit var directoryName1: TextView
