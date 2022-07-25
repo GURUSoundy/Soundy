@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
-    lateinit var btnGoSignUp: Button
+    lateinit var btnGoSignUp : Button
     lateinit var btnGoLogin : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnGoSignUp.setOnClickListener {
-            val intent = Intent(this, signUp::class.java)
+            val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
     }

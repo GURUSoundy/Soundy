@@ -11,7 +11,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
-class signUp : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
 
     // private val root: Any
 //    private lateinit var binding: signUp
@@ -79,7 +79,7 @@ class signUp : AppCompatActivity() {
         rePw = findViewById(R.id.rePw)
         btnSignup = findViewById(R.id.btnSignup)
 
-        var dbManager = DBManager(this, "memInfoDB", null, 1)
+        var dbManager = DBManager(this, "User", null, 1)
 
         btnSignup.setOnClickListener {
             Log.d(TAG, "회원가입 버튼 클릭")
