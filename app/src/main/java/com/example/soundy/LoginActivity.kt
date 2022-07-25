@@ -70,8 +70,8 @@ class LoginActivity : AppCompatActivity() {
 
                 while (cursor.moveToNext()) {
                     var validId: String = cursor.getString(0)
-                    var validPassword: String = cursor.getString(1)
-                    nickname = cursor.getString(2)
+                    nickname = cursor.getString(1)
+                    var validPassword: String = cursor.getString(2)
                 }
 
                 if (cursor.count == 1) {
