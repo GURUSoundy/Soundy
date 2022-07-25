@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SaveFileActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#00FFFFFF"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/back_button" />
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/beige"
+            android:gravity="center"
+            android:text="파일 저장"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.545"
+            tools:srcCompat="@tools:sample/avatars" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/fileName"
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_rounded_corner_rectangle_white"
+        android:drawableLeft="@drawable/record_icon_resize"
+        android:drawablePadding="15dp"
+        android:elevation="3dp"
+        android:hint="녹음 파일 이름 입력"
+        android:padding="15dp"
+        android:textColorHint="#797A7E"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="370dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/upload_icon_resize"
+        android:drawablePadding="10dp"
+        android:elevation="4dp"
+        android:gravity="center_vertical"
+        android:padding="18dp"
+        android:text=" 참고 자료 업로드"
+        android:textColor="#797A7E"
+        android:textSize="16sp"
+        app:cornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fileName" />
+
+    <ImageView
+        android:id="@+id/ivStt"
+        android:layout_width="370dp"
+        android:layout_height="240dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/stt_rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpload" />
+
+    <TextView
+        android:id="@+id/sttContent"
+        android:layout_width="324dp"
+        android:layout_height="126dp"
+        android:layout_marginTop="15dp"
+        android:text="TextView"
+        android:textSize="15sp"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toEndOf="@+id/ivStt"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="@+id/ivStt"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="330dp"
+        android:layout_height="2px"
+        android:layout_marginTop="67dp"
+        android:background="#797A7E"
+        app:layout_constraintEnd_toEndOf="@+id/ivStt"
+        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintStart_toStartOf="@+id/ivStt"
+        app:layout_constraintTop_toTopOf="@+id/ivStt" />
+
+    <TextView
+        android:id="@+id/tvStt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:text="STT(Speach To Text)"
+        android:textColor="#797A7E"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/iconStt"
+        app:layout_constraintTop_toTopOf="@+id/ivStt" />
+
+    <ImageView
+        android:id="@+id/iconStt"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/ivStt"
+        app:layout_constraintTop_toTopOf="@+id/ivStt"
+        app:srcCompat="@drawable/stt_icon" />
+
+    <Button
+        android:id="@+id/btnRoutine"
+        android:layout_width="370dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/calendar_icon_resize"
+        android:drawablePadding="10dp"
+        android:elevation="4dp"
+        android:gravity="center_vertical"
+        android:padding="15dp"
+        android:text=" 복습 루틴 설정"
+        android:textColor="#797A7E"
+        android:textSize="16sp"
+        app:cornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivStt" />
+
+
+    <ImageView
+        android:id="@+id/question"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="18dp"
+        android:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnRoutine"
+        app:layout_constraintTop_toTopOf="@+id/btnRoutine"
+        app:srcCompat="@drawable/question_icon" />
+
+    <!-- stt를 버튼으로 어떻게..
+    <Button
+        android:layout_width="370dp"
+        android:layout_height="240dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/stt_icon_resize"
+        android:drawablePadding="10dp"
+        android:elevation="4dp"
+        android:gravity="center_vertical"
+        android:padding="18dp"
+        android:text=" 참고 자료 업로드"
+        android:textColor="#797A7E"
+        android:textSize="16sp"
+        app:cornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="224dp" /> -->
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/mint"
+        android:text="저장"
+        android:textColor="#797A7E"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
