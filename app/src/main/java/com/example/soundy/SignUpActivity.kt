@@ -13,42 +13,6 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : AppCompatActivity() {
 
-    // private val root: Any
-//    private lateinit var binding: signUp
-//        private lateinit var localDB: DBManager
-//        val DATABASE_VERSION = 1
-//        val DATABASE_NAME = "DBManager.db"
-//
-//
-//        override fun onCreate(savedInstanceState: Bundle?) {
-//            super.onCreate(savedInstanceState)
-//            binding = signUp.inflate(layoutInflater)    // 뷰 바인딩
-//            val view = binding.root
-//            setContentView(view)
-//
-//
-//            localDB= DBManager(this, DATABASE_NAME,null, DATABASE_VERSION) // SQLite 모듈 생성
-//
-//            binding.btnSignup.setOnClickListener { view->
-//                if(binding.enterId.text.isEmpty()||binding.enterPw.text.isEmpty()||binding.rePw.text.isEmpty()){// 값이 전부 입력되지 않은경우
-//                    Toast.makeText(this,"값을 전부 입력해주세요..",Toast.LENGTH_LONG).show()
-//                }else{
-//
-//                    if(binding.rePw.text.toString().equals(binding.rePw.text.toString())){//패스워드/패스워드 확인이 일치
-//                        if(localDB.checkIdExist(binding.enterId.text.toString())){// 아이디 중복 확인
-//                            Toast.makeText(this,"아이디가 이미 존재합니다.",Toast.LENGTH_LONG).show()
-//                        }else{// 존재하는 아이디
-//                            localDB.signupUser(binding.enterId.text.toString(),binding.enterPw.text.toString())
-//                        }
-//                    }else{ // 패스워드/패스워드 확인이 일치하지 않음
-//                        Toast.makeText(this,"패스워드가 틀렸습니다.",Toast.LENGTH_LONG).show()
-//                    }
-//                }
-//            }
-//        }
-//  }
-
-
     lateinit var enterNick: EditText
     lateinit var enterId: EditText
     lateinit var enterPw: EditText
@@ -104,7 +68,7 @@ class SignUpActivity : AppCompatActivity() {
             else {
 
                 // 회원가입 성공 토스트 메세지 띄우기
-                dbManager.insertUser(nick, id, pw)
+                dbManager.insertUser(id, nick, pw)
                 Log.d(TAG, "회원정보 삽입")
                 Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
 

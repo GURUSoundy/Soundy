@@ -15,7 +15,7 @@ class DBManager(
     override fun onCreate(db: SQLiteDatabase?) {
 
         /*!!!!!!!!!!User table 확인 불가라 떠서 확인요망 !!!!*/
-        db!!.execSQL("CREATE TABLE User (nickname text, id text PRIMARY KEY, password text)")
+        db!!.execSQL("CREATE TABLE User (id text PRIMARY KEY, nickname text, password text)")
 
     }
 
