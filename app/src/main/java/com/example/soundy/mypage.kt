@@ -35,27 +35,27 @@ class mypage : AppCompatActivity() {
 
         /* 프로필수정 버튼 */
         btnProfile.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
+//            val intent = Intent(this, Profile::class.java)
             startActivity(intent)
         }
         /* 알람시간설정 버튼 */
         btnAlarm.setOnClickListener {
-            val intent = Intent(this, AlarmActivity::class.java)
+//            val intent = Intent(this, Alarm::class.java)
             startActivity(intent)
         }
         /* 초기화 버튼 */
         btnReset.setOnClickListener {
-            val intent = Intent(this, ResetActivity::class.java)
+//            val intent = Intent(this, Reset::class.java)
             startActivity(intent)
         }
         /* 로그아웃 버튼 */
         btnLogout.setOnClickListener {
- //          val intent = Intent(this, Logout::class.java)
+//            val intent = Intent(this, Logout::class.java)
             startActivity(intent)
         }
         /* 탈퇴 버튼 */
         btnQuit.setOnClickListener {
-            val intent = Intent(this, AccountWithdrawalActivity::class.java)
+//            val intent = Intent(this, AccountWithdrawal::class.java)
             startActivity(intent)
         }
     }
