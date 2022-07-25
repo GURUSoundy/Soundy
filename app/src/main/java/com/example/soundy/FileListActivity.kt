@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_file_list.*
 
 class FileListActivity : AppCompatActivity(), CustomDialogInterface {
     lateinit var btnPlusDirectory: FloatingActionButton
+    lateinit var btnMypage : ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +24,13 @@ class FileListActivity : AppCompatActivity(), CustomDialogInterface {
         btnPlusDirectory.setOnClickListener{
             val customDialog = CustomDialog(this, this)
             customDialog.show()
+        }
+
+        /* 마이페이지 이동 기능 */
+        btnMypage=findViewById<ImageButton>(R.id.btnMypage)
+        btnMypage.setOnClickListener {
+            val intent = Intent(this, mypage::class.java)
+            startActivity(intent)
         }
     }
 

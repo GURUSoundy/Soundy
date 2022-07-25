@@ -48,11 +48,12 @@ class AlarmActivity : AppCompatActivity() {
             Toast.makeText(this@AlarmActivity, "$hour 시 $minute 분 저장되었습니다.", Toast.LENGTH_SHORT).show()
         }
 
-        /* 뒤로 가기 버튼 클릭 시
+        /* 뒤로가기 버튼 클릭 리스너 */
+        btnBack = findViewById(R.id.btnBack)
         btnBack.setOnClickListener {
-            val intent = Intent(this, 이전 액티비티::class.java)
+            val intent = Intent(this, mypage::class.java)
             startActivity(intent)
-        } */
+        }
 
     }
 }
