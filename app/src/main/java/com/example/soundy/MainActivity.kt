@@ -6,15 +6,15 @@ import android.os.Bundle
 import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
-    lateinit var btnGoSignUp: Button //회원가입 버튼
+    lateinit var btnGoSignUp: Button
     lateinit var btnGoLogin : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnGoSignUp = findViewById(R.id.btnGoSignUp)
         btnGoLogin = findViewById(R.id.btnGoLogin)
+        btnGoSignUp = findViewById(R.id.btnGoSigUp)
 
         btnGoLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
@@ -25,6 +25,5 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, signUp::class.java)
             startActivity(intent)
         }
-
     }
 }

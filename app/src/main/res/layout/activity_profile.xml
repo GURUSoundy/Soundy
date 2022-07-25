@@ -157,7 +157,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintStart_toEndOf="@+id/nickname"
         app:layout_constraintTop_toBottomOf="@+id/imgProfile"
-        app:srcCompat="@drawable/pencil" />
+        app:srcCompat="@drawable/pencil_icon" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
