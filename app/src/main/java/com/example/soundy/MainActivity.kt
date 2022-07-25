@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
-    lateinit var btnGoSignUp: Button
+    lateinit var btnGoSignUp: Button //회원가입 버튼
     lateinit var btnGoLogin : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
