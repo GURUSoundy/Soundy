@@ -20,10 +20,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-        /* 회원가입 화면 만든 후 완성
-        btnGoSignUp.setOnClickListener {
 
+        btnGoSignUp.setOnClickListener {
+            val intent = Intent(this, signUp::class.java)
+            startActivity(intent)
         }
-        */
+
     }
 }
