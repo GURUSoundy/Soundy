@@ -95,7 +95,6 @@
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enterId" />
-
     <Button
         android:id="@+id/btnWithdrawal"
         android:layout_width="300dp"

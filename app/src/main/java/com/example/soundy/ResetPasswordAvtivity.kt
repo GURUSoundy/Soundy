@@ -1,13 +1,10 @@
 package com.example.soundy
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -33,10 +30,10 @@ class ResetPasswordAvtivity() : AppCompatActivity() {
         sqliteDB = dbManager.readableDatabase
 
         btnBack = findViewById(R.id.btnBack)
-        id = findViewById(R.id.id)
+        id = findViewById(R.id.stt)
         pwd = findViewById(R.id.pwd)
         pwdCheck = findViewById(R.id.pwdCheck)
-        btnResetPwd = findViewById(R.id.btnResetPwd)
+        btnResetPwd = findViewById(R.id.btnModify)
 
         /* 뒤로가기 버튼 */
         btnBack.setOnClickListener {

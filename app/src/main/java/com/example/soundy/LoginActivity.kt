@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, FileListActivity::class.java)
             startActivity(intent)
         } else {
-            id = findViewById(R.id.id)
+            id = findViewById(R.id.stt)
             password = findViewById(R.id.password)
             btnLogin = findViewById(R.id.btnWithdrawal)
             autoLogin = findViewById(R.id.autoLogin)
