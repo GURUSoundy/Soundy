@@ -96,7 +96,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enterId" />
     <Button
-        android:id="@+id/btnWithdrawal"
+        android:id="@+id/btnLogin"
         android:layout_width="300dp"
         android:layout_height="55dp"
         android:layout_marginTop="25dp"
