@@ -17,6 +17,7 @@ class FileListActivity : AppCompatActivity() {
     lateinit var btnPlusDirectory: FloatingActionButton
     /* 목록(상세) 테스트용 변수 */
     lateinit var directoryName1: TextView
+    lateinit var btnMypage : ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +34,13 @@ class FileListActivity : AppCompatActivity() {
         btnPlusDirectory.setOnClickListener{
             Toast.makeText(this, "디렉토리 추가", Toast.LENGTH_SHORT).show()
             /* 디렉토리 추가 로직 구현 */
+        }
+
+        /* 마이페이지 이동 버튼 */
+        btnMypage=findViewById<ImageButton>(R.id.btnMypage)
+        btnMypage.setOnClickListener {
+            val intent = Intent(this, mypage::class.java)
+            startActivity(intent)
         }
     }
 }
