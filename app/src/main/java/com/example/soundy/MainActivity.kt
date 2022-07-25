@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btnGoLogin = findViewById(R.id.btnGoLogin)
-        btnGoSignUp = findViewById(R.id.btnGoSigUp)
+        btnGoSignUp = findViewById(R.id.btnGoSignUp)
 
         btnGoLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
