@@ -1,5 +1,6 @@
 package com.example.soundy
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +13,24 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        /* 자동 로그인 처리 */
+        val auto = getSharedPreferences("autoLogin", Context.MODE_PRIVATE)
+        var userId = auto.getString("userId", null)
+        var userPW = auto.getString("userPW", null)
+        var userNickName = auto.getString("userNickname", null)
+
+        /* !!!!! 로그아웃 페이지 만든 후 autoLogin 값 지워주는 로직 추가(노션 확인) !!!!! */
+
+        if (userId != null && userPW != null) {
+
+            /* 아이디 넘기는 작업 추가 */
+
+            /* 로그인 잘 완료되면 목록 액티비티로 넘어감 */
+            val intent = Intent(this, FileListActivity::class.java)
+            intent.putExtra("nickname", userNickName)
+            startActivity(intent)
+        }
 
         btnGoLogin = findViewById(R.id.btnGoLogin)
         btnGoSignUp = findViewById(R.id.btnGoSignUp)
