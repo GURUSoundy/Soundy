@@ -47,31 +47,32 @@ class ResetPasswordAvtivity() : AppCompatActivity() {
             var strPwd: String = pwd.text.toString()
             var strPwdCheck: String = pwdCheck.text.toString()
 
+            /* 모든 칸을 입력하지 않았을 경우 */
+            if (strId.length == 0 || strPwd.length == 0 || strPwdCheck.length == 0) {
+                Toast.makeText(this, "아이디, 비밀번호, 비밀번호 확인을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            } else if (strPwd != strPwdCheck) {
+                Toast.makeText(this, "비밀번호와 비밀번호 확인이 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+            }
+
+
             /* id가 존재하는지 DB에서 확인 */
-            var cursor: Cursor = sqliteDB.rawQuery("select * from User where id = '$strId' and password = '$strPwd';", null)
+            var cursor: Cursor = sqliteDB.rawQuery("select * from User where id = '$strId';", null)
 
             while (cursor.moveToNext()) {
                 var validId: String = cursor.getString(0)
-                var validPassword: String = cursor.getString(1)
             }
 
             /* 비밀번호 변경 */
             if (cursor.count == 1) {
-                /* 비밀번호 변경 작업 추가 */
+                /* 아이디가 존재할 경우 */
                 sqliteDB = dbManager.writableDatabase
-                sqliteDB.execSQL("UPDATE USER SET password = '$strPwd' WHERE where id = '$strId';")
+                sqliteDB.execSQL("UPDATE USER SET password = '$strPwd' WHERE id = '$strId';")
 
                 cursor.close()
                 sqliteDB.close()
 
-            } else { /* 입력에 오류가 있을 경우 */
-                if (strId.isEmpty() || strPwd.isEmpty() || strPwdCheck.isEmpty()) {
-                    Toast.makeText(this, "아이디, 비밀번호, 비밀번호 확인을 입력해주세요.", Toast.LENGTH_SHORT).show()
-                } else if (strPwd != strPwdCheck) {
-                    Toast.makeText(this, "비밀번호와 비밀번호 확인이 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "존재하지 않는 아이디입니다.", Toast.LENGTH_SHORT).show()
-                }
+            } else { /* 아이디가 존재하지 않을 경우 */
+                Toast.makeText(this, "존재하지 않는 아이디입니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
