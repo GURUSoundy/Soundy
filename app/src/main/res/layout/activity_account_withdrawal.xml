@@ -5,17 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/beige"
-    android:orientation="vertical"
-    tools:context=".LoginActivity">
-
-    <!-- include toolbar -->
-    <!--  제대로 안돼서 일단 지움
-        <include
-            layout="@layout/toolbar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-            -->
+    tools:context=".AccountWithdrawalActivity">
 
     <!-- 메뉴바 구성 -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +35,7 @@
             android:layout_height="match_parent"
             android:backgroundTint="@color/beige"
             android:gravity="center"
-            android:text="로그인"
+            android:text="탈퇴"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -56,35 +46,30 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <EditText
-        android:id="@+id/enterId"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="184dp"
-        android:layout_marginEnd="80dp"
-        android:autofillHints="아이디"
-        android:background="@drawable/edit_text_rounded_corner_rectangle"
-        android:elevation="3dp"
-        android:ems="10"
-        android:hint="아이디 입력"
-        android:inputType="textEmailAddress"
-        android:paddingLeft="20dp"
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="false"
+        android:text="정말로 탈퇴하시겠습니까?"
+        android:textAlignment="center"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
 
     <EditText
-        android:id="@+id/enterPw"
+        android:id="@+id/password"
         android:layout_width="300dp"
         android:layout_height="55dp"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="80dp"
         android:autofillHints="비밀번호"
         android:background="@drawable/edit_text_rounded_corner_rectangle"
+        android:backgroundTint="@color/white"
         android:elevation="3dp"
         android:ems="10"
         android:hint="비밀번호 입력"
@@ -92,55 +77,25 @@
         android:paddingLeft="20dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterId" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Button
         android:id="@+id/btnWithdrawal"
         android:layout_width="300dp"
         android:layout_height="55dp"
         android:layout_marginTop="25dp"
-        android:backgroundTint="@color/mint"
+        android:backgroundTint="@color/gray"
         android:elevation="4dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:text="확인"
-        android:textColor="#797A7E"
+        android:text="탈퇴하기"
+        android:textColor="#FF4A4A"
         android:textSize="16sp"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterPw" />
-
-    <CheckBox
-        android:id="@+id/autoLogin"
-        android:layout_width="99dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="317dp"
-        android:layout_marginBottom="220dp"
-        android:text="자동 로그인"
-        android:textColor="#797A7E"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.294"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnForgetPassword"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#00FFFFFF"
-        android:text="@string/btn_forget_password"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="#54BAB9"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

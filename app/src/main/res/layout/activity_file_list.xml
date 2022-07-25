@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beige"
+    android:orientation="vertical"
+    tools:context=".FileListActivity">
+
+    <!-- 메뉴바 구성 -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#00FFFFFF"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/back_button" />
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/beige"
+            android:gravity="center"
+            android:text="목록"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/shape_circle_button"
+            android:elevation="4dp"
+            android:padding="2dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/default_profile" />
+        <!-- 사용자 프로필 사진 받아와서 적용할 수 있게 수정 -->
+        <!-- 페이지마다 다른 타이틀 적용할 수 있도록 수정 필요(android:text) -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--리사이클러뷰로 구현-->
+
+    <Button
+        android:id="@+id/btnWithdrawal"
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/white"
+        android:elevation="4dp"
+        android:gravity="left|center_vertical"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="2020-1"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:cornerRadius="15dp" />
+
+    <TextView
+        android:id="@+id/directoryName1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="컴개론" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@color/gray" />
+
+    <TextView
+        android:id="@+id/directoryName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="콘제기" />
+
+    <Button
+        android:id="@+id/btnCategory2"
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/white"
+        android:elevation="4dp"
+        android:gravity="left|center_vertical"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="2020-2"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:cornerRadius="15dp" />
+
+    <Button
+        android:id="@+id/btnCategory3"
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/white"
+        android:elevation="4dp"
+        android:gravity="left|center_vertical"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="2021-1"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:cornerRadius="15dp" />
+
+    <Button
+        android:id="@+id/btnCategory4"
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/white"
+        android:elevation="4dp"
+        android:gravity="left|center_vertical"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="자격증"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:cornerRadius="15dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnPlusDirectory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="25dp"
+        android:backgroundTint="@color/real_mint"
+        android:clickable="true"
+        android:elevation="4dp"
+        app:srcCompat="@android:drawable/ic_input_add"
+        app:tint="@color/white" />
+
+</LinearLayout>

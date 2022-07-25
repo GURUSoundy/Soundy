@@ -6,11 +6,11 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+
     <color name="white">#FFFFFFFF</color>
 
     <color name="real_mint">#54BAB9</color>
     <color name="mint">#EAF3EB</color>
     <color name="beige">#FBF8F1</color>
     <color name="gray">#1F797A7E</color>
-    <color name="light_gray">#EBE9E3</color>
 </resources>
