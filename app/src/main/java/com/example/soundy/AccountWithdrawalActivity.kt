@@ -1,5 +1,6 @@
 package com.example.soundy
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -15,12 +16,14 @@ class AccountWithdrawalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account_withdrawal)
 
-        btnBack = findViewById(R.id.btnBack)
         password = findViewById(R.id.password)
         btnWithdrawal = findViewById(R.id.btnWithdrawal)
 
-        btnBack.setOnClickListener{
-            /* 뒤로가기 버튼 로직 구현 */
+        /* 뒤로가기 버튼 클릭 리스너 */
+        btnBack = findViewById(R.id.btnBack)
+        btnBack.setOnClickListener {
+            val intent = Intent(this, mypage::class.java)
+            startActivity(intent)
         }
 
         btnWithdrawal.setOnClickListener {

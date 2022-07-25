@@ -1,5 +1,6 @@
 package com.example.soundy
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -13,11 +14,13 @@ class ResetActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reset)
 
-        btnBack = findViewById(R.id.btnBack)
         btnReset = findViewById(R.id.btnWithdrawal)
 
-        btnBack.setOnClickListener{
-            /* 초기화 화면에 들어오기 전의 화면으로 돌아가는 로직 구현 */
+        /* 뒤로가기 버튼 클릭 리스너 */
+        btnBack = findViewById(R.id.btnBack)
+        btnBack.setOnClickListener {
+            val intent = Intent(this, mypage::class.java)
+            startActivity(intent)
         }
 
         btnReset.setOnClickListener {
