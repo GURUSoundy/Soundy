@@ -49,9 +49,9 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, FileListActivity::class.java)
             startActivity(intent)
         } else {
-            id = findViewById(R.id.stt)
-            password = findViewById(R.id.password)
-            btnLogin = findViewById(R.id.btnWithdrawal)
+            id = findViewById(R.id.enterId)
+            password = findViewById(R.id.enterPw)
+            btnLogin = findViewById(R.id.btnLogin)
             autoLogin = findViewById(R.id.autoLogin)
             btnForgetPassword = findViewById(R.id.btnForgetPassword)
 
@@ -61,11 +61,11 @@ class LoginActivity : AppCompatActivity() {
             /* 로그인 버튼 클릭 이벤트 핸들러 */
             btnLogin.setOnClickListener {
                 /* id, password 넘겨서 DB에서 확인하는 로직 */
-                var str_id: String = id.text.toString()
-                var str_password: String = password.text.toString()
+                var strId: String = id.text.toString()
+                var strPassword: String = password.text.toString()
                 var nickname: String = ""
 
-                var cursor: Cursor = sqliteDB.rawQuery("select * from User where id = '$str_id' and password = '$str_password';", null)
+                var cursor: Cursor = sqliteDB.rawQuery("select * from User where id = '$strId' and password = '$strPassword';", null)
 
                 while (cursor.moveToNext()) {
                     var validId: String = cursor.getString(0)
@@ -87,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
 
                 } else {
                     /* 아이디나 비밀번호를 입력하지 않았을 경우 / 아이디 또는 비밀번호가 틀렸을 경우 */
-                    if (str_id.isEmpty() || str_password.isEmpty()) {
+                    if (strId.isEmpty() || strPassword.isEmpty()) {
                         Toast.makeText(this@LoginActivity, "아이디와 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(this@LoginActivity, "아이디 또는 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()
@@ -98,8 +98,8 @@ class LoginActivity : AppCompatActivity() {
                 if (autoLogin.isChecked) {
                     val auto = getSharedPreferences("autoLogin", Context.MODE_PRIVATE)
                     val editor = auto.edit()
-                    editor.putString("userId", str_id)
-                    editor.putString("userPW", str_password)
+                    editor.putString("userId", strId)
+                    editor.putString("userPW", strPassword)
                     editor.putString("userNickname", nickname)
                     editor.apply()
                 }
