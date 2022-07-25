@@ -77,7 +77,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btnSave"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnUnderscore"
-        app:srcCompat="@drawable/Eraser" />
+        app:srcCompat="@drawable/eraser" />
 
     <ImageButton
         android:id="@+id/btnHighlight"
@@ -92,7 +92,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btnUnderscore"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/Highlight" />
+        app:srcCompat="@drawable/highlight" />
 
     <ImageButton
         android:id="@+id/btnUnderscore"
@@ -106,7 +106,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btnEraser"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnHighlight"
-        app:srcCompat="@drawable/Underscore" />
+        app:srcCompat="@drawable/underscore" />
 
     <ImageButton
         android:id="@+id/btnSave"
@@ -121,7 +121,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnEraser"
-        app:srcCompat="@drawable/STTSave" />
+        app:srcCompat="@drawable/sttsave" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

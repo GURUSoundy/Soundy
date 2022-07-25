@@ -78,7 +78,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btnUnderscore"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/Highlight" />
+        app:srcCompat="@drawable/highlight" />
 
     <ImageButton
         android:id="@+id/btnUnderscore"
@@ -92,7 +92,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btnConfirm"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnHighlight"
-        app:srcCompat="@drawable/Underscore" />
+        app:srcCompat="@drawable/underscore" />
 
     <ImageButton
         android:id="@+id/btnConfirm"
@@ -107,7 +107,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnUnderscore"
-        app:srcCompat="@drawable/STTConfirm" />
+        app:srcCompat="@drawable/sttconfirm" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

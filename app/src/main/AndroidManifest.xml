@@ -9,23 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Soundy">
-        <activity android:name=".AccountWithdrawalActivity"/>
-        <activity android:name=".AlarmActivity"/>
-        <activity android:name=".FileListActivity"/>
-        <activity android:name=".FileListDetailActivity"/>
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".ProfileActivity"/>
-        <activity android:name=".ResetActivity"/>
-        <activity android:name=".ResetPasswordAvtivity"/>
-        <activity android:name=".SaveFileActivity"/>
-        <activity android:name=".ShowFileActivity"/>
-        <activity android:name=".signUp"/>
-        <activity android:name=".SttActivity"/>
-        <activity android:name=".SttQuizActivity"/>
+        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".SttQuizActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
