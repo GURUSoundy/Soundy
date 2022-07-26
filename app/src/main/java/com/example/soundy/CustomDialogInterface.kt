@@ -1,7 +1,7 @@
 package com.example.soundy
 
 interface CustomDialogInterface {
-    fun onAddButtonClicked()
+    fun onAddButtonClicked(dirName: String)
 
     fun onCancelButtonClicked()
 }
