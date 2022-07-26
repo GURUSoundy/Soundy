@@ -1,5 +1,6 @@
 package com.example.soundy
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
@@ -13,6 +14,7 @@ class ShowFileActivity : AppCompatActivity() {
     lateinit var btnQuiz : Button
     lateinit var btnRoutine : Button
     lateinit var btnBack : ImageButton
+    lateinit var btnMypage : ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,21 +34,26 @@ class ShowFileActivity : AppCompatActivity() {
         }
 
         btnStt.setOnClickListener{
-            /* stt 편집 페이지로 이동
-            val intent = Intent(this, stt편집액티비티::class.java)
+            /* stt 편집 페이지로 이동 */
+            val intent = Intent(this, SttActivity::class.java)
             startActivity(intent)
-             */
         }
 
         btnQuiz.setOnClickListener {
-            /* 퀴즈 페이지로 이동
-            val intent = Intent(this, 퀴즈액티비티::class.java)
+            /* 퀴즈 페이지로 이동 */
+            val intent = Intent(this, SttQuizActivity::class.java)
             startActivity(intent)
-             */
         }
 
         btnRoutine.setOnClickListener {
             /* 복습 루틴 페이지로 이동 */
+        }
+
+        /* 마이페이지 이동 기능 */
+        btnMypage=findViewById<ImageButton>(R.id.btnMypage)
+        btnMypage.setOnClickListener {
+            val intent = Intent(this, mypage::class.java)
+            startActivity(intent)
         }
 
         /* 뒤로 가기 버튼 클릭 시

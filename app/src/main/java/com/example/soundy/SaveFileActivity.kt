@@ -9,6 +9,8 @@ class SaveFileActivity : AppCompatActivity() {
 
     lateinit var fileName : String
 
+    lateinit var btnMypage : ImageButton
+
     lateinit var edtFileName : EditText
     lateinit var btnUpload : Button
     lateinit var btnStt : ImageView
@@ -30,16 +32,22 @@ class SaveFileActivity : AppCompatActivity() {
         btnBack = findViewById(R.id.btnBack)
 
         btnStt.setOnClickListener{
-            /* stt 편집 페이지로 이동
-            val intent = Intent(this, stt편집액티비티::class.java)
+            /* stt 편집 페이지로 이동 */
+            val intent = Intent(this, SttActivity::class.java)
             startActivity(intent)
-             */
         }
 
         btnSave.setOnClickListener {
             fileName = edtFileName.text.toString()
 
             Toast.makeText(this@SaveFileActivity, "$fileName 이 저장되었습니다.", Toast.LENGTH_SHORT).show()
+        }
+
+        /* 마이페이지 이동 기능 */
+        btnMypage=findViewById<ImageButton>(R.id.btnMypage)
+        btnMypage.setOnClickListener {
+            val intent = Intent(this, mypage::class.java)
+            startActivity(intent)
         }
 
         /* 뒤로 가기 버튼 클릭 시
