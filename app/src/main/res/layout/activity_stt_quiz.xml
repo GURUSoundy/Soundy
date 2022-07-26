@@ -6,7 +6,18 @@
     android:layout_height="match_parent"
     android:background="@color/beige"
     android:orientation="vertical"
-    tools:context=".SttActivity">
+    tools:context=".SttQuizActivity">
+
+    <EditText
+        android:id="@+id/edtQuiz"
+        android:layout_width="316dp"
+        android:layout_height="373dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barQuiz" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -47,26 +58,10 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <EditText
-        android:id="@+id/stt"
-        android:layout_width="349dp"
-        android:layout_height="431dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="120dp"
-        android:background="@drawable/edit_text_rounded_corner_rectangle"
-        android:backgroundTint="#FEFDFB"
-        android:elevation="3dp"
-        android:inputType="textEmailAddress"
-        android:paddingLeft="20dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
 
     <ImageButton
-        android:id="@+id/btnHighlight"
+        android:id="@+id/btnHighlightQuiz"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="45dp"
@@ -75,13 +70,13 @@
         android:backgroundTint="@color/beige"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnUnderscore"
+        app:layout_constraintEnd_toStartOf="@+id/btnUnderscoreQuiz"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/highlight" />
 
     <ImageButton
-        android:id="@+id/btnUnderscore"
+        android:id="@+id/btnUnderscoreQuiz"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="27dp"
@@ -89,13 +84,13 @@
         android:backgroundTint="@color/beige"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnConfirm"
+        app:layout_constraintEnd_toStartOf="@+id/btnConfirmQuiz"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnHighlight"
+        app:layout_constraintStart_toEndOf="@+id/btnHighlightQuiz"
         app:srcCompat="@drawable/underscore" />
 
     <ImageButton
-        android:id="@+id/btnConfirm"
+        android:id="@+id/btnConfirmQuiz"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginEnd="45dp"
@@ -106,8 +101,56 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnUnderscore"
+        app:layout_constraintStart_toEndOf="@+id/btnUnderscoreQuiz"
         app:srcCompat="@drawable/sttconfirm" />
+
+    <ImageView
+        android:id="@+id/ImgsttbackQuiz"
+        android:layout_width="355dp"
+        android:layout_height="464dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnHighlightQuiz"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/sttback" />
+
+    <ImageView
+        android:id="@+id/iconSttQuiz"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/barQuiz"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/stt_icon" />
+
+    <TextView
+        android:id="@+id/textSttQuiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="13dp"
+        android:text="STT(Speach To Text)"
+        android:textColor="#797A7E"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/barQuiz"
+        app:layout_constraintStart_toEndOf="@+id/iconSttQuiz" />
+
+    <View
+        android:id="@+id/barQuiz"
+        android:layout_width="330dp"
+        android:layout_height="2px"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="123dp"
+        android:layout_marginEnd="41dp"
+        android:background="#797A7E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
