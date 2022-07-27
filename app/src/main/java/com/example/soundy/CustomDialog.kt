@@ -3,15 +3,12 @@ package com.example.soundy
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
-import android.database.sqlite.SQLiteDatabase
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import java.util.*
 
 class CustomDialog(context: Context, Interface: CustomDialogInterface) : Dialog(context) {
@@ -46,7 +43,7 @@ class CustomDialog(context: Context, Interface: CustomDialogInterface) : Dialog(
 
         // 추가 버튼 클릭 시 onAddButtonClicked 호출 후 종료
         btnAdd.setOnClickListener {
-            newDirectoryName = findViewById(R.id.newDirectoryName)
+            newDirectoryName = findViewById(R.id.newTodoContent)
             routineEndDate = findViewById(R.id.endDate)
 
             Log.d("routine", routineEndDate.text.toString())

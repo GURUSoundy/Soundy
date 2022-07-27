@@ -7,7 +7,6 @@
     android:background="@color/beige"
     tools:context=".ToDoListActivity">
 
-    <!-- 메뉴바 구성 -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -23,27 +22,26 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/beige"
+            android:background="#00FFFFFF"
             android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/back_button"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            app:srcCompat="@drawable/back_button" />
 
         <TextView
             android:id="@+id/titleText"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/beige"
             android:backgroundTint="@color/beige"
             android:gravity="center"
             android:text="투두리스트"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/btnMypage"
-            app:layout_constraintStart_toEndOf="@+id/btnBack" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/btnMypage"
@@ -57,36 +55,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/default_profile"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-        <!-- 페이지마다 다른 타이틀 적용할 수 있도록 수정 필요(android:text) -->
+            app:srcCompat="@drawable/default_profile" />
+        <!-- 사용자 프로필 사진 받아와서 적용할 수 있게 수정 -->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/diaryTextView"
-        android:layout_width="395dp"
+        android:id="@+id/todoDate"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/stt"
+        android:layout_marginTop="25dp"
+        android:text="7.19"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/stt"
-        android:layout_width="349dp"
-        android:layout_height="431dp"
-        android:layout_marginBottom="44dp"
-        android:background="@drawable/edit_text_rounded_corner_rectangle"
-        android:backgroundTint="#FEFDFB"
-        android:elevation="3dp"
-        android:inputType="textEmailAddress"
-        android:paddingLeft="20dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnPlusTodo"
@@ -103,5 +87,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_input_add"
         app:tint="@color/white" />
+
+    <ProgressBar
+        android:id="@+id/todayAchiveProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        android:scaleY="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/todoDate" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/edit_text_rounded_corner_rectangle_white"
+        android:elevation="4dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTodoList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            tools:listitem="@layout/todo_list_item"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
