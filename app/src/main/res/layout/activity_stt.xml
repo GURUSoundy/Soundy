@@ -2,11 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sttBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/beige"
     android:orientation="vertical"
-    tools:context=".SttActivity">
+    tools:context=".SttActivity"
+    tools:layout_editor_absoluteY="25dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -46,24 +48,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <EditText
-        android:id="@+id/stt"
-        android:layout_width="349dp"
-        android:layout_height="431dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="120dp"
-        android:background="@drawable/edit_text_rounded_corner_rectangle"
-        android:backgroundTint="#FEFDFB"
-        android:elevation="3dp"
-        android:inputType="textEmailAddress"
-        android:paddingLeft="20dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <ImageButton
         android:id="@+id/btnEraser"
@@ -122,6 +106,65 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnEraser"
         app:srcCompat="@drawable/sttsave" />
+
+    <ImageView
+        android:id="@+id/Imgsttback"
+        android:layout_width="355dp"
+        android:layout_height="464dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnEraser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/sttback" />
+
+    <ImageView
+        android:id="@+id/iconStt2"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/stt_icon" />
+
+    <TextView
+        android:id="@+id/textStt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="89dp"
+        android:text="STT(Speach To Text)"
+        android:textColor="#797A7E"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/iconStt2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/bar"
+        android:layout_width="330dp"
+        android:layout_height="2px"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="407dp"
+        android:background="#797A7E"
+        app:layout_constraintBottom_toBottomOf="@+id/Imgsttback"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/EditStt"
+        android:layout_width="316dp"
+        android:layout_height="373dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
