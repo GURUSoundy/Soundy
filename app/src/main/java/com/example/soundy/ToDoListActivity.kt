@@ -81,7 +81,7 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
             dbManager.close()
             Toast.makeText(this, "투두리스트 추가 완료", Toast.LENGTH_SHORT).show()
 
-            /* 디렉토리 추가 후 액티비티 새로고침(추가한 디렉토리 보이게) */
+            /* 투두리스트 추가 후 액티비티 새로고침(추가한 투두리스트 보이게) */
             val intent = getIntent()
             finish();
             startActivity(intent)
