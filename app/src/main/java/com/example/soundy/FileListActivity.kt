@@ -68,7 +68,7 @@ class FileListActivity : AppCompatActivity(), CustomDialogInterface {
         } else {
             dbManager = DBManager(this, "Directory", null, 1)
             sqliteDB = dbManager.writableDatabase
-            sqliteDB.execSQL("INSERT INTO Directory VALUES('$dirName');")
+            sqliteDB.execSQL("INSERT INTO Directory (dirName) VALUES('$dirName');")
 
             sqliteDB.close()
             dbManager.close()
@@ -79,7 +79,6 @@ class FileListActivity : AppCompatActivity(), CustomDialogInterface {
             finish();
             startActivity(intent)
         }
-
     }
 
     override fun onCancelButtonClicked() {

@@ -1,11 +1,13 @@
 package com.example.soundy
 
+import android.content.Intent
 import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 
@@ -22,6 +24,9 @@ class DirectoryAdapter(val directoryList: ArrayList<Directorys>) : RecyclerView.
                 val directory: Directorys = directoryList.get(curPos)
                 /* 테스트용 토스트 메시지 (추후 액티비티 전환으로 수정 예정) parent.context->FileListActivity */
                 Toast.makeText(parent.context, "디렉토리 이름: ${directory.dirName}", Toast.LENGTH_SHORT).show()
+                val intent = Intent(parent.context, FileListDetailActivity::class.java)
+                intent.putExtra("dirName", directory.dirName)
+                intent.run { parent.context.startActivity(this) }
             }
         }
     }
