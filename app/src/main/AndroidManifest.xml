@@ -26,6 +26,8 @@
         <activity android:name=".ShowFileActivity"/>
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".SttActivity"/>
+        <activity android:name=".TryCalActivity"/>
+        <activity android:name=".ToDoListActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

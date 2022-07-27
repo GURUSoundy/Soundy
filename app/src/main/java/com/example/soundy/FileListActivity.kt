@@ -17,10 +17,19 @@ class FileListActivity : AppCompatActivity(), CustomDialogInterface {
     lateinit var dbManager: DBManager
     lateinit var sqliteDB: SQLiteDatabase
 
+    /* 테스트용 버튼 */
+    lateinit var calBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_list)
+
+        /* 테스트용(추후 삭제) */
+        calBtn = findViewById(R.id.calBtn)
+        calBtn.setOnClickListener {
+            val intent = Intent(this, TryCalActivity::class.java)
+            startActivity(intent)
+        }
 
         /* 마이페이지 이동 기능 */
         btnMypage=findViewById<ImageButton>(R.id.btnMypage)

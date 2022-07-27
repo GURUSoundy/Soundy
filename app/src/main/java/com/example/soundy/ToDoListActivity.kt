@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import kotlinx.android.synthetic.main.activity_review_routine.*
+import kotlinx.android.synthetic.main.activity_trycal.*
 
-class todoList : AppCompatActivity() {
+class ToDoListActivity : AppCompatActivity() {
 
     //var userID: String = "userID"
     //lateinit var fname: String
@@ -31,7 +31,7 @@ class todoList : AppCompatActivity() {
         /*뒤로가기 버튼*/
         btnBack = findViewById(R.id.btnBack)
         btnBack.setOnClickListener{
-            val intent = Intent(this, reviewRoutine::class.java)
+            val intent = Intent(this, TryCalActivity::class.java)
             startActivity(intent)
         }
         /* 마이페이지 이동 기능 */
@@ -41,17 +41,17 @@ class todoList : AppCompatActivity() {
             startActivity(intent)
         }
 
-        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            diaryTextView.visibility = View.VISIBLE
-            //saveBtn.visibility = View.VISIBLE
-            //contextEditText.visibility = View.VISIBLE
-            //diaryContent.visibility = View.INVISIBLE
-            //updateBtn.visibility = View.INVISIBLE
-            //deleteBtn.visibility = View.INVISIBLE
-            diaryTextView.text = String.format("%d / %d / %d", year, month + 1, dayOfMonth)
-            //contextEditText.setText("")
-            //checkDay(year, month, dayOfMonth, userID)
-        }
+//        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+//            diaryTextView.visibility = View.VISIBLE
+//            //saveBtn.visibility = View.VISIBLE
+//            //contextEditText.visibility = View.VISIBLE
+//            //diaryContent.visibility = View.INVISIBLE
+//            //updateBtn.visibility = View.INVISIBLE
+//            //deleteBtn.visibility = View.INVISIBLE
+//            diaryTextView.text = String.format("%d / %d / %d", year, month + 1, dayOfMonth)
+//            //contextEditText.setText("")
+//            //checkDay(year, month, dayOfMonth, userID)
+//        }
 
 
 
