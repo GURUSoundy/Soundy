@@ -60,15 +60,15 @@ class FileListActivity : AppCompatActivity(), CustomDialogInterface {
 
     }
 
-    override fun onAddButtonClicked(dirName: String) {
+    override fun onAddButtonClicked(dirName: String, endDate: String) {
         /* 디렉토리 추가 */
-        if (dirName == "") {
-            Toast.makeText(this, "디렉토리 이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
+        if (dirName == "" || endDate == "") {
+            Toast.makeText(this, "디렉토리 이름과 복습 마감 기한을 입력해주세요.", Toast.LENGTH_SHORT).show()
             /* 디렉토리 이름 입력 안됐을때 추가 버튼을 클릭하면 토스트 메시지와 함께 팝업 사라짐 -> 추후 수정 필요 */
         } else {
             dbManager = DBManager(this, "Directory", null, 1)
             sqliteDB = dbManager.writableDatabase
-            sqliteDB.execSQL("INSERT INTO Directory (dirName) VALUES('$dirName');")
+            sqliteDB.execSQL("INSERT INTO Directory VALUES('$dirName', '$endDate');")
 
             sqliteDB.close()
             dbManager.close()

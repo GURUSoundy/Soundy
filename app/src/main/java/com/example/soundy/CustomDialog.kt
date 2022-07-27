@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import java.util.*
 
@@ -28,20 +29,20 @@ class CustomDialog(context: Context, Interface: CustomDialogInterface) : Dialog(
         btnAdd = findViewById(R.id.btnAdd)
         btnCancel = findViewById(R.id.btnCancle)
         routineEndDate = findViewById(R.id.endDate)
+        var dateString = ""
 
         /* 배경을 투명하게 */
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        /*
         /* Date Picker (Calendar) */
         routineEndDate.setOnClickListener {
             val cal = Calendar.getInstance()
             val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                dateString = "${year}년 ${month+1}월 ${dayOfMonth}일"
+                dateString = "${year}/${month+1}/${dayOfMonth}"
+                routineEndDate.setText(dateString)
             }
-            DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH)).show()
+            DatePickerDialog(context, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH)).show()
         }
-        */
 
         // 추가 버튼 클릭 시 onAddButtonClicked 호출 후 종료
         btnAdd.setOnClickListener {
@@ -51,10 +52,12 @@ class CustomDialog(context: Context, Interface: CustomDialogInterface) : Dialog(
             Log.d("routine", routineEndDate.text.toString())
 
             var dirName = ""
-            if (newDirectoryName.text.toString() != "") {
+            var endDate = ""
+            if (newDirectoryName.text.toString() != "" && routineEndDate.text.toString() != "") {
                 dirName = newDirectoryName.text.toString()
+                endDate = routineEndDate.text.toString()
             }
-            customDialogInterface.onAddButtonClicked(dirName)
+            customDialogInterface.onAddButtonClicked(dirName, endDate)
             dismiss()
         }
 

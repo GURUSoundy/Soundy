@@ -20,7 +20,7 @@ class FileAdapter(val fileList: ArrayList<Files>) : RecyclerView.Adapter<FileAda
                 val curPos : Int = adapterPosition
                 /* curPos에 위치한 아이템 가져오기 */
                 val file: Files = fileList.get(curPos)
-                /* 테스트용 토스트 메시지 (추후 액티비티 전환으로 수정 예정) parent.context->FileListActivity */
+                /* 테스트용 토스트 메시지 (추후 액티비티 전환으로 수정 예정/디렉토리 이름 인텐트로 넘겨주기) parent.context->FileListActivity */
                 Toast.makeText(parent.context, "파일 이름: ${file.fileName}", Toast.LENGTH_SHORT).show()
             }
         }

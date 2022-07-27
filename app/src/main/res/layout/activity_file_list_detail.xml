@@ -38,7 +38,7 @@
             android:layout_height="match_parent"
             android:backgroundTint="@color/beige"
             android:gravity="center"
-            android:text="컴개론"
+            android:text="디렉토리 이름"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"

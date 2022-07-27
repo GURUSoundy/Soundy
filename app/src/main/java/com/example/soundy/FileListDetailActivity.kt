@@ -1,5 +1,6 @@
 package com.example.soundy
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -13,6 +14,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_file_list_detail.*
+import kotlinx.android.synthetic.main.plus_directory_popup.*
+import org.w3c.dom.Text
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FileListDetailActivity : AppCompatActivity() {
 
@@ -22,6 +27,7 @@ class FileListDetailActivity : AppCompatActivity() {
     lateinit var btnMypage: ImageButton
     lateinit var titleText: TextView
     lateinit var passedIntent: Intent
+    lateinit var deadLineDate: TextView
 
     /* 일단 캐시 디렉토리에 recording.3gp라는 이름으로 저장 */
     val recordingFilePath: String by lazy {
@@ -43,11 +49,48 @@ class FileListDetailActivity : AppCompatActivity() {
 
         btnBack = findViewById(R.id.btnBack)
         titleText = findViewById(R.id.titleText)
+        deadLineDate = findViewById(R.id.deadLineDate)
+        var dateString = ""
 
         /* FileListActivity에서 디렉토리 이름 받아오기 */
         passedIntent = getIntent()
         val dirName = passedIntent.getStringExtra("dirName").toString()
         titleText.text = dirName
+
+        /* 디렉토리의 복습 마감 기한 받아오기 */
+        dbManager = DBManager(this, "Directory", null, 1)
+        sqliteDB = dbManager.readableDatabase
+        var cursor1: Cursor = sqliteDB.rawQuery("select * from Directory where dirName = '$dirName';", null)
+
+        while (cursor1.moveToNext()) {
+            var endDate: String = cursor1.getString(1)
+            deadLineDate.text = endDate
+        }
+
+        sqliteDB.close()
+        dbManager.close()
+
+        /* 날짜 클릭 시 복습 마감 기한 수정 가능 */
+        deadLineDate.setOnClickListener {
+            val cal = Calendar.getInstance()
+            val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                dateString = "${year}/${month+1}/${dayOfMonth}"
+
+                dbManager = DBManager(this, "Directory", null, 1)
+                sqliteDB = dbManager.writableDatabase
+                sqliteDB.execSQL("UPDATE Directory SET endDate = '$dateString' where dirName = '$dirName';")
+
+                sqliteDB.close()
+                dbManager.close()
+
+                /* 날짜 수정 후 새로고침 */
+                val intent = getIntent()
+                finish();
+                startActivity(intent)
+            }
+            DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(
+                Calendar.DAY_OF_MONTH)).show()
+        }
 
         btnBack.setOnClickListener {
             val intent = Intent(this, FileListActivity::class.java)

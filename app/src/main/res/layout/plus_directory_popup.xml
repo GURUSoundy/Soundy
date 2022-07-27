@@ -28,6 +28,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
         android:ems="10"
+        android:focusable="false"
         android:hint="복습 마감 기한 설정"
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
