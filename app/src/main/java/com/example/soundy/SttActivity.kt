@@ -67,13 +67,12 @@ class SttActivity : AppCompatActivity() {
 
                 } else {
                     /* STT 값이 존재하지 않을 경우 */
-                    Toast.makeText(this, "STT 값이 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this, "STT 값이 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
 
             /* onTextChanged : 텍스트 변경 중에 호출 */
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
             }
 
 
