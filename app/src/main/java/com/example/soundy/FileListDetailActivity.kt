@@ -9,6 +9,7 @@ import android.media.MediaRecorder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_file_list_detail.*
@@ -19,6 +20,8 @@ class FileListDetailActivity : AppCompatActivity() {
     lateinit var sqliteDB: SQLiteDatabase
     lateinit var btnBack: ImageButton
     lateinit var btnMypage: ImageButton
+    lateinit var titleText: TextView
+    lateinit var passedIntent: Intent
 
     /* 일단 캐시 디렉토리에 recording.3gp라는 이름으로 저장 */
     val recordingFilePath: String by lazy {
@@ -39,6 +42,12 @@ class FileListDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_file_list_detail)
 
         btnBack = findViewById(R.id.btnBack)
+        titleText = findViewById(R.id.titleText)
+
+        /* FileListActivity에서 디렉토리 이름 받아오기 */
+        passedIntent = getIntent()
+        val dirName = passedIntent.getStringExtra("dirName").toString()
+        titleText.text = dirName
 
         btnBack.setOnClickListener {
             val intent = Intent(this, FileListActivity::class.java)
@@ -57,7 +66,8 @@ class FileListDetailActivity : AppCompatActivity() {
         sqliteDB = dbManager.readableDatabase
 
         /* DB에 있는 데이트들을 리스트에 넣기 */
-        var cursor: Cursor = sqliteDB.rawQuery("select * from File;", null)
+        /* 디렉토리에 포함된 파일들만 보이도록 */
+        var cursor: Cursor = sqliteDB.rawQuery("select * from File where dirName = '$dirName';", null)
 
         var fileList: ArrayList<Files> = arrayListOf<Files>()
 
