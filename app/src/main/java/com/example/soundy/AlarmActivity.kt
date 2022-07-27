@@ -5,6 +5,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
@@ -17,6 +18,7 @@ class AlarmActivity : AppCompatActivity() {
     lateinit var rgTime : RadioGroup
     lateinit var rbAm : RadioButton
     lateinit var rbPm : RadioButton
+    lateinit var btnBack : ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +29,11 @@ class AlarmActivity : AppCompatActivity() {
         rgTime = findViewById(R.id.rgTime)
         rbAm = findViewById(R.id.rbAm)
         rbPm = findViewById(R.id.rbPm)
+        btnBack = findViewById(R.id.btnBack)
+        btnBack.setOnClickListener{
+            val intent = Intent(this, mypage::class.java)
+            startActivity(intent)
+        }
 
         /* 뷰 초기화 */
         alarmOnoff()
@@ -34,8 +41,6 @@ class AlarmActivity : AppCompatActivity() {
 
         val model = fetchDataFromSharedPreferences() // 저장된 데이터 가져오기
         renderView(model) // 뷰에 데이터 그려주기
-
-
     }
 
 

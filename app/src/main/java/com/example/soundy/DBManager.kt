@@ -16,11 +16,12 @@ class DBManager(
 
         /*!!!!!!!!!!User table 확인 불가라 떠서 확인요망 !!!!*/
         db!!.execSQL("CREATE TABLE User (id text PRIMARY KEY, nickname text, password text)")
-
+        db!!.execSQL("CREATE TABLE File (fileName text PRIMARY KEY, dirName text, addFile text, stt text, routine text)")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("DROP TABLE IF EXISTS User")
+        db!!.execSQL("DROP TABLE IF EXISTS File")
         onCreate(db)
     }
 
@@ -31,6 +32,14 @@ class DBManager(
         /* insert될 데이터값 */
         db.execSQL(
             "INSERT INTO User VALUES('" + nickname + "'" + ", '" + id + "'" + ", '" + password + "');")
+
+        db.close()
+    }
+
+    fun saveFile(fileName: String, dirName: String, addFile: String, stt: String, routine: String){
+        val db = this.writableDatabase
+
+        db.execSQL("INSERT INTO File VALUES('" + fileName + "', '" + dirName + "', '" + addFile + "', '" + stt + "', '" + routine + "');")
 
         db.close()
     }
