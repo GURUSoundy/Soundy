@@ -13,14 +13,15 @@ class DBManager(
     version: Int
 ) : SQLiteOpenHelper(context, name, factory, version) {
     override fun onCreate(db: SQLiteDatabase?) {
-
-        /*!!!!!!!!!!User table 확인 불가라 떠서 확인요망 !!!!*/
         db!!.execSQL("CREATE TABLE User (id text PRIMARY KEY, nickname text, password text)")
-
+        db!!.execSQL("CREATE TABLE Directory (dirname text, endDate text)")
+        db!!.execSQL("CREATE TABLE File (fileName text PRIMARY KEY, dirName text, addFile text, stt text, routine text)")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("DROP TABLE IF EXISTS User")
+        db!!.execSQL("DROP TABLE IF EXISTS Directory")
+        db!!.execSQL("DROP TABLE IF EXISTS File")
         onCreate(db)
     }
 
