@@ -9,7 +9,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.Toast
 
 class SttActivity : AppCompatActivity() {
 

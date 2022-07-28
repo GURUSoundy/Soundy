@@ -27,7 +27,7 @@ class FileListActivity : AppCompatActivity(), CustomDialogInterface {
         /* 테스트용(추후 삭제) */
         calBtn = findViewById(R.id.calBtn)
         calBtn.setOnClickListener {
-            val intent = Intent(this, TryCalActivity::class.java)
+            val intent = Intent(this, CalendarActivity::class.java)
             startActivity(intent)
         }
 

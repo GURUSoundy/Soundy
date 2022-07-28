@@ -19,9 +19,7 @@ class CalendarAdapter(val dayList: ArrayList<String>, val onItemListner: OnItemL
     }
 
     override fun onBindViewHolder(holder: CalendarAdapter.ItemViewHolder, position: Int) {
-        var day = dayList.get(position)
-
-        holder.dayText.text = day
+        holder.dayText.text = dayList.get(position)
 
         /* 텍스트 색상 지정(토, 일) */
         if ((position + 1) % 7 == 0) {
@@ -33,7 +31,7 @@ class CalendarAdapter(val dayList: ArrayList<String>, val onItemListner: OnItemL
         /* 날짜 클릭 이벤트 */
         holder.itemView.setOnClickListener{
             /* 인터페이스를 통해 날짜 넘겨줌 */
-            onItemListner.onItemClick(day)
+            onItemListner.onItemClick(holder.dayText.text.toString())
         }
     }
 

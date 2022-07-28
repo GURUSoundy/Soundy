@@ -1,38 +1,35 @@
 package com.example.soundy
 
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.Typeface
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.style.ForegroundColorSpan
-import android.text.style.RelativeSizeSpan
-import android.text.style.StyleSpan
-import android.util.Log
-import android.widget.CalendarView
-import android.widget.GridLayout
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.soundy.databinding.ActivityTrycalBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.soundy.databinding.ActivityCalendarBinding
 import com.prolificinteractive.materialcalendarview.*
-import com.prolificinteractive.materialcalendarview.spans.DotSpan
 import kotlinx.android.synthetic.main.activity_save_file.*
-import kotlinx.android.synthetic.main.activity_trycal.*
+import kotlinx.android.synthetic.main.activity_calendar.*
+import kotlinx.android.synthetic.main.activity_calendar.rvTodoList
+import kotlinx.android.synthetic.main.activity_todo_list.*
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class TryCalActivity : AppCompatActivity(), OnItemListner {
+class CalendarActivity : AppCompatActivity(), OnItemListner {
 
-    private lateinit var binding: ActivityTrycalBinding
+    lateinit var dbManager: DBManager
+    lateinit var sqliteDB: SQLiteDatabase
+    private lateinit var binding: ActivityCalendarBinding
     lateinit var btnMypage: ImageButton
 
     /* 년월 변수 */
@@ -41,7 +38,7 @@ class TryCalActivity : AppCompatActivity(), OnItemListner {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_trycal)
+        setContentView(R.layout.activity_calendar)
 
         /* 마이페이지 이동 기능 */
         btnMypage=findViewById<ImageButton>(R.id.btnMypage)
@@ -51,7 +48,7 @@ class TryCalActivity : AppCompatActivity(), OnItemListner {
         }
 
         /* 바인딩 초기화 */
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_trycal)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_calendar)
 
         /* 현재 날짜 */
         selectedDate = LocalDate.now()
@@ -70,6 +67,33 @@ class TryCalActivity : AppCompatActivity(), OnItemListner {
             selectedDate = selectedDate.plusMonths(1)
             setMonthView()
         }
+
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
+        var date: String = current.format(formatter)
+
+        /* 투두 목록(리사이클러 뷰) */
+        dbManager = DBManager(this, "TodoList", null, 1)
+        sqliteDB = dbManager.readableDatabase
+
+        /* DB에 있는 데이트들을 리스트에 넣기 */
+        var cursor: Cursor = sqliteDB.rawQuery("select * from TodoList where date = '$date';", null)
+
+        var todoList: ArrayList<Todos> = arrayListOf<Todos>()
+
+        while (cursor.moveToNext()) {
+            var todoText: String = cursor.getString(1)
+            var todoChecked: Int = cursor.getInt(2)
+            todoList.add(Todos(todoText, todoChecked))
+        }
+
+        sqliteDB.close()
+        dbManager.close()
+
+        rvTodoList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvTodoList.setHasFixedSize(true)
+
+        rvTodoList.adapter = TodoAdapter(todoList)
     }
 
     /* 날짜 화면에 보여주기 */

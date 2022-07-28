@@ -2,7 +2,6 @@ package com.example.soundy
 
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.media.MediaPlayer
@@ -12,10 +11,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_file_list_detail.*
-import kotlinx.android.synthetic.main.plus_directory_popup.*
-import org.w3c.dom.Text
 import java.util.*
 import kotlin.collections.ArrayList
 

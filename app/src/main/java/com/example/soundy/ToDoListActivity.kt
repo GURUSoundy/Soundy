@@ -5,14 +5,10 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.activity_file_list_detail.*
 import kotlinx.android.synthetic.main.activity_todo_list.*
-import kotlinx.android.synthetic.main.activity_trycal.*
-import java.text.SimpleDateFormat
 
 class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
 
@@ -50,7 +46,7 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
         /*뒤로가기 버튼*/
         btnBack = findViewById(R.id.btnBack)
         btnBack.setOnClickListener{
-            val intent = Intent(this, TryCalActivity::class.java)
+            val intent = Intent(this, CalendarActivity::class.java)
             startActivity(intent)
         }
 
@@ -61,9 +57,28 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
             startActivity(intent)
         }
 
-//        /* 파일 목록(리사이클러 뷰) */
-//        dbManager = DBManager(this, "TodoList", null, 1)
-//        sqliteDB = dbManager.readableDatabase
+        /* 투두 목록(리사이클러 뷰) */
+        dbManager = DBManager(this, "TodoList", null, 1)
+        sqliteDB = dbManager.readableDatabase
+
+        /* DB에 있는 데이트들을 리스트에 넣기 */
+        var cursor: Cursor = sqliteDB.rawQuery("select * from TodoList where date = '$date';", null)
+
+        var todoList: ArrayList<Todos> = arrayListOf<Todos>()
+
+        while (cursor.moveToNext()) {
+            var todoText: String = cursor.getString(1)
+            var todoChecked: Int = cursor.getInt(2)
+            todoList.add(Todos(todoText, todoChecked))
+        }
+
+        sqliteDB.close()
+        dbManager.close()
+
+        rvTodoList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvTodoList.setHasFixedSize(true)
+
+        rvTodoList.adapter = TodoAdapter(todoList)
 
     }
 

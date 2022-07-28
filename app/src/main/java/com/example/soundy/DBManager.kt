@@ -17,7 +17,7 @@ class DBManager(
         db!!.execSQL("CREATE TABLE Directory (dirname text, endDate text)")
         db!!.execSQL("CREATE TABLE File (fileName text PRIMARY KEY, dirName text, addFile text, stt text, routine text)")
         db!!.execSQL("CREATE TABLE Todo (date DATE PRIMARY KEY)")
-        db!!.execSQL("CREATE TABLE TodoList(date DATE PRIMARY KEY, list text, isChecked int)")  // isChecked: 0-체크X / 1-체크O
+        db!!.execSQL("CREATE TABLE TodoList(date DATE not null, list text, isChecked int)")  // isChecked: 0-체크X / 1-체크O
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
