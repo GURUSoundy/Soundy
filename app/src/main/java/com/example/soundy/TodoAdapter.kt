@@ -1,8 +1,8 @@
 package com.example.soundy
 
 import android.content.Context
+import android.content.Intent.getIntent
 import android.database.sqlite.SQLiteDatabase
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +36,7 @@ class TodoAdapter(val todoList: ArrayList<Todos>) : RecyclerView.Adapter<TodoAda
         holder.todoChecked.setOnCheckedChangeListener { compoundButton, isChecked ->
             if (isChecked) {
                 sqliteDB.execSQL("UPDATE TodoList SET isChecked = 1 where list = '$todoText';")
-                /* 완료한 경우 취소선 생김 -> 이미 완료된 투두에는 취소선이 생긴 채로 안 떠서 일단 보류 */
+                /* 완료한 경우 취소선 긋기 -> 이미 완료된 투두에는 취소선이 있는 채로 안 떠서 일단 보류 */
                 /* holder.todoText.paintFlags = holder.todoText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG*/
             } else {
                 sqliteDB.execSQL("UPDATE TodoList SET isChecked = 0 where list = '$todoText';")

@@ -85,8 +85,10 @@ class FileListActivity : AppCompatActivity(), CustomDialogInterface {
 
             /* 디렉토리 추가 후 액티비티 새로고침(추가한 디렉토리 보이게) */
             val intent = getIntent()
-            finish();
+            finish()
+            overridePendingTransition(0, 0)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
     }
 

@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -19,6 +20,7 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
     lateinit var btnMypage: ImageButton
     lateinit var passedIntent: Intent
     lateinit var todoDate: TextView
+    lateinit var achieveProgress: ProgressBar
 
     lateinit var btnPlusTodo: FloatingActionButton
     lateinit var date: String
@@ -28,13 +30,37 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_todo_list)
 
-        /* TryCalActivity에서 date 받아오기 */
+        /* CalendarActivity에서 date 받아오기 */
         passedIntent = getIntent()
         val month = passedIntent.getStringExtra("month").toString()
         val day = passedIntent.getStringExtra("day").toString()
         todoDate = findViewById(R.id.todoDate)
         date = "${month}.${day}"
         todoDate.text = date
+
+        /* 성취도 계산 */
+        achieveProgress = findViewById(R.id.achieveProgress)
+        dbManager = DBManager(this, "TodoList", null, 1)
+        sqliteDB = dbManager.readableDatabase
+        var todoNum: Int = 0
+        var completedTodo: Int = 0
+
+        var cursor1: Cursor = sqliteDB.rawQuery("select * from TodoList where date = '$date';", null)
+
+        while (cursor1.moveToNext()) {
+            todoNum += 1
+            if (cursor1.getInt(2) == 1) {
+                completedTodo += 1
+            }
+        }
+        if (todoNum != 0) {
+            achieveProgress.setProgress(((completedTodo.toDouble() / todoNum.toDouble()) * 100).toInt())
+        } else {
+            achieveProgress.setProgress(0)
+        }
+
+        sqliteDB.close()
+        dbManager.close()
 
         /* 투두리스트 추가 버튼 */
         btnPlusTodo = findViewById(R.id.btnPlusTodo)
@@ -99,7 +125,9 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
             /* 투두리스트 추가 후 액티비티 새로고침(추가한 투두리스트 보이게) */
             val intent = getIntent()
             finish();
+            overridePendingTransition(0, 0)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
     }
 

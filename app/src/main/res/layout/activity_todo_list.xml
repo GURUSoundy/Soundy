@@ -89,11 +89,13 @@
         app:tint="@color/white" />
 
     <ProgressBar
-        android:id="@+id/todayAchiveProgress"
+        android:id="@+id/achieveProgress"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="300dp"
         android:layout_height="20dp"
         android:layout_marginTop="20dp"
+        android:progress="30"
+        android:progressTint="#00D5C1"
         android:scaleY="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
