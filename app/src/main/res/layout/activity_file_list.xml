@@ -49,9 +49,18 @@
 
         <Button
             android:id="@+id/calBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="캘린더" />
+            android:layout_width="55dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:backgroundTint="@color/mint"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:text="Todo"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <!-- 사용자 프로필 사진 받아와서 적용할 수 있게 수정 -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>

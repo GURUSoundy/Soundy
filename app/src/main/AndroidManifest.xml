@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.soundy">
 
-    /* 마이크 권한(음성 녹음) */
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
@@ -12,25 +11,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Soundy">
-        <activity android:name=".mypage"/>
-        <activity android:name=".ProfileActivity"/>
+        <activity android:name=".CalendarActivity"></activity>
+        <activity android:name=".mypage" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".SttQuizActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".AccountWithdrawalActivity"/>
-        <activity android:name=".AlarmActivity"/>
-        <activity android:name=".FileListActivity"/>
-        <activity android:name=".FileListDetailActivity"/>
-        <activity android:name=".ResetActivity"/>
-        <activity android:name=".ResetPasswordAvtivity"/>
-        <activity android:name=".SaveFileActivity"/>
-        <activity android:name=".ShowFileActivity"/>
-        <activity android:name=".SignUpActivity"/>
-        <activity android:name=".SttActivity"/>
-        <activity android:name=".CalendarActivity"/>
-        <activity android:name=".ToDoListActivity"/>
+        <activity android:name=".AccountWithdrawalActivity" />
+        <activity android:name=".AlarmActivity" />
+        <activity android:name=".FileListActivity" />
+        <activity android:name=".FileListDetailActivity" />
+        <activity android:name=".ResetActivity" />
+        <activity android:name=".ResetPasswordAvtivity" />
+        <activity android:name=".SaveFileActivity" />
+        <activity android:name=".ShowFileActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SttActivity" />
+        <activity android:name=".ToDoListActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

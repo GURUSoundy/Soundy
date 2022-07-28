@@ -11,6 +11,7 @@
         android:id="@+id/todoChecked"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
+        android:buttonTint="#54BAB9"
         android:scaleX="0.7"
         android:scaleY="0.7"
         app:layout_constraintEnd_toEndOf="parent"

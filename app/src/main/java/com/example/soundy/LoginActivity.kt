@@ -32,25 +32,6 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        /*
-        /* 자동 로그인 처리 */
-        val shared = getSharedPreferences("autoLogin", Context.MODE_PRIVATE)
-        var userId = shared.getString("userId", null)
-        var userPW = shared.getString("userPW", null)
-        var userNickName = shared.getString("userNickname", null)
-
-        /* !!!!! 로그아웃 페이지 만든 후 autoLogin 값 지워주는 로직 추가(노션 확인) !!!!! */
-
-        if (userId != null && userPW != null) {
-
-            /* 아이디 넘기는 작업 추가 */
-
-            /* 로그인 잘 완료되면 목록 액티비티로 넘어감 */
-            val intent = Intent(this, FileListActivity::class.java)
-            intent.putExtra("nickname", userNickName)
-            startActivity(intent)
-
-         */
         id = findViewById(R.id.enterId)
         password = findViewById(R.id.enterPw)
         btnLogin = findViewById(R.id.btnLogin)
@@ -79,6 +60,11 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity, "${nickname}님 환영합니다.", Toast.LENGTH_SHORT).show()
 
                 /* 아이디 넘기는 작업 추가 */
+                val userInfo = getSharedPreferences("userInfo", Context.MODE_PRIVATE)
+                val editor = userInfo.edit()
+                editor.putString("userId", strId)
+                editor.putString("userNickName", nickname)
+                editor.apply()
 
                 /* 로그인 잘 완료되면 목록 액티비티로 넘어감 */
                 val intent = Intent(this, FileListActivity::class.java)

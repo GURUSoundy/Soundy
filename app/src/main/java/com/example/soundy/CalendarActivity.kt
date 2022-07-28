@@ -6,19 +6,15 @@ import android.database.sqlite.SQLiteDatabase
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.soundy.databinding.ActivityCalendarBinding
-import com.prolificinteractive.materialcalendarview.*
-import kotlinx.android.synthetic.main.activity_save_file.*
-import kotlinx.android.synthetic.main.activity_calendar.*
 import kotlinx.android.synthetic.main.activity_calendar.rvTodoList
-import kotlinx.android.synthetic.main.activity_todo_list.*
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.YearMonth
@@ -30,7 +26,6 @@ class CalendarActivity : AppCompatActivity(), OnItemListner {
     lateinit var dbManager: DBManager
     lateinit var sqliteDB: SQLiteDatabase
     private lateinit var binding: ActivityCalendarBinding
-    lateinit var btnMypage: ImageButton
 
     /* 년월 변수 */
     lateinit var selectedDate: LocalDate
@@ -40,15 +35,22 @@ class CalendarActivity : AppCompatActivity(), OnItemListner {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
 
-        /* 마이페이지 이동 기능 */
-        btnMypage=findViewById<ImageButton>(R.id.btnMypage)
-        btnMypage.setOnClickListener {
-            val intent = Intent(this, mypage::class.java)
+        /* 바인딩 초기화 */
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_calendar)
+
+        /* 뒤로가기 버튼 */
+        binding.btnBack.setOnClickListener{
+            Log.d("태그", "뒤로가기 버튼 클릭")
+            val intent = Intent(this, FileListActivity::class.java)
             startActivity(intent)
         }
 
-        /* 바인딩 초기화 */
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_calendar)
+        /* 마이페이지 이동 기능 */
+        binding.btnMypage.setOnClickListener {
+            Log.d("태그", "마이페이지 버튼 클릭")
+            val intent = Intent(this, mypage::class.java)
+            startActivity(intent)
+        }
 
         /* 현재 날짜 */
         selectedDate = LocalDate.now()
@@ -159,7 +161,7 @@ class CalendarActivity : AppCompatActivity(), OnItemListner {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onItemClick(dayText: String) {
         var yearMonthDay = yearMonthFromDate(selectedDate) + "." + dayText
-        Toast.makeText(this, yearMonthDay, Toast.LENGTH_SHORT).show()
+        // Toast.makeText(this, yearMonthDay, Toast.LENGTH_SHORT).show()
 
         val intent = Intent(this, ToDoListActivity::class.java)
         intent.putExtra("month", yearMonthFromDate(selectedDate))

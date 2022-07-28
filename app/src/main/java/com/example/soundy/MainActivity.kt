@@ -20,8 +20,6 @@ class MainActivity : AppCompatActivity() {
         var userPW = auto.getString("userPW", null)
         var userNickName = auto.getString("userNickname", null)
 
-        /* !!!!! 로그아웃 페이지 만든 후 autoLogin 값 지워주는 로직 추가(노션 확인) !!!!! */
-
         if (userId != null && userPW != null) {
 
             /* 아이디 넘기는 작업 추가 */

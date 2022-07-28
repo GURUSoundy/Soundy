@@ -1,15 +1,20 @@
 package com.example.soundy
 
+import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_todo_list.*
+
 
 class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
 
@@ -25,6 +30,7 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
     lateinit var btnPlusTodo: FloatingActionButton
     lateinit var date: String
 
+    lateinit var todoLayout: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,6 +112,14 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
 
         rvTodoList.adapter = TodoAdapter(todoList)
 
+        todoLayout = findViewById(R.id.todoLayout)
+        todoLayout.setOnClickListener {
+            val intent = getIntent()
+            finish();
+            overridePendingTransition(0, 0)
+            startActivity(intent)
+            overridePendingTransition(0, 0)
+        }
     }
 
     override fun onAddButtonClicked(todo: String) {
@@ -133,4 +147,6 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
 
     override fun onCancelButtonClicked() {
     }
+
+
 }

@@ -198,7 +198,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="15dp"
-                tools:listitem="@layout/calendar_item">
+                tools:listitem="">
 
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>

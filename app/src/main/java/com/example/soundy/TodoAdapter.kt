@@ -1,13 +1,18 @@
 package com.example.soundy
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.Intent.getIntent
 import android.database.sqlite.SQLiteDatabase
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 class TodoAdapter(val todoList: ArrayList<Todos>) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
@@ -28,7 +33,13 @@ class TodoAdapter(val todoList: ArrayList<Todos>) : RecyclerView.Adapter<TodoAda
         holder.todoText.text = todoText
 
         /* DB에 저장된 todoChecked 값이 0이면 false, 1이면 true 상태로 출력 */
-        holder.todoChecked.isChecked = todoList.get(position).todoChecked != 0
+        if (todoList.get(position).todoChecked != 0) {
+            holder.todoChecked.isChecked = true
+            holder.todoText.paintFlags = holder.todoText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        } else {
+            holder.todoChecked.isChecked = false
+            holder.todoText.paintFlags = holder.todoText.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+        }
 
         dbManager = DBManager(parentContext, "TodoList", null, 1)
         sqliteDB = dbManager.writableDatabase
@@ -36,11 +47,11 @@ class TodoAdapter(val todoList: ArrayList<Todos>) : RecyclerView.Adapter<TodoAda
         holder.todoChecked.setOnCheckedChangeListener { compoundButton, isChecked ->
             if (isChecked) {
                 sqliteDB.execSQL("UPDATE TodoList SET isChecked = 1 where list = '$todoText';")
-                /* 완료한 경우 취소선 긋기 -> 이미 완료된 투두에는 취소선이 있는 채로 안 떠서 일단 보류 */
-                /* holder.todoText.paintFlags = holder.todoText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG*/
+                /* 완료한 경우 취소선 긋기 */
+                holder.todoText.paintFlags = holder.todoText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             } else {
                 sqliteDB.execSQL("UPDATE TodoList SET isChecked = 0 where list = '$todoText';")
-                /* holder.todoText.paintFlags = holder.todoText.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv() */
+                holder.todoText.paintFlags = holder.todoText.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
             }
         }
     }
