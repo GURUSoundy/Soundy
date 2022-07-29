@@ -81,7 +81,7 @@ class FileListDetailActivity : AppCompatActivity() {
 
                 /* 날짜 수정 후 새로고침 */
                 val intent = getIntent()
-                finish();
+                finish()
                 overridePendingTransition(0, 0)
                 startActivity(intent)
                 overridePendingTransition(0, 0)
@@ -91,14 +91,13 @@ class FileListDetailActivity : AppCompatActivity() {
         }
 
         btnBack.setOnClickListener {
-            val intent = Intent(this, FileListActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         /* 마이페이지 이동 기능 */
         btnMypage=findViewById<ImageButton>(R.id.btnMypage)
         btnMypage.setOnClickListener {
-            val intent = Intent(this, mypage::class.java)
+            val intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
         }
 

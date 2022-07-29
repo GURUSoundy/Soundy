@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Soundy">
-        <activity android:name=".CalendarActivity"></activity>
-        <activity android:name=".mypage" />
+        <activity android:name=".CalendarActivity"/>
+        <activity android:name=".MyPageActivity"/>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".SttQuizActivity" />
         <activity android:name=".LoginActivity" />

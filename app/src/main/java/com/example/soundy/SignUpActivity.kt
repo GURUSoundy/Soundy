@@ -28,8 +28,7 @@ class SignUpActivity : AppCompatActivity() {
         /* 뒤로가기 버튼 클릭 리스너 */
         btnBack = findViewById(R.id.btnBack)
         btnBack.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         enterNick = findViewById(R.id.enterNick)
@@ -67,10 +66,10 @@ class SignUpActivity : AppCompatActivity() {
                 Log.d(TAG, "회원정보 삽입")
                 Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
 
-
                 // 메인 화면으로 이동
                 val intent = Intent(this, MainActivity::class.java)
-                   startActivity(intent)
+                startActivity(intent)
+                finish()
             }
         }
     }

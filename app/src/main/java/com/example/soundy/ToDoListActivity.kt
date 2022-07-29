@@ -1,15 +1,10 @@
 package com.example.soundy
 
-import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -37,7 +32,7 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
         setContentView(R.layout.activity_todo_list)
 
         /* CalendarActivity에서 date 받아오기 */
-        passedIntent = getIntent()
+        passedIntent = intent
         val month = passedIntent.getStringExtra("month").toString()
         val day = passedIntent.getStringExtra("day").toString()
         todoDate = findViewById(R.id.todoDate)
@@ -60,9 +55,9 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
             }
         }
         if (todoNum != 0) {
-            achieveProgress.setProgress(((completedTodo.toDouble() / todoNum.toDouble()) * 100).toInt())
+            achieveProgress.progress = ((completedTodo.toDouble() / todoNum.toDouble()) * 100).toInt()
         } else {
-            achieveProgress.setProgress(0)
+            achieveProgress.progress = 0
         }
 
         sqliteDB.close()
@@ -78,14 +73,13 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
         /*뒤로가기 버튼*/
         btnBack = findViewById(R.id.btnBack)
         btnBack.setOnClickListener{
-            val intent = Intent(this, CalendarActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         /* 마이페이지 이동 기능 */
         btnMypage=findViewById<ImageButton>(R.id.btnMypage)
         btnMypage.setOnClickListener {
-            val intent = Intent(this, mypage::class.java)
+            val intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
         }
 
@@ -114,7 +108,7 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
 
         todoLayout = findViewById(R.id.todoLayout)
         todoLayout.setOnClickListener {
-            val intent = getIntent()
+            val intent = intent
             finish();
             overridePendingTransition(0, 0)
             startActivity(intent)
@@ -137,7 +131,7 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
             Toast.makeText(this, "투두리스트 추가 완료", Toast.LENGTH_SHORT).show()
 
             /* 투두리스트 추가 후 액티비티 새로고침(추가한 투두리스트 보이게) */
-            val intent = getIntent()
+            val intent = intent
             finish();
             overridePendingTransition(0, 0)
             startActivity(intent)

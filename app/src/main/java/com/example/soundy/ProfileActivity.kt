@@ -16,8 +16,7 @@ class ProfileActivity : AppCompatActivity() {
         /* 뒤로가기 버튼 클릭 리스너 */
         btnBack = findViewById(R.id.btnBack)
         btnBack.setOnClickListener {
-            val intent = Intent(this, mypage::class.java)
-            startActivity(intent)
+            finish()
         }
     }
 }

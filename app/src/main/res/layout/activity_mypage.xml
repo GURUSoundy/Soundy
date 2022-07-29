@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     android:background="@color/beige"
     android:orientation="vertical"
-    tools:context=".mypage">
+    tools:context=".MyPageActivity">
 
     <!-- 메뉴바 구성 -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"

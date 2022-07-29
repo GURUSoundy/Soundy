@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, FileListActivity::class.java)
             intent.putExtra("nickname", userNickName)
             startActivity(intent)
+            finish()
         }
 
         btnGoLogin = findViewById(R.id.btnGoLogin)

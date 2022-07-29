@@ -28,8 +28,7 @@ class LoginActivity : AppCompatActivity() {
         /* 뒤로가기 버튼 클릭 리스너 */
         btnBack = findViewById(R.id.btnBack)
         btnBack.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         id = findViewById(R.id.enterId)
@@ -73,6 +72,9 @@ class LoginActivity : AppCompatActivity() {
                 cursor.close()
                 sqliteDB.close()
 
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+                finish()
+
             } else {
                 /* 아이디나 비밀번호를 입력하지 않았을 경우 / 아이디 또는 비밀번호가 틀렸을 경우 */
                 if (strId.isEmpty() || strPassword.isEmpty()) {
@@ -95,15 +97,9 @@ class LoginActivity : AppCompatActivity() {
 
         /* 비밀번호 재설정 버튼 클릭 이벤트 핸들러 */
         btnForgetPassword.setOnClickListener {
-            Toast.makeText(this@LoginActivity, "비밀번호 재설정.", Toast.LENGTH_SHORT).show()
-
             val intent = Intent(this, ResetPasswordAvtivity::class.java)
             startActivity(intent)
         }
-
-
-
-
     }
 
 }

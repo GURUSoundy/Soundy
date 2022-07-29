@@ -7,7 +7,6 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.DataBindingUtil.setContentView
@@ -36,20 +35,22 @@ class CalendarActivity : AppCompatActivity(), OnItemListner {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
 
+        overridePendingTransition(R.anim.horizon_enter, R.anim.none)
+
         /* 바인딩 초기화 */
-        binding = setContentView(this, R.layout.activity_calendar)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_calendar)
 
         /* 뒤로가기 버튼 */
         binding.btnBack.setOnClickListener{
             Log.d("태그", "뒤로가기 버튼 클릭")
-            val intent = Intent(this, FileListActivity::class.java)
-            startActivity(intent)
+            finish()
+            overridePendingTransition(R.anim.none, R.anim.horizon_exit)
         }
 
         /* 마이페이지 이동 기능 */
         binding.btnMypage.setOnClickListener {
             Log.d("태그", "마이페이지 버튼 클릭")
-            val intent = Intent(this, mypage::class.java)
+            val intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
         }
 
@@ -74,6 +75,7 @@ class CalendarActivity : AppCompatActivity(), OnItemListner {
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
         var date: String = current.format(formatter)
+        Log.d("날짜", date)
 
         /* 투두 목록(리사이클러 뷰) */
         dbManager = DBManager(this, "TodoList", null, 1)
