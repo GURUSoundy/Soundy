@@ -58,6 +58,17 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:elevation="3dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnUpload"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="@+id/btnUpload"
+        app:layout_constraintTop_toTopOf="@+id/btnUpload" />
+
     <EditText
         android:id="@+id/fileName"
         android:layout_width="370dp"

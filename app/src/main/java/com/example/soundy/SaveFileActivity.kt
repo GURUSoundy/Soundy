@@ -4,8 +4,12 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.webkit.ValueCallback
+import android.webkit.WebChromeClient
+import android.webkit.WebView
 import android.widget.*
 import java.util.*
 
@@ -17,6 +21,10 @@ class SaveFileActivity : AppCompatActivity() {
     lateinit var fileName : String
     lateinit var sttContent : String
     lateinit var routine : String
+
+    lateinit var mWebView: WebView
+    val IMAGE_SELECTOR_REQ = 1
+    private var mFilePathCallback: ValueCallback<*>? = null
 
     lateinit var btnMypage : ImageButton
     lateinit var edtFileName : EditText
@@ -41,6 +49,10 @@ class SaveFileActivity : AppCompatActivity() {
 
         dbManager = DBManager(this, "File", null, 1)
         sqliteDB = dbManager.readableDatabase
+
+        mWebView = findViewById<WebView>(R.id.webview)
+        setmWebViewFileUploadPossible()
+        with(mWebView) { this.loadUrl("file:///android_asset/upload.html") }
 
         /* 업로드 버튼 클릭 시 */
         btnUpload.setOnClickListener {
@@ -94,6 +106,27 @@ class SaveFileActivity : AppCompatActivity() {
         btnBack.setOnClickListener {
             val intent = Intent(this, FileListDetailActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    protected fun setmWebViewFileUploadPossible() {
+        mWebView.webChromeClient = object : WebChromeClient() {
+            override fun onShowFileChooser(
+                webView: WebView?,
+                filePathCallback: android.webkit.ValueCallback<Array<Uri>>?,
+                fileChooserParams: FileChooserParams?
+            ): Boolean {
+                mFilePathCallback = filePathCallback
+                val intent = Intent(Intent.ACTION_GET_CONTENT)
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+                intent.addCategory(Intent.CATEGORY_OPENABLE)
+                intent.type = "*/*"
+                startActivityForResult(
+                    Intent.createChooser(intent, "Select picture"),
+                    IMAGE_SELECTOR_REQ
+                )
+                return true
+            }
         }
     }
 }

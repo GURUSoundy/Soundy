@@ -3,6 +3,7 @@ package com.example.soundy
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
@@ -50,15 +51,20 @@ class ShowFileActivity : AppCompatActivity() {
         fileName = "week1"
         tvFileName.setText(fileName)
 
+        /* 녹음 파일 저장된 경로
+        var mediaplayer : MediaPlayer?= MediaPlayer.create(this, R.raw.sample) */
+
         btnPlay.setOnClickListener{
             /* 녹음 파일 재생, 재생 상태인지 일시 정지 상태인지에 따라 */
             if(play_status == false){
                 btnPlay.setImageResource(R.drawable.pause_icon)
-                // 녹음 파일(fileName) 재생 코드
+                /* 녹음 파일(fileName) 재생 코드
+                mediaplayer?.start() */
                 play_status = true
             } else {
                 btnPlay.setImageResource(R.drawable.play_icon)
-                // 녹음 파일 일시 정지 코드
+                /* 녹음 파일 일시 정지 코드
+                mediaplayer?.pause() */
                 play_status = false
             }
         }
