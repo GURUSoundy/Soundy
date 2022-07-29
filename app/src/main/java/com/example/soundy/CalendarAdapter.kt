@@ -1,11 +1,15 @@
 package com.example.soundy
 
 import android.graphics.Color
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class CalendarAdapter(val dayList: ArrayList<String>, val onItemListner: OnItemListner) :
     RecyclerView.Adapter<CalendarAdapter.ItemViewHolder>() {
@@ -18,8 +22,13 @@ class CalendarAdapter(val dayList: ArrayList<String>, val onItemListner: OnItemL
         return ItemViewHolder(view)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: CalendarAdapter.ItemViewHolder, position: Int) {
         holder.dayText.text = dayList.get(position)
+
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
+        var date: String = current.format(formatter)
 
         /* 텍스트 색상 지정(토, 일) */
         if ((position + 1) % 7 == 0) {

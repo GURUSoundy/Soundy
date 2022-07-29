@@ -84,7 +84,7 @@
                 app:srcCompat="@drawable/arrow_left" />
 
             <TextView
-                android:id="@+id/monthYearText"
+                android:id="@+id/yearMonthText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2022년 7월"

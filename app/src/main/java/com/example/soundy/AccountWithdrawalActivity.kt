@@ -57,6 +57,12 @@ class AccountWithdrawalActivity : AppCompatActivity() {
                 sqliteDB.close()
                 dbManager.close()
 
+                /* !!!!! autoLogin 값 지워주는 로직  !!!!! */
+                val unAuto = getSharedPreferences("autoLogin", Context.MODE_PRIVATE)
+                val editor = unAuto.edit()
+                editor.clear()
+                editor.commit()
+
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             } else {

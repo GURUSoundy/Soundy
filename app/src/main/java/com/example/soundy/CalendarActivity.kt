@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil.setContentView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,7 +37,7 @@ class CalendarActivity : AppCompatActivity(), OnItemListner {
         setContentView(R.layout.activity_calendar)
 
         /* 바인딩 초기화 */
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_calendar)
+        binding = setContentView(this, R.layout.activity_calendar)
 
         /* 뒤로가기 버튼 */
         binding.btnBack.setOnClickListener{
@@ -101,7 +102,7 @@ class CalendarActivity : AppCompatActivity(), OnItemListner {
     /* 날짜 화면에 보여주기 */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setMonthView() {
-        binding.monthYearText.text = monthYearFromDate(selectedDate)
+        binding.yearMonthText.text = yearMonthFromDate(selectedDate)
 
         /* 날짜 생성해서 리스트에 담기 */
         val dayList = dayInMonthArray(selectedDate)
@@ -117,12 +118,6 @@ class CalendarActivity : AppCompatActivity(), OnItemListner {
 
         /* 어댑터 적용 */
         binding.recyclerView.adapter = adapter
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun monthYearFromDate(date: LocalDate): String {
-        var formatter = DateTimeFormatter.ofPattern("yyyy.MM")
-        return date.format(formatter)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
