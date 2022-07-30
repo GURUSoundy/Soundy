@@ -71,6 +71,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <Button
+        android:id="@+id/btnOnoff"
+        android:layout_width="110dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#EAF3EB"
+        android:text="알람 켜기"
+        android:textColor="#797A7E"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <EditText
         android:id="@+id/editTime"
         android:layout_width="85dp"
@@ -82,27 +97,27 @@
         android:text="07"
         android:textAlignment="center"
         android:textSize="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnOnoff"
         app:layout_constraintEnd_toStartOf="@+id/textView3"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.327" />
 
     <EditText
         android:id="@+id/editMinute"
         android:layout_width="85dp"
         android:layout_height="60dp"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="4dp"
         android:background="@drawable/edit_text_rounded_corner_rectangle_2"
         android:inputType="number"
         android:text="00"
         android:textAlignment="center"
         android:textSize="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnSave"
         app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.495" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.327" />
 
     <TextView
         android:id="@+id/textView3"
@@ -131,8 +146,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/editMinute"
-        app:layout_constraintTop_toBottomOf="@+id/deadLineDate"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.884">
 
         <RadioButton
             android:id="@+id/rbAm"
