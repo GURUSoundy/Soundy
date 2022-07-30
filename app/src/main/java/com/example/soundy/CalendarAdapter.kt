@@ -1,6 +1,7 @@
 package com.example.soundy
 
 import android.graphics.Color
+import android.graphics.Color.parseColor
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
