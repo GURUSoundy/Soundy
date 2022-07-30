@@ -11,6 +11,7 @@ import android.icu.text.SimpleDateFormat
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.*
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -29,7 +30,7 @@ import kotlinx.coroutines.*
 
 const val REQUEST_CODE=200
 
-class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, OnItemClickListener{
+class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, OnItemClickListener {
 
     /* 오디오 관련 변수 */
     private var permissions= arrayOf(Manifest.permission.RECORD_AUDIO)
@@ -40,6 +41,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
     private var isRecording=false
     private var isPaused = false
     private var duration=""
+    private var dirName=""
 
     private lateinit var vibrator: Vibrator
     private lateinit var timer: Timer
@@ -193,22 +195,22 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
             startActivity(intent)
         }
 
-        /* rvfile 목록 */
-        dbManager = DBManager(this, "File", null, 1)
-        sqliteDB = dbManager.readableDatabase
-
-        /* DB에 있는 데이트들을 리스트에 넣기 */
-        /* 디렉토리에 포함된 파일들만 보이도록 */
-        var cursor: Cursor = sqliteDB.rawQuery("select * from File where dirName = '$dirName';", null)
-
-        var fileList: ArrayList<Files> = arrayListOf<Files>()
-
-        while (cursor.moveToNext()) {
-            var fileName: String = cursor.getString(0)
-            fileList.add(Files(fileName))
-        }
-        sqliteDB.close()
-        dbManager.close()
+//        /* rvfile 목록 */
+//        dbManager = DBManager(this, "File", null, 1)
+//        sqliteDB = dbManager.readableDatabase
+//
+//        /* DB에 있는 데이트들을 리스트에 넣기 */
+//        /* 디렉토리에 포함된 파일들만 보이도록 */
+//        var cursor: Cursor = sqliteDB.rawQuery("select * from File where dirName = '$dirName';", null)
+//
+//        var fileList: ArrayList<Files> = arrayListOf<Files>()
+//
+//        while (cursor.moveToNext()) {
+//            var fileName: String = cursor.getString(0)
+//            fileList.add(Files(fileName))
+//        }
+//        sqliteDB.close()
+//        dbManager.close()
 
         /*rvfile(녹음파일) 리사이클러뷰 목록 관련*/
         records = ArrayList()
@@ -225,7 +227,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
             adapter=mAdapter
             layoutManager=LinearLayoutManager(context)
         }
-        fetchAll()
+        fetchAll(dirName)
 
         /*rvfile(녹음파일) 재생 관련*/
         var filePath=intent.getStringExtra("filepath")
@@ -342,11 +344,18 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
             //out.close()
         }catch (e:IOException){}
 
-        var record =audioRecord(newFilename,filePath,timestamp,duration,ampsPath)
+        var record =audioRecord(newFilename,filePath,timestamp,duration,ampsPath, dirName)
 
         GlobalScope.launch{
             db.audioRecordDao().insert(record)
         }
+
+        /* 녹음파일 저장 후 액티비티 새로고침 */
+        val intent = getIntent()
+        finish()
+        overridePendingTransition(0, 0)
+        startActivity(intent)
+        overridePendingTransition(0, 0)
     }
 
     private fun dismiss(){
@@ -365,10 +374,10 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
     }
 
     /*rvfile(녹음파일) 리사이클러뷰 목록 관련*/
-    private fun fetchAll(){
+    private fun fetchAll(dirName: String){
         GlobalScope.launch {
             records.clear()
-            var queryResult = db.audioRecordDao().getAll()
+            var queryResult = db.audioRecordDao().getAll(dirName)
             records.addAll(queryResult)
 
             mAdapter.notifyDataSetChanged()
