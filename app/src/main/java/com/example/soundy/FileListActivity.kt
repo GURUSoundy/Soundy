@@ -58,7 +58,6 @@ class FileListActivity : AppCompatActivity(), CustomDialogInterface {
             var dirName: String = cursor.getString(0)
             directoryList.add(Directorys(dirName))
         }
-
         sqliteDB.close()
         dbManager.close()
 
