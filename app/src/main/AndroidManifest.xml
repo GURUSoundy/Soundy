@@ -1,34 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.soundy">
 
-    /* 마이크 권한(음성 녹음) */
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Soundy">
-        <activity android:name=".mypage"/>
-        <activity android:name=".ProfileActivity"/>
+        <activity
+            android:name=".rvfilelist"
+            android:exported="false" />
+        <activity
+            android:name=".AudioPlayer"
+            android:exported="false" />
+        <activity
+            android:name=".trycal"
+            android:exported="false" />
+        <activity
+            android:name=".todoList"
+            android:exported="false" />
+        <activity android:name=".reviewRoutine" />
+        <activity android:name=".mypage" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".SttQuizActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".AccountWithdrawalActivity"/>
-        <activity android:name=".AlarmActivity"/>
-        <activity android:name=".FileListActivity"/>
-        <activity android:name=".FileListDetailActivity"/>
-        <activity android:name=".ResetActivity"/>
-        <activity android:name=".ResetPasswordAvtivity"/>
-        <activity android:name=".SaveFileActivity"/>
-        <activity android:name=".ShowFileActivity"/>
-        <activity android:name=".SignUpActivity"/>
-        <activity android:name=".SttActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".AccountWithdrawalActivity" />
+        <activity android:name=".AlarmActivity" />
+        <activity android:name=".FileListActivity" />
+        <activity android:name=".FileListDetailActivity" />
+        <activity android:name=".ResetActivity" />
+        <activity android:name=".ResetPasswordAvtivity" />
+        <activity android:name=".SaveFileActivity" />
+        <activity android:name=".ShowFileActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SttActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
