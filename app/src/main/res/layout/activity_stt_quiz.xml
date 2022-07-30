@@ -38,7 +38,7 @@
             android:layout_height="match_parent"
             android:backgroundTint="@color/beige"
             android:gravity="center"
-            android:text="복습 카드"
+            android:text="복습 퀴즈"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
