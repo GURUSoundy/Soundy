@@ -144,8 +144,8 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         var dateString = ""
 
         /* FileListActivity에서 디렉토리 이름 받아오기 */
-        passedIntent = getIntent()
-        val dirName = passedIntent.getStringExtra("dirName").toString()
+        passedIntent = intent
+        dirName = passedIntent.getStringExtra("dirName").toString()
         titleText.text = dirName
 
         /* 디렉토리의 복습 마감 기한 받아오기 */
@@ -176,10 +176,8 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
 
                 /* 날짜 수정 후 새로고침 */
                 val intent = getIntent()
-                finish()
-                overridePendingTransition(0, 0)
+                finish();
                 startActivity(intent)
-                overridePendingTransition(0, 0)
             }
             DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(
                 Calendar.DAY_OF_MONTH)).show()
@@ -190,30 +188,12 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
             startActivity(intent)
             finish()
         }
-
         /* 마이페이지 이동 기능 */
         btnMypage=findViewById<ImageButton>(R.id.btnMypage)
         btnMypage.setOnClickListener {
             val intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
         }
-
-//        /* rvfile 목록 */
-//        dbManager = DBManager(this, "File", null, 1)
-//        sqliteDB = dbManager.readableDatabase
-//
-//        /* DB에 있는 데이트들을 리스트에 넣기 */
-//        /* 디렉토리에 포함된 파일들만 보이도록 */
-//        var cursor: Cursor = sqliteDB.rawQuery("select * from File where dirName = '$dirName';", null)
-//
-//        var fileList: ArrayList<Files> = arrayListOf<Files>()
-//
-//        while (cursor.moveToNext()) {
-//            var fileName: String = cursor.getString(0)
-//            fileList.add(Files(fileName))
-//        }
-//        sqliteDB.close()
-//        dbManager.close()
 
         /*rvfile(녹음파일) 리사이클러뷰 목록 관련*/
         records = ArrayList()
@@ -348,13 +328,14 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         }catch (e:IOException){}
 
         var record =audioRecord(newFilename,filePath,timestamp,duration,ampsPath, dirName)
+        Log.d("태그", dirName)
 
         GlobalScope.launch{
             db.audioRecordDao().insert(record)
         }
 
         /* 녹음파일 저장 후 액티비티 새로고침 */
-        val intent = getIntent()
+        val intent = intent
         finish()
         overridePendingTransition(0, 0)
         startActivity(intent)
