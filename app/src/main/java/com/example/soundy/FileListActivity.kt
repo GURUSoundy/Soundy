@@ -17,15 +17,24 @@ class FileListActivity : AppCompatActivity(), CustomDialogInterface {
     lateinit var dbManager: DBManager
     lateinit var sqliteDB: SQLiteDatabase
 
+    /* 테스트용 버튼 */
+    lateinit var calBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_list)
 
+        /* 테스트용(추후 삭제) */
+        calBtn = findViewById(R.id.calBtn)
+        calBtn.setOnClickListener {
+            val intent = Intent(this, CalendarActivity::class.java)
+            startActivity(intent)
+        }
+
         /* 마이페이지 이동 기능 */
         btnMypage=findViewById<ImageButton>(R.id.btnMypage)
         btnMypage.setOnClickListener {
-            val intent = Intent(this, mypage::class.java)
+            val intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
         }
 
@@ -76,8 +85,10 @@ class FileListActivity : AppCompatActivity(), CustomDialogInterface {
 
             /* 디렉토리 추가 후 액티비티 새로고침(추가한 디렉토리 보이게) */
             val intent = getIntent()
-            finish();
+            finish()
+            overridePendingTransition(0, 0)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
     }
 

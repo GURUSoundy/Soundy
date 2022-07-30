@@ -16,12 +16,14 @@ class DBManager(
         db!!.execSQL("CREATE TABLE User (id text PRIMARY KEY, nickname text, password text)")
         db!!.execSQL("CREATE TABLE Directory (dirname text, endDate text)")
         db!!.execSQL("CREATE TABLE File (fileName text PRIMARY KEY, dirName text, addFile text, stt text, routine text)")
+        db!!.execSQL("CREATE TABLE TodoList(date DATE not null, list text, isChecked int)")  // isChecked: 0-체크X / 1-체크O
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("DROP TABLE IF EXISTS User")
         db!!.execSQL("DROP TABLE IF EXISTS Directory")
         db!!.execSQL("DROP TABLE IF EXISTS File")
+        db!!.execSQL("DROP TABLE IF EXISTS TodoList")
         onCreate(db)
     }
 
@@ -36,6 +38,12 @@ class DBManager(
         db.close()
     }
 
+    /* 테이블 내 모든 데이터 삭제 */
+    fun deleteData(tableName: String) {
+        val db = this.writableDatabase
+        db.execSQL("DELETE FROM '$tableName';")
+        db.close()
+    }
     fun saveFile(fileName: String, dirName: String, addFile: String, stt: String, routine: String){
         val db = this.writableDatabase
 
@@ -43,31 +51,5 @@ class DBManager(
 
         db.close()
     }
-
-//    fun checkIdExist(id: String): Boolean {
-//        val db = this.readableDatabase
-//
-//        // 리턴받고자 하는 컬럼 값 ID의 array
-//        val projection = arrayOf(BaseColumns._ID)
-//           // ,registerUser.userData.COLUMN_NAME_ID, registerUser.userData.COLUMN_NAME_PASSWORD)
-//
-//        //  WHERE "id" = id AND "password"=password 구문 적용하는 부분
-//        val selection = "${registerUser.userData.COLUMN_NAME_ID} = ?"
-//        val selectionArgs = arrayOf(id)
-//
-////         정렬조건 지정
-////        val sortOrder = "${FeedEntry.COLUMN_NAME_SUBTITLE} DESC"
-//
-//        val cursor = db.query(
-//            registerUser.userData.TABLE_NAME,   // 테이블
-//            projection,             // 리턴 받고자 하는 컬럼
-//            selection,              // where 조건
-//            selectionArgs,          // where 조건에 해당하는 값의 배열
-//            null,                   // 그룹 조건
-//            null,                   // having 조건
-//            null               // orderby 조건 지정
-//        )
-//        return cursor.count>0
-//    }
 
 }

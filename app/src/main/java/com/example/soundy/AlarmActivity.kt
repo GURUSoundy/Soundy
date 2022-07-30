@@ -96,6 +96,10 @@ class AlarmActivity : AppCompatActivity() {
         }
     }
 
+        /* 뒤로가기 버튼 클릭 리스너 */
+        btnBack = findViewById(R.id.btnBack)
+        btnBack.setOnClickListener {
+            finish()
     /* 알람 켜기 끄기 */
     private fun alarmOnoff() {
         val onOffButton = findViewById<Button>(R.id.btnOnoff)

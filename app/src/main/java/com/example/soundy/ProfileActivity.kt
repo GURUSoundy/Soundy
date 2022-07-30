@@ -36,8 +36,7 @@ class ProfileActivity : AppCompatActivity() {
 
         /* 뒤로가기 버튼 */
         btnBack.setOnClickListener {
-            val intent = Intent(this, mypage::class.java)
-            startActivity(intent)
+            finish()
         }
 
         /* mypage에서 사용자 id 받아오기 */

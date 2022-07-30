@@ -2,7 +2,6 @@ package com.example.soundy
 
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.media.MediaPlayer
@@ -12,10 +11,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_file_list_detail.*
-import kotlinx.android.synthetic.main.plus_directory_popup.*
-import org.w3c.dom.Text
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -85,22 +81,23 @@ class FileListDetailActivity : AppCompatActivity() {
 
                 /* 날짜 수정 후 새로고침 */
                 val intent = getIntent()
-                finish();
+                finish()
+                overridePendingTransition(0, 0)
                 startActivity(intent)
+                overridePendingTransition(0, 0)
             }
             DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(
                 Calendar.DAY_OF_MONTH)).show()
         }
 
         btnBack.setOnClickListener {
-            val intent = Intent(this, FileListActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         /* 마이페이지 이동 기능 */
         btnMypage=findViewById<ImageButton>(R.id.btnMypage)
         btnMypage.setOnClickListener {
-            val intent = Intent(this, mypage::class.java)
+            val intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
         }
 

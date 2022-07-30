@@ -19,24 +19,16 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo_icon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Soundy"
+        android:theme="@style/Theme.Soundy">
+        <activity android:name=".CalendarActivity"
+            android:exported="false"/>
+        <activity android:name=".MyPageActivity"/>
+        <activity android:name=".ProfileActivity" />
         android:usesCleartextTraffic="true" />
         <activity android:name=".SplashActivity"/>
         <activity
-            android:name=".rvfilelist"
+            android:name=".ToDoListActivity"
             android:exported="false" />
-        <activity
-            android:name=".AudioPlayer"
-            android:exported="false" />
-        <activity
-            android:name=".trycal"
-            android:exported="false" />
-        <activity
-            android:name=".todoList"
-            android:exported="false" />
-        <activity android:name=".reviewRoutine" />
-        <activity android:name=".mypage" />
-        <activity android:name=".ProfileActivity" />
         <activity android:name=".SttQuizActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".AccountWithdrawalActivity" />
