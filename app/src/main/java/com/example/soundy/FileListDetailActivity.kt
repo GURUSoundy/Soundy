@@ -168,6 +168,11 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         deadLineDate = findViewById(R.id.deadLineDate)
         var dateString = ""
 
+        /* FileListActivity에서 디렉토리 이름 받아오기 */
+        passedIntent = intent
+        dirName = passedIntent.getStringExtra("dirName").toString()
+        titleText.text = dirName
+
         /* 디렉토리의 복습 마감 기한 받아오기 */
         dbManager = DBManager(this, "Directory", null, 1)
         sqliteDB = dbManager.readableDatabase
@@ -196,10 +201,8 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
 
                 /* 날짜 수정 후 새로고침 */
                 val intent = getIntent()
-                finish()
-                overridePendingTransition(0, 0)
+                finish();
                 startActivity(intent)
-                overridePendingTransition(0, 0)
             }
             DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(
                 Calendar.DAY_OF_MONTH)).show()
@@ -348,13 +351,14 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         }catch (e:IOException){}
 
         var record =audioRecord(newFilename,filePath,timestamp,duration,ampsPath, dirName)
+        Log.d("태그", dirName)
 
         GlobalScope.launch{
             db.audioRecordDao().insert(record)
         }
 
         /* 녹음파일 저장 후 액티비티 새로고침 */
-        val intent = getIntent()
+        val intent = intent
         finish()
         overridePendingTransition(0, 0)
         startActivity(intent)
