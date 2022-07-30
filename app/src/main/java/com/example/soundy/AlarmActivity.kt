@@ -31,8 +31,6 @@ class AlarmActivity : AppCompatActivity() {
         rbPm = findViewById(R.id.rbPm)
         btnBack = findViewById(R.id.btnBack)
         btnBack.setOnClickListener{
-            val intent = Intent(this, MyPageActivity::class.java)
-            startActivity(intent)
             finish()
         }
 

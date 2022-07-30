@@ -89,6 +89,7 @@ class SaveFileActivity : AppCompatActivity() {
                 Toast.makeText(this@SaveFileActivity, "${fileName}이(가) 저장되었습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, FileListDetailActivity::class.java)
                 startActivity(intent)
+                finish()
             } else{
                 Toast.makeText(this@SaveFileActivity, "파일 이름을 입력해 주세요.", Toast.LENGTH_SHORT).show()
             }
@@ -104,8 +105,7 @@ class SaveFileActivity : AppCompatActivity() {
 
         /* 뒤로 가기 버튼 클릭 시 */
         btnBack.setOnClickListener {
-            val intent = Intent(this, FileListDetailActivity::class.java)
-            startActivity(intent)
+            finish()
         }
     }
 

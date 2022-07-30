@@ -36,8 +36,7 @@ class SttQuizActivity : AppCompatActivity() {
 
         /* 뒤로가기 버튼 */
         btnBack.setOnClickListener {
-            val intent = Intent(this, ShowFileActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         /* 마이페이지 버튼 */

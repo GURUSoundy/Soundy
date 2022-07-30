@@ -30,9 +30,6 @@ class AccountWithdrawalActivity : AppCompatActivity() {
         /* 뒤로가기 버튼 클릭 리스너 */
         btnBack = findViewById(R.id.btnBack)
         btnBack.setOnClickListener {
-            val intent = Intent(this, MyPageActivity::class.java)
-            startActivity(intent)
-
             finish()
         }
 
@@ -67,6 +64,7 @@ class AccountWithdrawalActivity : AppCompatActivity() {
 
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                finish()
             } else {
                 Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
             }

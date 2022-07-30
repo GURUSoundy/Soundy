@@ -114,8 +114,7 @@ class ShowFileActivity : AppCompatActivity() {
 
         /* 뒤로 가기 버튼 클릭 시 */
         btnBack.setOnClickListener {
-            val intent = Intent(this, FileListDetailActivity::class.java)
-            startActivity(intent)
+            finish()
         }
     }
 }

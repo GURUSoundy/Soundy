@@ -67,8 +67,6 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
 
                 // 메인 화면으로 이동
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
                 finish()
             }
         }
