@@ -10,6 +10,7 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
+
 class SttActivity : AppCompatActivity() {
 
     lateinit var dbManager: DBManager
@@ -36,12 +37,12 @@ class SttActivity : AppCompatActivity() {
 
         /* 마이페이지 버튼 */
         btnMypage.setOnClickListener {
-            val intent = Intent(this, mypage::class.java)
+            val intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
         }
 
         /* ShowFileActivity에서 파일명 받아오기 */
-        val fileName : String = intent.getStringExtra("fileName")
+        val fileName : String? = intent.getStringExtra("fileName")
 
         /* 파일 테이블에서 STT 값 읽어오기 */
         dbManager = DBManager(this, "File", null, 1)

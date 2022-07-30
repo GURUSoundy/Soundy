@@ -36,11 +36,13 @@ class ProfileActivity : AppCompatActivity() {
 
         /* 뒤로가기 버튼 */
         btnBack.setOnClickListener {
+            val intent = Intent(this, MyPageActivity::class.java)
+            startActivity(intent)
             finish()
         }
 
         /* mypage에서 사용자 id 받아오기 */
-        val strId : String = intent.getStringExtra("userId")
+        val strId : String? = intent.getStringExtra("userId")
 
 
         /* DB 읽어오기 */

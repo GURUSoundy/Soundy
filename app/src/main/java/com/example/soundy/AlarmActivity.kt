@@ -31,8 +31,9 @@ class AlarmActivity : AppCompatActivity() {
         rbPm = findViewById(R.id.rbPm)
         btnBack = findViewById(R.id.btnBack)
         btnBack.setOnClickListener{
-            val intent = Intent(this, mypage::class.java)
+            val intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         /* 뷰 초기화 */
@@ -96,10 +97,6 @@ class AlarmActivity : AppCompatActivity() {
         }
     }
 
-        /* 뒤로가기 버튼 클릭 리스너 */
-        btnBack = findViewById(R.id.btnBack)
-        btnBack.setOnClickListener {
-            finish()
     /* 알람 켜기 끄기 */
     private fun alarmOnoff() {
         val onOffButton = findViewById<Button>(R.id.btnOnoff)

@@ -92,6 +92,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="92dp"
         android:layout_marginEnd="2dp"
+        android:layout_marginBottom="202dp"
         android:background="@drawable/edit_text_rounded_corner_rectangle_2"
         android:inputType="number"
         android:text="07"
@@ -100,24 +101,21 @@
         app:layout_constraintBottom_toTopOf="@+id/btnOnoff"
         app:layout_constraintEnd_toStartOf="@+id/textView3"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.327" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editMinute"
         android:layout_width="85dp"
         android:layout_height="60dp"
         android:layout_marginStart="4dp"
+        android:layout_marginBottom="202dp"
         android:background="@drawable/edit_text_rounded_corner_rectangle_2"
         android:inputType="number"
         android:text="00"
         android:textAlignment="center"
         android:textSize="40dp"
         app:layout_constraintBottom_toTopOf="@+id/btnSave"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.327" />
+        app:layout_constraintStart_toEndOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/textView3"
@@ -130,7 +128,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/editTime"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49" />
+        app:layout_constraintVertical_bias="0.488" />
 
     <RadioGroup
         android:id="@+id/rgTime"
@@ -146,7 +144,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/editMinute"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintVertical_bias="0.884">
 
         <RadioButton
