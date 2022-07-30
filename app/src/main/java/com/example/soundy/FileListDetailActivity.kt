@@ -13,6 +13,7 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.sip.SipSession
 import android.os.*
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.util.AttributeSet
 import android.view.Gravity.apply
@@ -54,6 +55,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
     private var isRecording=false
     private var isPaused = false
     private var duration=""
+    private var dirName=""
 
     private lateinit var vibrator: Vibrator
     private lateinit var timer: Timer
@@ -75,25 +77,19 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
     lateinit var passedIntent: Intent
     lateinit var deadLineDate: TextView
 
-    /* 일단 캐시 디렉토리에 recording.3gp라는 이름으로 저장 */
-//    val recordingFilePath: String by lazy {
-//        "${externalCacheDir?.absolutePath}/recording.3gp"
-//    }
-
-    /* 오디오 기능 사용 명시 */
-//    val requiredPermissions = arrayOf(
-//        android.Manifest.permission.RECORD_AUDIO
-//    )
-
-    //var recorder: MediaRecorder ?= null
-    //var mediaPlayer: MediaPlayer ?= null
-
-    //var filePath=intent.getStringExtra("filepath")
+    var name : String = ""
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_list_detail)
+
+        titleText = findViewById<TextView>(R.id.titleText)
+
+        /* FileListActivity에서 디렉토리 이름 받아오기 */
+        passedIntent = getIntent()
+        dirName = passedIntent.getStringExtra("dirName").toString()
+        titleText.setText(dirName)
 
         /*녹음 기능 추가 중인 코드*/
         permissionGranted=ActivityCompat.checkSelfPermission(this,permissions[0])==PackageManager.PERMISSION_GRANTED
@@ -147,11 +143,15 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
             dismiss()
         }
 
+
         /*파일제목설정 popup 확인버튼 기능 구현*/
         btnOK.setOnClickListener{
             dismiss()
             save()
-            Toast.makeText(this, "녹음이 저장되었습니다.",Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SaveFileActivity::class.java)
+            intent.putExtra("fileName", filenameInput.text.toString())
+            intent.putExtra("dirName", dirName)
+            startActivity(intent)
         }
         popupBG.setOnClickListener{
             File("$dirPath$filename.mp3").delete()
@@ -166,38 +166,9 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         }
         btnDelete.isClickable=false
 
-        //btnDone = findViewById(R.id.btnDone)
-
-//        btnDone.setOnClickListener{
-//            val customDialog = CustomDialog(this, this)
-//            customDialog.show()
-//        }
-
-        //버튼 클릭 이벤트////////////////////////////////////////////////
-//        button_start.setOnClickListener {
-//            if (ContextCompat.checkSelfPermission(this,
-//                    android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
-//                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//                //Permission is not granted
-//                val permissions = arrayOf(android.Manifest.permission.RECORD_AUDIO, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-//                ActivityCompat.requestPermissions(this, permissions,200)
-//            } else {
-//                startRecording()
-//            }
-//        }
-//        button_stop.setOnClickListener {
-//            stopPlaying()
-//        }
-        //}
         btnBack = findViewById(R.id.btnBack)
-        titleText = findViewById(R.id.titleText)
         deadLineDate = findViewById(R.id.deadLineDate)
         var dateString = ""
-
-        /* FileListActivity에서 디렉토리 이름 받아오기 */
-        passedIntent = getIntent()
-        val dirName = passedIntent.getStringExtra("dirName").toString()
-        titleText.text = dirName
 
         /* 디렉토리의 복습 마감 기한 받아오기 */
         dbManager = DBManager(this, "Directory", null, 1)
@@ -227,8 +198,10 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
 
                 /* 날짜 수정 후 새로고침 */
                 val intent = getIntent()
-                finish();
+                finish()
+                overridePendingTransition(0, 0)
                 startActivity(intent)
+                overridePendingTransition(0, 0)
             }
             DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(
                 Calendar.DAY_OF_MONTH)).show()
@@ -245,28 +218,6 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
             startActivity(intent)
         }
 
-        /* rvfile 목록 */
-        dbManager = DBManager(this, "File", null, 1)
-        sqliteDB = dbManager.readableDatabase
-
-        /* DB에 있는 데이트들을 리스트에 넣기 */
-        /* 디렉토리에 포함된 파일들만 보이도록 */
-        var cursor: Cursor = sqliteDB.rawQuery("select * from File where dirName = '$dirName';", null)
-
-        var fileList: ArrayList<Files> = arrayListOf<Files>()
-
-        while (cursor.moveToNext()) {
-            var fileName: String = cursor.getString(0)
-            fileList.add(Files(fileName))
-        }
-        sqliteDB.close()
-        dbManager.close()
-
-        /*rvfile(녹음파일) 목록 관련*/
-//        rvFile.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        rvFile.setHasFixedSize(true)
-//        rvFile.adapter = FileAdapter(fileList)
-
         /*rvfile(녹음파일) 리사이클러뷰 목록 관련*/
         records = ArrayList()
 
@@ -282,28 +233,14 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
             adapter=mAdapter
             layoutManager=LinearLayoutManager(context)
         }
-        fetchAll()
+        fetchAll(dirName)
 
         /*rvfile(녹음파일) 재생 관련*/
         var filePath=intent.getStringExtra("filepath")
 
         mediaPlayer = MediaPlayer()
-//        mediaPlayer.apply{
-//            //여기서 계속 오류
-//            setDataSource(filePath)
-//            prepare()
-//       }
         playPauseplayer()
-
-//        btnPlay=findViewById(R.id.btnPlay)
-//        btnStop=findViewById(R.id.btnStop)
-//
-//        btnPlay.setOnClickListener{
-//            playPauseplayer()
-//        }
-
-    } //***************************************************************onCreate fun 종료*****************************/
-
+    }
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -412,11 +349,19 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
             //out.close()
         }catch (e:IOException){}
 
-        var record =audioRecord(newFilename,filePath,timestamp,duration,ampsPath)
+        var record =audioRecord(newFilename,filePath,timestamp,duration,ampsPath, dirName)
 
         GlobalScope.launch{
             db.audioRecordDao().insert(record)
         }
+
+        /* 녹음파일 저장 후 액티비티 새로고침 */
+        val intent = getIntent()
+        finish()
+        overridePendingTransition(0, 0)
+        startActivity(intent)
+        overridePendingTransition(0, 0)
+
     }
 
     private fun dismiss(){
@@ -435,10 +380,10 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
     }
 
     /*rvfile(녹음파일) 리사이클러뷰 목록 관련*/
-    private fun fetchAll(){
+    private fun fetchAll(dirName: String){
         GlobalScope.launch {
             records.clear()
-            var queryResult = db.audioRecordDao().getAll()
+            var queryResult = db.audioRecordDao().getAll(dirName)
             records.addAll(queryResult)
 
             mAdapter.notifyDataSetChanged()
@@ -463,6 +408,11 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
     //fun btnPlay.onClickListener() {
     override fun onItemClickListener(position: Int) {
         var audioRecord = records[position]
+        val intent = Intent(this, ShowFileActivity::class.java)
+        intent.putExtra("fileName", audioRecord.filename)
+        intent.putExtra("dirName", dirName)
+        Toast.makeText(this, "$dirName ${audioRecord.filename}",Toast.LENGTH_SHORT).show()
+        startActivity(intent)
         //var intent = Intent(this, rvfilelist::class.java)
 
         //intent.putExtra("filepath",audioRecord.filePath)
@@ -473,5 +423,4 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
     override fun onItemLongClickListener(position: Int) {
         Toast.makeText(this, "Long click",Toast.LENGTH_SHORT).show()
     }
-
 }

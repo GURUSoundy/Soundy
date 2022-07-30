@@ -40,7 +40,7 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         /* mypage에서 사용자 id 받아오기 */
-        val strId : String = intent.getStringExtra("userId")
+        val strId : String? = intent.getStringExtra("userId")
 
 
         /* DB 읽어오기 */

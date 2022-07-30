@@ -15,9 +15,11 @@ class ShowFileActivity : AppCompatActivity() {
     lateinit var sqliteDB: SQLiteDatabase
 
     lateinit var fileName : String
+    lateinit var dirName : String
     lateinit var sttContent : String
     lateinit var routine : String
 
+    lateinit var titleText : TextView
     lateinit var tvFileName : TextView
     lateinit var btnShowUpload : Button
     lateinit var btnStt : ImageView
@@ -32,6 +34,7 @@ class ShowFileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_file)
 
+        titleText = findViewById(R.id.titleText)
         tvFileName = findViewById(R.id.tvFileName)
         btnShowUpload = findViewById(R.id.btnUpload)
         btnStt = findViewById(R.id.ivStt)
@@ -47,9 +50,9 @@ class ShowFileActivity : AppCompatActivity() {
         var play_status = false
 
         /* FileListDetail 에서 파일명(녹음파일명) 받아옴 */
-        //fileName = intent.getStringExtra("fileName")
-        fileName = "week1"
-        tvFileName.setText(fileName)
+        titleText.setText(intent.getStringExtra("fileName").toString())
+        tvFileName.setText(intent.getStringExtra("fileName").toString())
+        dirName = intent.getStringExtra("dirName").toString()
 
         /* 녹음 파일 저장된 경로
         var mediaplayer : MediaPlayer?= MediaPlayer.create(this, R.raw.sample) */
@@ -108,14 +111,13 @@ class ShowFileActivity : AppCompatActivity() {
         /* 마이페이지 이동 기능 */
         btnMypage=findViewById<ImageButton>(R.id.btnMypage)
         btnMypage.setOnClickListener {
-            val intent = Intent(this, mypage::class.java)
+            val intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
         }
 
         /* 뒤로 가기 버튼 클릭 시 */
         btnBack.setOnClickListener {
-            val intent = Intent(this, FileListDetailActivity::class.java)
-            startActivity(intent)
+            finish()
         }
     }
 }

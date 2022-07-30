@@ -1,6 +1,7 @@
 package com.example.soundy
 
 import android.graphics.Color
+import android.graphics.Color.parseColor
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -32,9 +33,9 @@ class CalendarAdapter(val dayList: ArrayList<String>, val onItemListner: OnItemL
 
         /* 텍스트 색상 지정(토, 일) */
         if ((position + 1) % 7 == 0) {
-            holder.dayText.setTextColor(Color.BLUE)
+            holder.dayText.setTextColor(parseColor("#54BAB9"))
         } else if (position == 0 || position % 7 == 0) {
-            holder.dayText.setTextColor(Color.RED)
+            holder.dayText.setTextColor(parseColor("#F46B6B"))
         }
 
         /* 날짜 클릭 이벤트 */

@@ -51,6 +51,7 @@ class MyPageActivity : AppCompatActivity() {
         /* 프로필수정 버튼 */
         btnProfile.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra("userId", userId)
             startActivity(intent)
         }
         /* 알람시간설정 버튼 */

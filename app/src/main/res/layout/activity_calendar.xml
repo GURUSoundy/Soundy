@@ -131,7 +131,7 @@
                     android:layout_weight="1"
                     android:text="SUN"
                     android:textAlignment="center"
-                    android:textColor="#FF6363"
+                    android:textColor="@color/orange"
                     android:textStyle="bold"
                     tools:layout_weight="1" />
 
@@ -186,7 +186,7 @@
                     android:layout_weight="1"
                     android:text="SAT"
                     android:textAlignment="center"
-                    android:textColor="#3F51B5"
+                    android:textColor="@color/real_mint"
                     android:textStyle="bold"
                     tools:layout_weight="1" />
             </LinearLayout>

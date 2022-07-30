@@ -164,6 +164,7 @@ class CalendarActivity : AppCompatActivity(), OnItemListner {
         intent.putExtra("month", yearMonthFromDate(selectedDate))
         intent.putExtra("day", dayText)
         startActivity(intent)
+        finish()
     }
 
 }
