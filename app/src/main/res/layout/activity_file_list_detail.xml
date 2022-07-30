@@ -65,25 +65,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/default_profile" />
-
             <!-- 사용자 프로필 사진 받아와서 적용할 수 있게 수정 -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:id="@+id/rvFile"-->
-<!--                    android:layout_width="407dp"-->
-<!--                    android:layout_height="219dp"-->
-<!--                    android:layout_marginBottom="4dp"-->
-<!--                    android:orientation="vertical"-->
-<!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    tools:listitem="@layout/file_list_item">-->
+        <!--                <androidx.recyclerview.widget.RecyclerView-->
+        <!--                    android:id="@+id/rvFile"-->
+        <!--                    android:layout_width="407dp"-->
+        <!--                    android:layout_height="219dp"-->
+        <!--                    android:layout_marginBottom="4dp"-->
+        <!--                    android:orientation="vertical"-->
+        <!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+        <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                    app:layout_constraintStart_toStartOf="parent"-->
+        <!--                    tools:listitem="@layout/file_list_item">-->
 
-<!--                </androidx.recyclerview.widget.RecyclerView>-->
+        <!--                </androidx.recyclerview.widget.RecyclerView>-->
 
 
         <TextView
@@ -142,7 +141,6 @@
 
         </LinearLayout>
 
-
         <TextView
             android:id="@+id/deadLineDate"
             android:layout_width="wrap_content"
@@ -165,7 +163,6 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:listitem="@layout/file_list_item">
         </androidx.recyclerview.widget.RecyclerView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
@@ -179,6 +176,3 @@
     <include layout="@layout/renamefile_popup" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-
