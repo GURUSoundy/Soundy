@@ -8,21 +8,35 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.icu.text.SimpleDateFormat
+import android.media.AudioRecord
 import android.media.MediaPlayer
 import android.media.MediaRecorder
+import android.net.sip.SipSession
 import android.os.*
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import android.util.AttributeSet
+import android.view.Gravity.apply
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.GravityCompat.apply
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_file_list_detail.*
+import kotlinx.android.synthetic.main.activity_file_list_detail.view.*
+import kotlinx.android.synthetic.main.activity_save_file.*
+import kotlinx.android.synthetic.main.plus_directory_popup.*
 import kotlinx.android.synthetic.main.renamefile_popup.*
+import kotlinx.android.synthetic.main.rvfilelist.*
+import org.w3c.dom.Text
 import java.io.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -30,7 +44,7 @@ import kotlinx.coroutines.*
 
 const val REQUEST_CODE=200
 
-class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, OnItemClickListener {
+class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, OnItemClickListener{
 
     /* 오디오 관련 변수 */
     private var permissions= arrayOf(Manifest.permission.RECORD_AUDIO)
@@ -68,6 +82,13 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_list_detail)
 
+        titleText = findViewById<TextView>(R.id.titleText)
+
+        /* FileListActivity에서 디렉토리 이름 받아오기 */
+        passedIntent = getIntent()
+        dirName = passedIntent.getStringExtra("dirName").toString()
+        titleText.setText(dirName)
+
         /*녹음 기능 추가 중인 코드*/
         permissionGranted=ActivityCompat.checkSelfPermission(this,permissions[0])==PackageManager.PERMISSION_GRANTED
 
@@ -94,6 +115,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
 
                 else->startRecording()
             }
+            //vibrator.vibrate(VibrationEffect.createOneShot(50,VibrationEffect.DEFAULT_AMPLITUDE))
         }
 
         /*녹음 파일목록 버튼 기능구현*/
@@ -119,11 +141,15 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
             dismiss()
         }
 
+
         /*파일제목설정 popup 확인버튼 기능 구현*/
         btnOK.setOnClickListener{
             dismiss()
             save()
-            Toast.makeText(this, "녹음이 저장되었습니다.",Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SaveFileActivity::class.java)
+            intent.putExtra("fileName", filenameInput.text.toString())
+            intent.putExtra("dirName", dirName)
+            startActivity(intent)
         }
         popupBG.setOnClickListener{
             File("$dirPath$filename.mp3").delete()
@@ -139,14 +165,8 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         btnDelete.isClickable=false
 
         btnBack = findViewById(R.id.btnBack)
-        titleText = findViewById(R.id.titleText)
         deadLineDate = findViewById(R.id.deadLineDate)
         var dateString = ""
-
-        /* FileListActivity에서 디렉토리 이름 받아오기 */
-        passedIntent = getIntent()
-        val dirName = passedIntent.getStringExtra("dirName").toString()
-        titleText.text = dirName
 
         /* 디렉토리의 복습 마감 기한 받아오기 */
         dbManager = DBManager(this, "Directory", null, 1)
@@ -188,32 +208,13 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         btnBack.setOnClickListener {
             val intent = Intent(this, FileListActivity::class.java)
             startActivity(intent)
-            finish()
         }
-
         /* 마이페이지 이동 기능 */
         btnMypage=findViewById<ImageButton>(R.id.btnMypage)
         btnMypage.setOnClickListener {
             val intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
         }
-
-//        /* rvfile 목록 */
-//        dbManager = DBManager(this, "File", null, 1)
-//        sqliteDB = dbManager.readableDatabase
-//
-//        /* DB에 있는 데이트들을 리스트에 넣기 */
-//        /* 디렉토리에 포함된 파일들만 보이도록 */
-//        var cursor: Cursor = sqliteDB.rawQuery("select * from File where dirName = '$dirName';", null)
-//
-//        var fileList: ArrayList<Files> = arrayListOf<Files>()
-//
-//        while (cursor.moveToNext()) {
-//            var fileName: String = cursor.getString(0)
-//            fileList.add(Files(fileName))
-//        }
-//        sqliteDB.close()
-//        dbManager.close()
 
         /*rvfile(녹음파일) 리사이클러뷰 목록 관련*/
         records = ArrayList()
@@ -236,9 +237,8 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         var filePath=intent.getStringExtra("filepath")
 
         mediaPlayer = MediaPlayer()
-
-    } //***************************************************************onCreate fun 종료*****************************/
-
+        playPauseplayer()
+    }
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -359,6 +359,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         overridePendingTransition(0, 0)
         startActivity(intent)
         overridePendingTransition(0, 0)
+
     }
 
     private fun dismiss(){
@@ -405,6 +406,11 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
     //fun btnPlay.onClickListener() {
     override fun onItemClickListener(position: Int) {
         var audioRecord = records[position]
+        val intent = Intent(this, ShowFileActivity::class.java)
+        intent.putExtra("fileName", audioRecord.filename)
+        intent.putExtra("dirName", dirName)
+        Toast.makeText(this, "$dirName ${audioRecord.filename}",Toast.LENGTH_SHORT).show()
+        startActivity(intent)
         //var intent = Intent(this, rvfilelist::class.java)
 
         //intent.putExtra("filepath",audioRecord.filePath)
@@ -415,5 +421,4 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
     override fun onItemLongClickListener(position: Int) {
         Toast.makeText(this, "Long click",Toast.LENGTH_SHORT).show()
     }
-
 }

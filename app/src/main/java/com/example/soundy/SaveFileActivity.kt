@@ -18,16 +18,16 @@ class SaveFileActivity : AppCompatActivity() {
     lateinit var dbManager: DBManager
     lateinit var sqliteDB: SQLiteDatabase
 
-    lateinit var fileName : String
     lateinit var sttContent : String
     lateinit var routine : String
+    lateinit var dirName : String
 
     lateinit var mWebView: WebView
     val IMAGE_SELECTOR_REQ = 1
     private var mFilePathCallback: ValueCallback<*>? = null
 
     lateinit var btnMypage : ImageButton
-    lateinit var edtFileName : EditText
+    lateinit var fileName : TextView
     lateinit var btnUpload : Button
     lateinit var btnStt : ImageView
     lateinit var tvSttContent : TextView
@@ -39,7 +39,7 @@ class SaveFileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_save_file)
 
-        edtFileName = findViewById(R.id.fileName)
+        fileName = findViewById(R.id.fileName)
         btnUpload = findViewById(R.id.btnUpload)
         btnStt = findViewById(R.id.ivStt)
         tvSttContent = findViewById(R.id.tvSttContent)
@@ -50,15 +50,16 @@ class SaveFileActivity : AppCompatActivity() {
         dbManager = DBManager(this, "File", null, 1)
         sqliteDB = dbManager.readableDatabase
 
+        /* 파일 업로드 클릭 시 */
         mWebView = findViewById<WebView>(R.id.webview)
         setmWebViewFileUploadPossible()
         with(mWebView) { this.loadUrl("file:///android_asset/upload.html") }
 
-        /* 업로드 버튼 클릭 시 */
+        /* 업로드 버튼 클릭 시
         btnUpload.setOnClickListener {
             // 파일 목록이 팝업으로 떠서 사용자가 직접 고를 수 있게
             // 그리고 버튼 텍스트가 해당 파일명으로 바뀜
-        }
+        } */
 
         /* 인텐트로 stt 내용 받아와서 stt 텍스트뷰를 통해 일부 내용을 보여줌 */
         sttContent = "아직 없어요.."
@@ -75,25 +76,22 @@ class SaveFileActivity : AppCompatActivity() {
             DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH)).show()
         }
 
+        dirName = intent.getStringExtra("dirName").toString()
+        fileName.setText(intent.getStringExtra("fileName"))
+
         /* 저장 버튼 클릭 시 */
         btnSave.setOnClickListener {
-            fileName = edtFileName.text.toString()
 
             var cursor: Cursor = sqliteDB.rawQuery("select * from File where fileName = '$fileName';", null)
 
-            if(fileName != ""){
-                if(cursor.count == 1){
-                    Toast.makeText(this@SaveFileActivity, "이미 존재하는 파일입니다.", Toast.LENGTH_SHORT).show()
-                }
-                //saveFile(fileName, dirName, addFile, sttContent, routine)
-                Toast.makeText(this@SaveFileActivity, "${fileName}이(가) 저장되었습니다.", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, FileListDetailActivity::class.java)
-                startActivity(intent)
+            if(cursor.count == 1){
+                Toast.makeText(this@SaveFileActivity, "이미 존재하는 파일입니다.", Toast.LENGTH_SHORT).show()
+            }else{
+                //sqliteDB = dbManager.writableDatabase
+                //sqliteDB.saveFile(fileName, dirName, addFile, sttContent, routine)
+                Toast.makeText(this@SaveFileActivity, "${fileName.text},$dirName 이(가) 저장되었습니다.", Toast.LENGTH_SHORT).show()
                 finish()
-            } else{
-                Toast.makeText(this@SaveFileActivity, "파일 이름을 입력해 주세요.", Toast.LENGTH_SHORT).show()
             }
-
         }
 
         /* 마이페이지 이동 기능 */

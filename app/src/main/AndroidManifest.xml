@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -24,7 +23,7 @@
             android:exported="false"/>
         <activity android:name=".MyPageActivity"/>
         <activity android:name=".ProfileActivity" />
-        android:usesCleartextTraffic="true" />
+        android:usesCleartextTraffic="true">
         <activity android:name=".SplashActivity"/>
         <activity
             android:name=".ToDoListActivity"

@@ -69,7 +69,7 @@
         app:layout_constraintStart_toStartOf="@+id/btnUpload"
         app:layout_constraintTop_toTopOf="@+id/btnUpload" />
 
-    <EditText
+    <TextView
         android:id="@+id/fileName"
         android:layout_width="370dp"
         android:layout_height="60dp"
@@ -78,9 +78,9 @@
         android:drawableLeft="@drawable/record_icon_resize"
         android:drawablePadding="15dp"
         android:elevation="3dp"
-        android:hint="녹음 파일 이름 입력"
+        android:text="녹음 파일 이름 입력"
         android:padding="15dp"
-        android:textColorHint="#797A7E"
+        android:textColor="#797A7E"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
