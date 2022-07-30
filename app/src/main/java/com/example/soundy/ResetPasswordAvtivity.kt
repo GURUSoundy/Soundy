@@ -39,6 +39,7 @@ class ResetPasswordAvtivity() : AppCompatActivity() {
         btnBack.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         /* 비밀번호 변경 */

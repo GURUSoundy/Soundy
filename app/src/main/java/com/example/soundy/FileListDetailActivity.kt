@@ -8,34 +8,20 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.icu.text.SimpleDateFormat
-import android.media.AudioRecord
 import android.media.MediaPlayer
 import android.media.MediaRecorder
-import android.net.sip.SipSession
 import android.os.*
 import androidx.appcompat.app.AppCompatActivity
-import android.util.AttributeSet
-import android.view.Gravity.apply
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.GravityCompat.apply
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_file_list_detail.*
-import kotlinx.android.synthetic.main.activity_file_list_detail.view.*
-import kotlinx.android.synthetic.main.activity_save_file.*
-import kotlinx.android.synthetic.main.plus_directory_popup.*
 import kotlinx.android.synthetic.main.renamefile_popup.*
-import kotlinx.android.synthetic.main.rvfilelist.*
-import org.w3c.dom.Text
 import java.io.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -75,21 +61,6 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
     lateinit var passedIntent: Intent
     lateinit var deadLineDate: TextView
 
-    /* 일단 캐시 디렉토리에 recording.3gp라는 이름으로 저장 */
-//    val recordingFilePath: String by lazy {
-//        "${externalCacheDir?.absolutePath}/recording.3gp"
-//    }
-
-    /* 오디오 기능 사용 명시 */
-//    val requiredPermissions = arrayOf(
-//        android.Manifest.permission.RECORD_AUDIO
-//    )
-
-    //var recorder: MediaRecorder ?= null
-    //var mediaPlayer: MediaPlayer ?= null
-
-    //var filePath=intent.getStringExtra("filepath")
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -121,7 +92,6 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
 
                 else->startRecording()
             }
-            //vibrator.vibrate(VibrationEffect.createOneShot(50,VibrationEffect.DEFAULT_AMPLITUDE))
         }
 
         /*녹음 파일목록 버튼 기능구현*/
@@ -166,29 +136,6 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         }
         btnDelete.isClickable=false
 
-        //btnDone = findViewById(R.id.btnDone)
-
-//        btnDone.setOnClickListener{
-//            val customDialog = CustomDialog(this, this)
-//            customDialog.show()
-//        }
-
-        //버튼 클릭 이벤트////////////////////////////////////////////////
-//        button_start.setOnClickListener {
-//            if (ContextCompat.checkSelfPermission(this,
-//                    android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
-//                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//                //Permission is not granted
-//                val permissions = arrayOf(android.Manifest.permission.RECORD_AUDIO, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-//                ActivityCompat.requestPermissions(this, permissions,200)
-//            } else {
-//                startRecording()
-//            }
-//        }
-//        button_stop.setOnClickListener {
-//            stopPlaying()
-//        }
-        //}
         btnBack = findViewById(R.id.btnBack)
         titleText = findViewById(R.id.titleText)
         deadLineDate = findViewById(R.id.deadLineDate)
@@ -237,6 +184,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         btnBack.setOnClickListener {
             val intent = Intent(this, FileListActivity::class.java)
             startActivity(intent)
+            finish()
         }
         /* 마이페이지 이동 기능 */
         btnMypage=findViewById<ImageButton>(R.id.btnMypage)
@@ -262,11 +210,6 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         sqliteDB.close()
         dbManager.close()
 
-        /*rvfile(녹음파일) 목록 관련*/
-//        rvFile.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        rvFile.setHasFixedSize(true)
-//        rvFile.adapter = FileAdapter(fileList)
-
         /*rvfile(녹음파일) 리사이클러뷰 목록 관련*/
         records = ArrayList()
 
@@ -288,19 +231,6 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         var filePath=intent.getStringExtra("filepath")
 
         mediaPlayer = MediaPlayer()
-//        mediaPlayer.apply{
-//            //여기서 계속 오류
-//            setDataSource(filePath)
-//            prepare()
-//       }
-        playPauseplayer()
-
-//        btnPlay=findViewById(R.id.btnPlay)
-//        btnStop=findViewById(R.id.btnStop)
-//
-//        btnPlay.setOnClickListener{
-//            playPauseplayer()
-//        }
 
     } //***************************************************************onCreate fun 종료*****************************/
 

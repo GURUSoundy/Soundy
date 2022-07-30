@@ -33,6 +33,7 @@ class AlarmActivity : AppCompatActivity() {
         btnBack.setOnClickListener{
             val intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         /* 뷰 초기화 */
