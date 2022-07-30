@@ -65,6 +65,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/default_profile" />
+
             <!-- 사용자 프로필 사진 받아와서 적용할 수 있게 수정 -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -140,6 +141,7 @@
                 android:visibility="gone" />
 
         </LinearLayout>
+
 
         <TextView
             android:id="@+id/deadLineDate"
