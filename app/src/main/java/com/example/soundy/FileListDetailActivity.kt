@@ -77,8 +77,6 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
     lateinit var passedIntent: Intent
     lateinit var deadLineDate: TextView
 
-    var name : String = ""
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

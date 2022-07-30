@@ -10,6 +10,7 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
+
 class SttActivity : AppCompatActivity() {
 
     lateinit var dbManager: DBManager

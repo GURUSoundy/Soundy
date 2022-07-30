@@ -17,6 +17,9 @@ class SttQuizActivity : AppCompatActivity() {
     lateinit var btnBack : ImageButton
     lateinit var btnMypage : ImageButton
     lateinit var btnNext : Button
+    lateinit var indicator1 : ImageView
+    lateinit var indicator2 : ImageView
+    lateinit var indicator3 : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +29,10 @@ class SttQuizActivity : AppCompatActivity() {
         btnBack = findViewById(R.id.btnBack)
         btnMypage = findViewById(R.id.btnMypage)
         btnNext = findViewById(R.id.btnNext)
+
+//        indicator1 = findViewById(R.id.indicator1)
+//        indicator2 = findViewById(R.id.indicator2)
+//        indicator3 = findViewById(R.id.indicator3)
 
         /* 뒤로가기 버튼 */
         btnBack.setOnClickListener {

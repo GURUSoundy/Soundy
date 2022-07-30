@@ -54,16 +54,19 @@ class MyPageActivity : AppCompatActivity() {
             intent.putExtra("userId", userId)
             startActivity(intent)
         }
+
         /* 알람시간설정 버튼 */
         btnAlarm.setOnClickListener {
             val intent = Intent(this, AlarmActivity::class.java)
             startActivity(intent)
         }
+
         /* 초기화 버튼 */
         btnReset.setOnClickListener {
             val intent = Intent(this, ResetActivity::class.java)
             startActivity(intent)
         }
+
         /* 로그아웃 버튼 */
         btnLogout.setOnClickListener {
             /* !!!!! autoLogin 값 지워주는 로직  !!!!! */
@@ -77,6 +80,7 @@ class MyPageActivity : AppCompatActivity() {
 
             finish()
         }
+
         /* 탈퇴 버튼 */
         btnQuit.setOnClickListener {
             val intent = Intent(this, AccountWithdrawalActivity::class.java)

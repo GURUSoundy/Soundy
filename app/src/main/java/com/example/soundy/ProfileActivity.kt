@@ -42,7 +42,6 @@ class ProfileActivity : AppCompatActivity() {
         /* mypage에서 사용자 id 받아오기 */
         val strId : String? = intent.getStringExtra("userId")
 
-
         /* DB 읽어오기 */
         var cursor: Cursor = sqliteDB.rawQuery("select * from User where id = '$strId';", null)
 
