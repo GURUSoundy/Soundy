@@ -21,23 +21,10 @@
         <activity android:name=".MyPageActivity"/>
         <activity android:name=".ProfileActivity" />
         <activity
-            android:name=".rvfilelist"
-            android:exported="false" />
-        <activity
-            android:name=".AudioPlayer"
-            android:exported="false" />
-        <activity
-            android:name=".CalendarActivity"
-            android:exported="false" />
-        <activity
             android:name=".ToDoListActivity"
             android:exported="false" />
-        <activity android:name=".reviewRoutine" />
-        <activity android:name=".MyPageActivity" />
-        <activity android:name=".ProfileActivity" />
         <activity android:name=".SttQuizActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".reviewRoutine" />
         <activity android:name=".AccountWithdrawalActivity" />
         <activity android:name=".AlarmActivity" />
         <activity android:name=".FileListActivity" />
