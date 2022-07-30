@@ -11,6 +11,11 @@
 
     <color name="real_mint">#54BAB9</color>
     <color name="mint">#EAF3EB</color>
+    <color name="ivory">#FFFEFDFB</color>
     <color name="beige">#FBF8F1</color>
     <color name="gray">#1F797A7E</color>
+    <color name="grayDarkDisabled">#8F8F8F</color>
+    <color name="orange">#F46B6B</color>
+
+    <color name="opaqueBG">#61000000</color>
 </resources>

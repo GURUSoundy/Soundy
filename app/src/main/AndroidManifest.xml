@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.soundy">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -8,6 +9,9 @@
     <uses-feature android:name="android.hardware.camera" android:required="true"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -16,8 +20,21 @@
         android:roundIcon="@drawable/logo_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.Soundy"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" />
         <activity android:name=".SplashActivity"/>
+        <activity
+            android:name=".rvfilelist"
+            android:exported="false" />
+        <activity
+            android:name=".AudioPlayer"
+            android:exported="false" />
+        <activity
+            android:name=".trycal"
+            android:exported="false" />
+        <activity
+            android:name=".todoList"
+            android:exported="false" />
+        <activity android:name=".reviewRoutine" />
         <activity android:name=".mypage" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".SttQuizActivity" />
@@ -35,7 +52,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
