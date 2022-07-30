@@ -32,9 +32,9 @@ class CalendarAdapter(val dayList: ArrayList<String>, val onItemListner: OnItemL
 
         /* 텍스트 색상 지정(토, 일) */
         if ((position + 1) % 7 == 0) {
-            holder.dayText.setTextColor(Color.BLUE)
+            holder.dayText.setTextColor(Color.parseColor("#54BAB9"))
         } else if (position == 0 || position % 7 == 0) {
-            holder.dayText.setTextColor(Color.RED)
+            holder.dayText.setTextColor(Color.parseColor("#F46B6B"))
         }
 
         /* 날짜 클릭 이벤트 */
