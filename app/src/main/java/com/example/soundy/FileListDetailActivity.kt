@@ -281,7 +281,8 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
 
         var simpleDateFormat = SimpleDateFormat("yyyy.MM.DD_hh.mm.ss")
         var date=simpleDateFormat.format(Date())
-        filename="audioRecord_$date"
+//        filename="audioRecord_$date"
+        filename="audioRecord"
 
         recorder.apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)
