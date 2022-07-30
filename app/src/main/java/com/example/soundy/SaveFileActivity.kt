@@ -98,7 +98,7 @@ class SaveFileActivity : AppCompatActivity() {
         /* 마이페이지 이동 기능 */
         btnMypage=findViewById<ImageButton>(R.id.btnMypage)
         btnMypage.setOnClickListener {
-            val intent = Intent(this, mypage::class.java)
+            val intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
         }
 
