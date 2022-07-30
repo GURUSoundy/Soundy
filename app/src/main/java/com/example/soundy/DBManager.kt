@@ -44,5 +44,12 @@ class DBManager(
         db.execSQL("DELETE FROM '$tableName';")
         db.close()
     }
+    fun saveFile(fileName: String, dirName: String, addFile: String, stt: String, routine: String){
+        val db = this.writableDatabase
+
+        db.execSQL("INSERT INTO File VALUES('" + fileName + "', '" + dirName + "', '" + addFile + "', '" + stt + "', '" + routine + "');")
+
+        db.close()
+    }
 
 }

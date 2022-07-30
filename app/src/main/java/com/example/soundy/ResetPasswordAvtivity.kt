@@ -54,7 +54,7 @@ class ResetPasswordAvtivity() : AppCompatActivity() {
             }
 
 
-            /* id가 존재하는지 DB에서 확인 */
+            /* id가 존재하는지 DB 확인 */
             var cursor: Cursor = sqliteDB.rawQuery("select * from User where id = '$strId';", null)
 
             while (cursor.moveToNext()) {
@@ -65,10 +65,11 @@ class ResetPasswordAvtivity() : AppCompatActivity() {
             if (cursor.count == 1) {
                 /* 아이디가 존재할 경우 */
                 sqliteDB = dbManager.writableDatabase
-                sqliteDB.execSQL("UPDATE USER SET password = '$strPwd' WHERE id = '$strId';")
-
+                sqliteDB.execSQL("UPDATE User SET password = '$strPwd' WHERE id = '$strId';")
                 cursor.close()
                 sqliteDB.close()
+
+                Toast.makeText(this, "비밀번호가 변경되었습니다.", Toast.LENGTH_SHORT).show()
 
             } else { /* 아이디가 존재하지 않을 경우 */
                 Toast.makeText(this, "존재하지 않는 아이디입니다.", Toast.LENGTH_SHORT).show()
