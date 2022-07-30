@@ -50,8 +50,9 @@ class ShowFileActivity : AppCompatActivity() {
         var play_status = false
 
         /* FileListDetail 에서 파일명(녹음파일명) 받아옴 */
-        titleText.setText(intent.getStringExtra("fileName").toString())
-        tvFileName.setText(intent.getStringExtra("fileName").toString())
+        fileName = intent.getStringExtra("fileName").toString()
+        titleText.setText(fileName)
+        tvFileName.setText(fileName)
         dirName = intent.getStringExtra("dirName").toString()
 
         /* 녹음 파일 저장된 경로
@@ -84,7 +85,6 @@ class ShowFileActivity : AppCompatActivity() {
         btnStt.setOnClickListener{
             /* stt 편집 페이지로 이동 */
             Toast.makeText(this@ShowFileActivity, fileName, Toast.LENGTH_SHORT).show()
-
             val intent = Intent(this, SttActivity::class.java)
             intent.putExtra("fileName", fileName)
             startActivity(intent)
