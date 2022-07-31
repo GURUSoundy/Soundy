@@ -12,7 +12,7 @@ data class audioRecord(
     var duration : String,
     var ampsPath : String,
     var dirName: String
-    ) {
+) {
     @PrimaryKey(autoGenerate = true)
     var id = 0
     @Ignore
