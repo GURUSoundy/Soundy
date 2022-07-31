@@ -205,8 +205,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         }
         /* 뒤로가기 기능 */
         btnBack.setOnClickListener {
-            val intent = Intent(this, FileListActivity::class.java)
-            startActivity(intent)
+            finish()
         }
         /* 마이페이지 이동 기능 */
         btnMypage=findViewById<ImageButton>(R.id.btnMypage)

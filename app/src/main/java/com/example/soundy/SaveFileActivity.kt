@@ -5,18 +5,25 @@ import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.widget.*
+import androidx.annotation.RequiresApi
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class SaveFileActivity : AppCompatActivity() {
 
     lateinit var dbManager: DBManager
+    lateinit var routineDBManager: DBManager
     lateinit var sqliteDB: SQLiteDatabase
+    lateinit var routineSqliteDB: SQLiteDatabase
 
     lateinit var sttContent : String
     lateinit var routine : String
@@ -31,10 +38,11 @@ class SaveFileActivity : AppCompatActivity() {
     lateinit var btnUpload : Button
     lateinit var btnStt : ImageView
     lateinit var tvSttContent : TextView
-    lateinit var btnRoutine : Button
+//    lateinit var btnRoutine : Button
     lateinit var btnSave : Button
     lateinit var btnBack : ImageButton
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_save_file)
@@ -43,12 +51,15 @@ class SaveFileActivity : AppCompatActivity() {
         btnUpload = findViewById(R.id.btnUpload)
         btnStt = findViewById(R.id.ivStt)
         tvSttContent = findViewById(R.id.tvSttContent)
-        btnRoutine = findViewById(R.id.btnRoutine)
+//        btnRoutine = findViewById(R.id.btnRoutine)
         btnSave = findViewById(R.id.btnSave)
         btnBack = findViewById(R.id.btnBack)
 
         dbManager = DBManager(this, "File", null, 1)
         sqliteDB = dbManager.readableDatabase
+
+        routineDBManager = DBManager(this, "TodoList", null, 1)
+        routineSqliteDB = routineDBManager.writableDatabase
 
         /* 파일 업로드 클릭 시 */
         mWebView = findViewById<WebView>(R.id.webview)
@@ -66,21 +77,41 @@ class SaveFileActivity : AppCompatActivity() {
         //val sttContent = intent.getStringExtra("sttContent")
         tvSttContent.setText(sttContent)
 
+        /*
         /* 복습 루틴 버튼 클릭 시 */
         btnRoutine.setOnClickListener {
+
             val cal = Calendar.getInstance()
             val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                 routine = "${year}-${month+1}-${dayOfMonth}"
                 Toast.makeText(this@SaveFileActivity, "${year}년 ${month+1}월 ${dayOfMonth}일로 설정되었습니다.", Toast.LENGTH_SHORT).show()
             }
             DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH)).show()
-        }
+
+        }*/
 
         dirName = intent.getStringExtra("dirName").toString()
         fileName.setText(intent.getStringExtra("fileName"))
 
         /* 저장 버튼 클릭 시 */
         btnSave.setOnClickListener {
+
+            /* 복습 루틴 설정하여 투두리스트 DB에 추가 */
+            /* 복습 마감 기한 처리 필요 */
+            val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
+
+            var today = LocalDateTime.now()
+            var oneDayLater = today.plusDays(1)
+            var sevenDaysLater = today.plusDays(7)
+            var oneMonthLater = today.plusMonths(1)
+
+            var strOneDayLater: String = oneDayLater.format(formatter)
+            var strSevenDaysLater: String = sevenDaysLater.format(formatter)
+            var strOneMonthLater: String = oneMonthLater.format(formatter)
+
+            routineSqliteDB.execSQL("INSERT INTO TodoList VALUES('$strOneDayLater', '[$dirName - ${fileName.text}] 1차 복습', 0);")
+            routineSqliteDB.execSQL("INSERT INTO TodoList VALUES('$strSevenDaysLater', '[$dirName - ${fileName.text}] 2차 복습', 0);")
+            routineSqliteDB.execSQL("INSERT INTO TodoList VALUES('$strOneMonthLater', '[$dirName - ${fileName.text}] 3차 복습', 0);")
 
             var cursor: Cursor = sqliteDB.rawQuery("select * from File where fileName = '$fileName';", null)
 
