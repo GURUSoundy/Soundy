@@ -32,8 +32,8 @@ class ShowFileActivity : AppCompatActivity() {
     lateinit var btnShowUpload : Button
     lateinit var btnStt : ImageView
     lateinit var tvSttContent : TextView
-    lateinit var btnQuiz : Button
-    lateinit var btnRoutine : Button
+//    lateinit var btnQuiz : Button
+//    lateinit var btnRoutine : Button
     lateinit var btnBack : ImageButton
     lateinit var btnMypage : ImageButton
     lateinit var btnPlay : ImageButton
@@ -47,8 +47,8 @@ class ShowFileActivity : AppCompatActivity() {
         btnShowUpload = findViewById(R.id.btnUpload)
         btnStt = findViewById(R.id.ivStt)
         tvSttContent = findViewById(R.id.tvSttContent)
-        btnQuiz = findViewById(R.id.btnQuiz)
-        btnRoutine = findViewById(R.id.btnRoutine)
+//        btnQuiz = findViewById(R.id.btnQuiz)
+//        btnRoutine = findViewById(R.id.btnRoutine)
         btnBack = findViewById(R.id.btnBack)
         btnPlay = findViewById(R.id.btnPlay)
 
@@ -101,23 +101,23 @@ class ShowFileActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btnQuiz.setOnClickListener {
-            /* 퀴즈 페이지로 이동 */
-            val intent = Intent(this, SttQuizActivity::class.java)
-            startActivity(intent)
-        }
-
-        btnRoutine.setOnClickListener {
-            val cal = Calendar.getInstance()
-            val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                routine = "${year}-${month+1}-${dayOfMonth}"
-                // db에 수정한 날짜 저장
-
-                Toast.makeText(this@ShowFileActivity, "${year}년 ${month+1}월 ${dayOfMonth}일로 수정되었습니다.", Toast.LENGTH_SHORT).show()
-            }
-            DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(
-                Calendar.DAY_OF_MONTH)).show()
-        }
+//        btnQuiz.setOnClickListener {
+//            /* 퀴즈 페이지로 이동 */
+//            val intent = Intent(this, SttQuizActivity::class.java)
+//            startActivity(intent)
+//        }
+//
+//        btnRoutine.setOnClickListener {
+//            val cal = Calendar.getInstance()
+//            val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+//                routine = "${year}-${month+1}-${dayOfMonth}"
+//                // db에 수정한 날짜 저장
+//
+//                Toast.makeText(this@ShowFileActivity, "${year}년 ${month+1}월 ${dayOfMonth}일로 수정되었습니다.", Toast.LENGTH_SHORT).show()
+//            }
+//            DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(
+//                Calendar.DAY_OF_MONTH)).show()
+//        }
 
         /* 마이페이지 이동 기능 */
         btnMypage=findViewById<ImageButton>(R.id.btnMypage)

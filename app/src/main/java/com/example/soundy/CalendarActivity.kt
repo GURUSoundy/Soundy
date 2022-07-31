@@ -162,9 +162,13 @@ class CalendarActivity : AppCompatActivity(), OnItemListner {
 
         val intent = Intent(this, ToDoListActivity::class.java)
         intent.putExtra("month", yearMonthFromDate(selectedDate))
-        intent.putExtra("day", dayText)
+        if (dayText.length == 1) {
+            var formattedDayText: String = "0$dayText"
+            intent.putExtra("day", formattedDayText)
+        } else {
+            intent.putExtra("day", dayText)
+        }
         startActivity(intent)
-        finish()
     }
 
 }

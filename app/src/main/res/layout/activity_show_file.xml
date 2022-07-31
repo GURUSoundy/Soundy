@@ -126,9 +126,9 @@
         android:layout_width="324dp"
         android:layout_height="126dp"
         android:layout_marginTop="15dp"
-        android:text="TextView"
-        android:textSize="15sp"
         android:ellipsize="end"
+        android:text="메모로 수정..?"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/ivStt"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="@+id/ivStt"
@@ -167,6 +167,7 @@
         app:layout_constraintTop_toTopOf="@+id/ivStt"
         app:srcCompat="@drawable/stt_icon" />
 
+    <!--
     <Button
         android:id="@+id/btnQuiz"
         android:layout_width="370dp"
@@ -196,6 +197,7 @@
         app:layout_constraintEnd_toEndOf="@+id/btnQuiz"
         app:layout_constraintTop_toTopOf="@+id/btnQuiz"
         app:srcCompat="@drawable/question_icon" />
+
 
     <Button
         android:id="@+id/btnRoutine"
@@ -229,6 +231,6 @@
         android:elevation="5dp"
         app:layout_constraintEnd_toEndOf="@+id/btnRoutine"
         app:layout_constraintTop_toTopOf="@+id/btnRoutine"
-        app:srcCompat="@drawable/question_icon" />
+        app:srcCompat="@drawable/question_icon" /> -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
