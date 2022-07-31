@@ -7,9 +7,12 @@ import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.core.content.res.ResourcesCompat
 import androidx.room.Room
+import java.io.FileDescriptor
+import java.io.FileInputStream
 import java.util.*
 
 class ShowFileActivity : AppCompatActivity() {
@@ -73,8 +76,11 @@ class ShowFileActivity : AppCompatActivity() {
         btnPlay.setOnClickListener{
             mediaPlayer = MediaPlayer()
             mediaPlayer.apply {
-                setDataSource(filePath)
-                prepare()
+                Log.d("디버깅", filePath.toString())
+//                var fis = FileInputStream(filePath)
+//                var fd: FileDescriptor = fis.fd
+                setDataSource(filePath.toString())
+//                prepare()
             }
             if(!mediaPlayer.isPlaying){
                 mediaPlayer.prepare()

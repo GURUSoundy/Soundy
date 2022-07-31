@@ -331,6 +331,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         }
 
         var filePath = "$dirPath$newFilename.mp3"
+        Log.d("디버깅", "디테일페이지 filePath: $filePath")
         var timestamp = Date().time
         var ampsPath = "$dirPath$newFilename"
 
@@ -390,6 +391,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         val intent = Intent(this, ShowFileActivity::class.java)
         intent.putExtra("fileName", audioRecord.filename)
         intent.putExtra("dirName", dirName)
+        intent.putExtra("filePath", audioRecord.filePath)
         Toast.makeText(this, "$dirName ${audioRecord.filename}",Toast.LENGTH_SHORT).show()
         startActivity(intent)
     }
