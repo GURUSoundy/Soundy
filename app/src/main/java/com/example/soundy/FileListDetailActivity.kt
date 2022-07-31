@@ -9,7 +9,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.icu.text.SimpleDateFormat
 import android.media.AudioRecord
-import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.sip.SipSession
 import android.os.*
@@ -59,9 +58,6 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
 
     private lateinit var vibrator: Vibrator
     private lateinit var timer: Timer
-    private lateinit var mediaPlayer: MediaPlayer
-    private lateinit var btnPlay : ImageButton
-    private lateinit var btnStop : ImageButton
 
     private lateinit var db : recordDatabase
 
@@ -236,11 +232,6 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         }
         fetchAll(dirName)
 
-        /*rvfile(녹음파일) 재생 관련*/
-        var filePath=intent.getStringExtra("filepath")
-
-        mediaPlayer = MediaPlayer()
-        playPauseplayer()
     }
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -281,7 +272,8 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
 
         var simpleDateFormat = SimpleDateFormat("yyyy.MM.DD_hh.mm.ss")
         var date=simpleDateFormat.format(Date())
-        filename="audioRecord_$date"
+//        filename="audioRecord_$date"
+        filename="audioRecord"
 
         recorder.apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)
@@ -340,14 +332,11 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
 
         var filePath = "$dirPath$newFilename.mp3"
         var timestamp = Date().time
-        var ampsPath = "$dirPath$newFilename.mp3"
+        var ampsPath = "$dirPath$newFilename"
 
         try {
             var fos=FileOutputStream(ampsPath)
-            //var out=ObjectOutputStream(fos)
-            //out.writeObject(amplitudes)
             fos.close()
-            //out.close()
         }catch (e:IOException){}
 
         var record =audioRecord(newFilename,filePath,timestamp,duration,ampsPath, dirName)
@@ -368,7 +357,6 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
 
     private fun dismiss(){
         popupBG.visibility=View.GONE
-        //bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         hideKeyboard(filenameInput)
         Handler(Looper.getMainLooper()).postDelayed({
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -392,22 +380,11 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         }
     }
 
-    private fun playPauseplayer(){
-        if(!mediaPlayer.isPlaying){
-            mediaPlayer.start()
-            //btnPlay.background=ResourcesCompat.getDrawable(resources,R.drawable.ic_pause,theme)
-        }else{
-            mediaPlayer.pause()
-            //btnPlay.background=ResourcesCompat.getDrawable(resources,R.drawable.ic_play,theme)
-        }
-    }
-
     override fun onTimerTick(duration: String) {
         tvTimer.text=duration
         this.duration=duration.dropLast(3)
     }
 
-    //fun btnPlay.onClickListener() {
     override fun onItemClickListener(position: Int) {
         var audioRecord = records[position]
         val intent = Intent(this, ShowFileActivity::class.java)
@@ -415,11 +392,6 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         intent.putExtra("dirName", dirName)
         Toast.makeText(this, "$dirName ${audioRecord.filename}",Toast.LENGTH_SHORT).show()
         startActivity(intent)
-        //var intent = Intent(this, rvfilelist::class.java)
-
-        //intent.putExtra("filepath",audioRecord.filePath)
-        //intent.putExtra("filename",audioRecord.filename)
-        //startActivity(intent)
     }
 
     override fun onItemLongClickListener(position: Int) {

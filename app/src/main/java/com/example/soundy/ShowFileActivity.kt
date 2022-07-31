@@ -4,12 +4,17 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import android.media.MediaPlayer
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import androidx.core.content.res.ResourcesCompat
+import androidx.room.Room
 import java.util.*
 
 class ShowFileActivity : AppCompatActivity() {
+
+    lateinit var mediaPlayer: MediaPlayer
 
     lateinit var dbManager: DBManager
     lateinit var sqliteDB: SQLiteDatabase
@@ -54,23 +59,43 @@ class ShowFileActivity : AppCompatActivity() {
         titleText.setText(fileName)
         tvFileName.setText(fileName)
         dirName = intent.getStringExtra("dirName").toString()
+        var filePath = intent.getStringExtra("filePath")
 
-        /* 녹음 파일 저장된 경로
-        var mediaplayer : MediaPlayer?= MediaPlayer.create(this, R.raw.sample) */
+        /* 녹음 파일을 미디어 플레이어에 담기
+        mediaPlayer = MediaPlayer()
+        mediaPlayer.apply {
+            setDataSource(filePath) <<<<<< 여기서 문제가 생긴 듯!!!!! filePath는 잘 받아옴
+            prepare()
+        } */
+
+        //playPausePlayer()
 
         btnPlay.setOnClickListener{
-            /* 녹음 파일 재생, 재생 상태인지 일시 정지 상태인지에 따라 */
+            mediaPlayer = MediaPlayer()
+            mediaPlayer.apply {
+                setDataSource(filePath)
+                prepare()
+            }
+            if(!mediaPlayer.isPlaying){
+                mediaPlayer.prepare()
+                mediaPlayer.start()
+                btnPlay.background = ResourcesCompat.getDrawable(resources, R.drawable.pause_icon, theme)
+            } else {
+                mediaPlayer.pause()
+                btnPlay.background = ResourcesCompat.getDrawable(resources, R.drawable.play_icon, theme)
+            }
+            /* 녹음 파일 재생, 재생 상태인지 일시 정지 상태인지에 따라
             if(play_status == false){
                 btnPlay.setImageResource(R.drawable.pause_icon)
-                /* 녹음 파일(fileName) 재생 코드
-                mediaplayer?.start() */
+                /* 녹음 파일(fileName) 재생 코드 */
+                //mediaPlayer.start()
                 play_status = true
             } else {
                 btnPlay.setImageResource(R.drawable.play_icon)
-                /* 녹음 파일 일시 정지 코드
-                mediaplayer?.pause() */
+                /* 녹음 파일 일시 정지 코드 */
+                //mediaPlayer.pause()
                 play_status = false
-            }
+            } */
         }
 
         btnShowUpload.setOnClickListener {
@@ -120,4 +145,16 @@ class ShowFileActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    private fun playPausePlayer(){
+        if(!mediaPlayer.isPlaying){
+            mediaPlayer.prepare()
+            mediaPlayer.start()
+            btnPlay.background = ResourcesCompat.getDrawable(resources, R.drawable.pause_icon, theme)
+        } else {
+            mediaPlayer.pause()
+            btnPlay.background = ResourcesCompat.getDrawable(resources, R.drawable.play_icon, theme)
+        }
+    }
 }
+

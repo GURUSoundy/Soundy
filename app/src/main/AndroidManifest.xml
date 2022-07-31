@@ -18,12 +18,12 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo_icon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Soundy">
+        android:theme="@style/Theme.Soundy"
+        android:usesCleartextTraffic="true">
         <activity android:name=".CalendarActivity"
             android:exported="false"/>
         <activity android:name=".MyPageActivity"/>
         <activity android:name=".ProfileActivity" />
-        android:usesCleartextTraffic="true">
         <activity android:name=".SplashActivity"/>
         <activity
             android:name=".ToDoListActivity"
@@ -40,7 +40,8 @@
         <activity android:name=".ShowFileActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SttActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
