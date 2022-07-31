@@ -64,44 +64,24 @@ class ShowFileActivity : AppCompatActivity() {
         dirName = intent.getStringExtra("dirName").toString()
         var filePath = intent.getStringExtra("filePath")
 
-        /* 녹음 파일을 미디어 플레이어에 담기
+        /* 녹음 파일을 미디어 플레이어에 담기 */
         mediaPlayer = MediaPlayer()
         mediaPlayer.apply {
-            setDataSource(filePath) <<<<<< 여기서 문제가 생긴 듯!!!!! filePath는 잘 받아옴
+            setDataSource(filePath)
             prepare()
-        } */
-
-        //playPausePlayer()
+        }
 
         btnPlay.setOnClickListener{
-            mediaPlayer = MediaPlayer()
-            mediaPlayer.apply {
-                Log.d("디버깅", filePath.toString())
-//                var fis = FileInputStream(filePath)
-//                var fd: FileDescriptor = fis.fd
-                setDataSource(filePath.toString())
-//                prepare()
-            }
-            if(!mediaPlayer.isPlaying){
-                mediaPlayer.prepare()
-                mediaPlayer.start()
-                btnPlay.background = ResourcesCompat.getDrawable(resources, R.drawable.pause_icon, theme)
-            } else {
-                mediaPlayer.pause()
-                btnPlay.background = ResourcesCompat.getDrawable(resources, R.drawable.play_icon, theme)
-            }
-            /* 녹음 파일 재생, 재생 상태인지 일시 정지 상태인지에 따라
+            /* 재생 상태에 따라 play, pause 설정 */
             if(play_status == false){
                 btnPlay.setImageResource(R.drawable.pause_icon)
-                /* 녹음 파일(fileName) 재생 코드 */
-                //mediaPlayer.start()
+                mediaPlayer.start()
                 play_status = true
             } else {
                 btnPlay.setImageResource(R.drawable.play_icon)
-                /* 녹음 파일 일시 정지 코드 */
-                //mediaPlayer.pause()
+                mediaPlayer.pause()
                 play_status = false
-            } */
+            }
         }
 
         btnShowUpload.setOnClickListener {
@@ -149,17 +129,6 @@ class ShowFileActivity : AppCompatActivity() {
         /* 뒤로 가기 버튼 클릭 시 */
         btnBack.setOnClickListener {
             finish()
-        }
-    }
-
-    private fun playPausePlayer(){
-        if(!mediaPlayer.isPlaying){
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-            btnPlay.background = ResourcesCompat.getDrawable(resources, R.drawable.pause_icon, theme)
-        } else {
-            mediaPlayer.pause()
-            btnPlay.background = ResourcesCompat.getDrawable(resources, R.drawable.play_icon, theme)
         }
     }
 }
