@@ -22,6 +22,7 @@ class ShowFileActivity : AppCompatActivity() {
     lateinit var dirName : String
     lateinit var memoContent : String
     lateinit var routine : String
+    lateinit var filePath: String
 
     lateinit var titleText : TextView
     lateinit var tvFileName : TextView
@@ -58,7 +59,8 @@ class ShowFileActivity : AppCompatActivity() {
         titleText.setText(fileName)
         tvFileName.setText(fileName)
         dirName = intent.getStringExtra("dirName").toString()
-        var filePath = intent.getStringExtra("filePath")
+        filePath = intent.getStringExtra("filePath").toString()
+        Log.d("인텐트", "ShowFileActivity이 받은 filePath: $filePath")
 
         /* 녹음 파일을 미디어 플레이어에 담기 */
         mediaPlayer = MediaPlayer()

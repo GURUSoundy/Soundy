@@ -82,6 +82,7 @@ class MemoActivity : AppCompatActivity() {
             intent.putExtra("fileName", fileName)
             intent.putExtra("dirName", dirName)
             intent.putExtra("filePath", filePath)
+            Log.d("인텐트", "MemoActivity -> ShowFileActivity: $filePath")
             startActivity(intent)
             finish()
         }
