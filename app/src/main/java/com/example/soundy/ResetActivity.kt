@@ -7,11 +7,13 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
+import androidx.room.Room
 
 class ResetActivity : AppCompatActivity() {
     lateinit var btnBack: ImageButton
     lateinit var btnReset: Button
     lateinit var dbManager: DBManager
+    private lateinit var db : recordDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,19 @@ class ResetActivity : AppCompatActivity() {
 
                     dbManager = DBManager(this, "File", null, 1)
                     dbManager.deleteData("File")
+
+                    /* 녹음파일 table 삭제 */
+                    db= Room.databaseBuilder(
+                        this, recordDatabase::class.java,
+                        "audioRecords"
+                    ).build()
+
+                    val r = Runnable {
+                        db.audioRecordDao().delete()
+                    }
+
+                    val thread = Thread(r)
+                    thread.start()
                 })
                 .setNegativeButton("취소",
                 DialogInterface.OnClickListener { dialog, id ->
