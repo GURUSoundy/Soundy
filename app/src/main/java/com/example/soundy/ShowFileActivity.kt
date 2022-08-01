@@ -1,18 +1,14 @@
 package com.example.soundy
 
-import android.app.DatePickerDialog
 import android.content.Intent
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.media.MediaPlayer
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.core.content.res.ResourcesCompat
-import androidx.room.Room
-import java.io.FileDescriptor
-import java.io.FileInputStream
 import java.util.*
 
 class ShowFileActivity : AppCompatActivity() {
@@ -24,14 +20,14 @@ class ShowFileActivity : AppCompatActivity() {
 
     lateinit var fileName : String
     lateinit var dirName : String
-    lateinit var sttContent : String
+    lateinit var memoContent : String
     lateinit var routine : String
 
     lateinit var titleText : TextView
     lateinit var tvFileName : TextView
     lateinit var btnShowUpload : Button
-    lateinit var btnStt : ImageView
-    lateinit var tvSttContent : TextView
+    lateinit var btnMemo : ImageView
+    lateinit var tvMemoContent : TextView
 //    lateinit var btnQuiz : Button
 //    lateinit var btnRoutine : Button
     lateinit var btnBack : ImageButton
@@ -45,8 +41,8 @@ class ShowFileActivity : AppCompatActivity() {
         titleText = findViewById(R.id.titleText)
         tvFileName = findViewById(R.id.tvFileName)
         btnShowUpload = findViewById(R.id.btnUpload)
-        btnStt = findViewById(R.id.ivStt)
-        tvSttContent = findViewById(R.id.tvSttContent)
+        btnMemo = findViewById(R.id.ivMemo)
+        tvMemoContent = findViewById(R.id.tvMemoContent)
 //        btnQuiz = findViewById(R.id.btnQuiz)
 //        btnRoutine = findViewById(R.id.btnRoutine)
         btnBack = findViewById(R.id.btnBack)
@@ -88,17 +84,27 @@ class ShowFileActivity : AppCompatActivity() {
             // 업로드 했던 파일을 보여줌
         }
 
-        /* db에서 (녹음)파일명으로 stt 내용을 불러옴 */
-        //sttContent = sqliteDB.rawQuery("select stt from File where fileName = '$name';", null).toString()
-        sttContent = "아직.."
-        tvSttContent.setText(sttContent)
+        /* db에서 (녹음)파일명으로 메모 내용을 불러옴 */
+        var cursor: Cursor = sqliteDB.rawQuery("select memo from File where fileName = '$fileName';", null)
 
-        btnStt.setOnClickListener{
-            /* stt 편집 페이지로 이동 */
+        while (cursor.moveToNext()) {
+            memoContent = cursor.getString(0)
+        }
+
+        Log.d("메모", "$memoContent")
+        if (memoContent != "") {
+            tvMemoContent.setText(memoContent)
+        }
+
+        btnMemo.setOnClickListener{
+            /* 메모 편집 페이지로 이동 */
             Toast.makeText(this@ShowFileActivity, fileName, Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, SttActivity::class.java)
+            val intent = Intent(this, MemoActivity::class.java)
             intent.putExtra("fileName", fileName)
+            intent.putExtra("dirName", dirName)
+            intent.putExtra("filePath", filePath)
             startActivity(intent)
+            finish()
         }
 
 //        btnQuiz.setOnClickListener {

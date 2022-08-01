@@ -111,7 +111,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvFileName" />
 
     <ImageView
-        android:id="@+id/ivStt"
+        android:id="@+id/ivMemo"
         android:layout_width="370dp"
         android:layout_height="240dp"
         android:layout_marginTop="5dp"
@@ -122,16 +122,16 @@
         app:layout_constraintTop_toBottomOf="@+id/btnUpload" />
 
     <TextView
-        android:id="@+id/tvSttContent"
+        android:id="@+id/tvMemoContent"
         android:layout_width="324dp"
         android:layout_height="126dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         android:ellipsize="end"
-        android:text="메모로 수정..?"
+        android:hint="메모하실 사항이 있으신가요?"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/ivStt"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="@+id/ivStt"
+        app:layout_constraintEnd_toEndOf="@+id/ivMemo"
+        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintStart_toStartOf="@+id/ivMemo"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <View
@@ -140,22 +140,22 @@
         android:layout_height="2px"
         android:layout_marginTop="67dp"
         android:background="#797A7E"
-        app:layout_constraintEnd_toEndOf="@+id/ivStt"
+        app:layout_constraintEnd_toEndOf="@+id/ivMemo"
         app:layout_constraintHorizontal_bias="0.475"
-        app:layout_constraintStart_toStartOf="@+id/ivStt"
-        app:layout_constraintTop_toTopOf="@+id/ivStt" />
+        app:layout_constraintStart_toStartOf="@+id/ivMemo"
+        app:layout_constraintTop_toTopOf="@+id/ivMemo" />
 
     <TextView
-        android:id="@+id/tvStt"
+        android:id="@+id/tvMemo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="25dp"
-        android:text="STT(Speach To Text)"
+        android:text="메모"
         android:textColor="#797A7E"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/iconStt"
-        app:layout_constraintTop_toTopOf="@+id/ivStt" />
+        app:layout_constraintTop_toTopOf="@+id/ivMemo" />
 
     <ImageView
         android:id="@+id/iconStt"
@@ -163,8 +163,8 @@
         android:layout_height="35dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="@+id/ivStt"
-        app:layout_constraintTop_toTopOf="@+id/ivStt"
+        app:layout_constraintStart_toStartOf="@+id/ivMemo"
+        app:layout_constraintTop_toTopOf="@+id/ivMemo"
         app:srcCompat="@drawable/stt_icon" />
 
     <!--

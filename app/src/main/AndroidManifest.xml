@@ -39,7 +39,7 @@
         <activity android:name=".SaveFileActivity" />
         <activity android:name=".ShowFileActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".SttActivity" />
+        <activity android:name=".MemoActivity" />
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

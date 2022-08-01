@@ -142,10 +142,20 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         btnOK.setOnClickListener{
             dismiss()
             save()
+
+            var newDBManager = DBManager(this, "File", null, 1)
+            var newSqliteDB : SQLiteDatabase = newDBManager.writableDatabase
+
+            newSqliteDB.execSQL("INSERT INTO File (fileName, dirName, memo) VALUES ('${filenameInput.text.toString()}', '$dirName', '');")
+
+            newSqliteDB.close()
+            newDBManager.close()
+
             val intent = Intent(this, SaveFileActivity::class.java)
             intent.putExtra("fileName", filenameInput.text.toString())
             intent.putExtra("dirName", dirName)
             startActivity(intent)
+            finish()
         }
         popupBG.setOnClickListener{
             File("$dirPath$filename.mp3").delete()
@@ -340,7 +350,6 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         }catch (e:IOException){}
 
         var record =audioRecord(newFilename,filePath,timestamp,duration,ampsPath, dirName)
-        Log.d("태그", dirName)
 
         GlobalScope.launch{
             db.audioRecordDao().insert(record)
