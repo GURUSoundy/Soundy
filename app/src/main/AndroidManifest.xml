@@ -24,7 +24,13 @@
             android:exported="false"/>
         <activity android:name=".MyPageActivity"/>
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".SplashActivity"/>
+        <activity android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ToDoListActivity"
             android:exported="false" />
@@ -39,13 +45,9 @@
         <activity android:name=".SaveFileActivity" />
         <activity android:name=".ShowFileActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".SttActivity" />
+        <activity android:name=".MemoActivity" />
         <activity android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <receiver
