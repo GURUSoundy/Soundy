@@ -12,8 +12,8 @@ abstract interface audioRecordDao {
     @Insert
     fun insert(vararg audioRecord: audioRecord)
 
-    @Delete
-    fun delete(audioRecord: audioRecord)
+    @Query("DELETE FROM audioRecords")
+    fun delete()
 
     @Delete
     fun delete(audioRecords: Array<audioRecord>)
