@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebView
@@ -37,6 +38,7 @@ class SaveFileActivity : AppCompatActivity() {
 //    lateinit var btnRoutine : Button
     lateinit var btnSave : Button
     lateinit var btnBack : ImageButton
+    lateinit var filePath: String
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,14 +64,18 @@ class SaveFileActivity : AppCompatActivity() {
         setmWebViewFileUploadPossible()
         with(mWebView) { this.loadUrl("file:///android_asset/upload.html") }
 
-        dirName = intent.getStringExtra("dirName").toString()
-        fileName.setText(intent.getStringExtra("fileName"))
+        var passedIntent : Intent = intent
+        dirName = passedIntent.getStringExtra("dirName").toString()
+        fileName.setText(passedIntent.getStringExtra("fileName"))
+        filePath = passedIntent.getStringExtra("filePath").toString()
 
         /* 메모 부분 클릭 시 */
         tvMemoContent.setOnClickListener {
             val intent = Intent(this, MemoActivity::class.java)
             intent.putExtra("fileName", fileName.text)
             intent.putExtra("dirName", dirName)
+            intent.putExtra("filePath", filePath)
+            Log.d("인텐트", "SaveFileActivity->MemoActivity: $filePath")
             startActivity(intent)
         }
 
@@ -103,7 +109,9 @@ class SaveFileActivity : AppCompatActivity() {
                 //sqliteDB.saveFile(fileName, dirName, addFile, sttContent, routine)
                 Toast.makeText(this@SaveFileActivity, "${fileName.text},$dirName 이(가) 저장되었습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, FileListDetailActivity::class.java)
+                intent.putExtra("fileName", fileName.text)
                 intent.putExtra("dirName", dirName)
+                intent.putExtra("filePath", filePath)
                 finish()
             }
         }

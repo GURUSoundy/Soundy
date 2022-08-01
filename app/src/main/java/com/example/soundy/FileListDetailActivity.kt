@@ -401,6 +401,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         intent.putExtra("dirName", dirName)
         intent.putExtra("filePath", audioRecord.filePath)
         Toast.makeText(this, "$dirName ${audioRecord.filename}",Toast.LENGTH_SHORT).show()
+        Log.d("인텐트", "fileListDetailActivity -> ShowFileActivity: ${audioRecord.filePath}")
         startActivity(intent)
     }
 
