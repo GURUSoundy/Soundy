@@ -6,9 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.*
-import androidx.core.content.res.ResourcesCompat
 import java.util.*
 
 class ShowFileActivity : AppCompatActivity() {
@@ -29,8 +27,6 @@ class ShowFileActivity : AppCompatActivity() {
     lateinit var btnShowUpload : Button
     lateinit var btnMemo : ImageView
     lateinit var tvMemoContent : TextView
-//    lateinit var btnQuiz : Button
-//    lateinit var btnRoutine : Button
     lateinit var btnBack : ImageButton
     lateinit var btnMypage : ImageButton
     lateinit var btnPlay : ImageButton
@@ -44,8 +40,6 @@ class ShowFileActivity : AppCompatActivity() {
         btnShowUpload = findViewById(R.id.btnUpload)
         btnMemo = findViewById(R.id.ivMemo)
         tvMemoContent = findViewById(R.id.tvMemoContent)
-//        btnQuiz = findViewById(R.id.btnQuiz)
-//        btnRoutine = findViewById(R.id.btnRoutine)
         btnBack = findViewById(R.id.btnBack)
         btnPlay = findViewById(R.id.btnPlay)
 
@@ -60,7 +54,6 @@ class ShowFileActivity : AppCompatActivity() {
         tvFileName.setText(fileName)
         dirName = intent.getStringExtra("dirName").toString()
         filePath = intent.getStringExtra("filePath").toString()
-        Log.d("인텐트", "ShowFileActivity이 받은 filePath: $filePath")
 
         /* 녹음 파일을 미디어 플레이어에 담기 */
         mediaPlayer = MediaPlayer()
@@ -93,7 +86,6 @@ class ShowFileActivity : AppCompatActivity() {
             memoContent = cursor.getString(0)
         }
 
-        Log.d("메모", "$memoContent")
         if (memoContent != "") {
             tvMemoContent.setText(memoContent)
         }
@@ -108,24 +100,6 @@ class ShowFileActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
-//        btnQuiz.setOnClickListener {
-//            /* 퀴즈 페이지로 이동 */
-//            val intent = Intent(this, SttQuizActivity::class.java)
-//            startActivity(intent)
-//        }
-//
-//        btnRoutine.setOnClickListener {
-//            val cal = Calendar.getInstance()
-//            val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-//                routine = "${year}-${month+1}-${dayOfMonth}"
-//                // db에 수정한 날짜 저장
-//
-//                Toast.makeText(this@ShowFileActivity, "${year}년 ${month+1}월 ${dayOfMonth}일로 수정되었습니다.", Toast.LENGTH_SHORT).show()
-//            }
-//            DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(
-//                Calendar.DAY_OF_MONTH)).show()
-//        }
 
         /* 마이페이지 이동 기능 */
         btnMypage=findViewById<ImageButton>(R.id.btnMypage)

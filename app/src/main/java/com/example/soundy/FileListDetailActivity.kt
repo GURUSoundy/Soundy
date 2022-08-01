@@ -8,34 +8,20 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.icu.text.SimpleDateFormat
-import android.media.AudioRecord
 import android.media.MediaRecorder
-import android.net.sip.SipSession
 import android.os.*
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import android.util.AttributeSet
-import android.view.Gravity.apply
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.GravityCompat.apply
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_file_list_detail.*
-import kotlinx.android.synthetic.main.activity_file_list_detail.view.*
-import kotlinx.android.synthetic.main.activity_save_file.*
-import kotlinx.android.synthetic.main.plus_directory_popup.*
 import kotlinx.android.synthetic.main.renamefile_popup.*
-import kotlinx.android.synthetic.main.rvfilelist.*
-import org.w3c.dom.Text
 import java.io.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -73,6 +59,8 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
     lateinit var passedIntent: Intent
     lateinit var deadLineDate: TextView
 
+    lateinit var filePath: String
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,11 +69,11 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         titleText = findViewById<TextView>(R.id.titleText)
 
         /* FileListActivity에서 디렉토리 이름 받아오기 */
-        passedIntent = getIntent()
+        passedIntent = intent
         dirName = passedIntent.getStringExtra("dirName").toString()
-        titleText.setText(dirName)
+        titleText.text = dirName
 
-        /*녹음 기능 추가 중인 코드*/
+        /* 녹음 기능 추가 중인 코드 */
         permissionGranted=ActivityCompat.checkSelfPermission(this,permissions[0])==PackageManager.PERMISSION_GRANTED
 
         if(!permissionGranted)
@@ -111,34 +99,23 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
 
                 else->startRecording()
             }
-            //vibrator.vibrate(VibrationEffect.createOneShot(50,VibrationEffect.DEFAULT_AMPLITUDE))
         }
 
-        /*녹음 파일목록 버튼 기능구현*/
-        btnList.setOnClickListener {
-            //Toast.makeText(this, "list button",Toast.LENGTH_SHORT).show()
-//            val intent = getIntent()
-//            finish();
-//            startActivity(intent)
-        }
-
-        /*녹음 종료 버튼 기능구현*/
+        /* 녹음 종료 버튼 기능 구현 */
         btnDone.setOnClickListener{
             stopRecorder()
-            //Toast.makeText(this, "녹음이 저장되었습니다.",Toast.LENGTH_SHORT).show()
             bottomSheetBehavior.state =BottomSheetBehavior.STATE_EXPANDED
             popupBG.visibility=View.VISIBLE
             filenameInput.setText(filename)
         }
 
-        /*파일취소 버튼 기능 구현*/
+        /* 파일취소 버튼 기능 구현 */
         btnCancel.setOnClickListener{
             File("$dirPath$filename.mp3").delete()
             dismiss()
         }
 
-
-        /*파일제목설정 popup 확인버튼 기능 구현*/
+        /* 파일제목설정 popup 확인버튼 기능 구현 */
         btnOK.setOnClickListener{
             dismiss()
             save()
@@ -154,6 +131,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
             val intent = Intent(this, SaveFileActivity::class.java)
             intent.putExtra("fileName", filenameInput.text.toString())
             intent.putExtra("dirName", dirName)
+            intent.putExtra("filePath", filePath)
             startActivity(intent)
             finish()
         }
@@ -162,7 +140,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
             dismiss()
         }
 
-        /*파일삭제 버튼 기능 구현*/
+        /* 파일삭제 버튼 기능 구현 */
         btnDelete.setOnClickListener{
             stopRecorder()
             File("$dirPath$filename.mp3").delete()
@@ -224,7 +202,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
             startActivity(intent)
         }
 
-        /*rvfile(녹음파일) 리사이클러뷰 목록 관련*/
+        /* rvfile(녹음파일) 리사이클러뷰 목록 관련 */
         records = ArrayList()
 
         db=Room.databaseBuilder(
@@ -240,8 +218,8 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
             layoutManager=LinearLayoutManager(context)
         }
         fetchAll(dirName)
-
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -261,7 +239,8 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
 
         timer.pause()
     }
-    /*녹음 다시 시작*/
+
+    /* 녹음 다시 시작 */
     private fun resumeRecorder(){
         recorder.resume()
         isPaused=false
@@ -281,7 +260,6 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
 
         var simpleDateFormat = SimpleDateFormat("yyyy.MM.DD_hh.mm.ss")
         var date=simpleDateFormat.format(Date())
-//        filename="audioRecord_$date"
         filename="audioRecord"
 
         recorder.apply {
@@ -290,12 +268,13 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
             setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
             setOutputFile("$dirPath$filename.mp3")
 
-            try{
+            try {
                 prepare()
-            }catch (e: IOException){}
+            } catch (e: IOException){}
 
             start()
         }
+
         btnRecord.setImageResource(R.drawable.ic_pause)
         isRecording=true
         isPaused=false
@@ -305,7 +284,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         btnDelete.isClickable=true
         btnDelete.setImageResource(R.drawable.ic_delete)
 
-        /*녹음 완료 시 btnList->btnDone*/
+        /* 녹음 완료 시 btnList->btnDone */
         btnList.visibility=View.GONE
         btnDone.visibility=View.VISIBLE
     }
@@ -329,17 +308,17 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         btnRecord.setImageResource(R.drawable.ic_record)
 
         tvTimer.text = "00:00.00"
-    } /**/
+    }
 
     private fun save(){
         val newFilename =filenameInput.text.toString()
-        /*새로운 파일 이름 생성*/
+        /* 새로운 파일 이름 생성 */
         if (newFilename != filename){
             var newFile =File("$dirPath$newFilename.mp3")
             File("$dirPath$filename.mp3").renameTo(newFile)
         }
 
-        var filePath = "$dirPath$newFilename.mp3"
+        filePath = "$dirPath$newFilename.mp3"
         Log.d("디버깅", "디테일페이지 filePath: $filePath")
         var timestamp = Date().time
         var ampsPath = "$dirPath$newFilename"
@@ -372,13 +351,13 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         }, 100)
     }
 
-    /*파일이름 설정 시 키보드*/
+    /* 파일이름 설정 시 키보드 */
     private fun hideKeyboard(view: View){
         val imm =getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    /*rvfile(녹음파일) 리사이클러뷰 목록 관련*/
+    /* rvfile(녹음파일) 리사이클러뷰 목록 관련 */
     private fun fetchAll(dirName: String){
         GlobalScope.launch {
             records.clear()
@@ -401,7 +380,6 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         intent.putExtra("dirName", dirName)
         intent.putExtra("filePath", audioRecord.filePath)
         Toast.makeText(this, "$dirName ${audioRecord.filename}",Toast.LENGTH_SHORT).show()
-        Log.d("인텐트", "fileListDetailActivity -> ShowFileActivity: ${audioRecord.filePath}")
         startActivity(intent)
     }
 

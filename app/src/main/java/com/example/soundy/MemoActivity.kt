@@ -8,7 +8,6 @@ import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
-
 class MemoActivity : AppCompatActivity() {
 
     lateinit var dbManager: DBManager
@@ -45,7 +44,7 @@ class MemoActivity : AppCompatActivity() {
         val dirName : String? = intent.getStringExtra("dirName")
         val filePath: String ?= intent.getStringExtra("filePath")
 
-        titleText.setText(fileName)
+        titleText.text = fileName
 
         /* 파일 테이블에서 메모 값 읽어오기 */
         dbManager = DBManager(this, "File", null, 1)
@@ -62,7 +61,6 @@ class MemoActivity : AppCompatActivity() {
         }
 
         editMemo.setText(validMemo)
-        Log.d("메모", "validMemo: $validMemo")
 
         cursor.close()
 
@@ -82,7 +80,6 @@ class MemoActivity : AppCompatActivity() {
             intent.putExtra("fileName", fileName)
             intent.putExtra("dirName", dirName)
             intent.putExtra("filePath", filePath)
-            Log.d("인텐트", "MemoActivity -> ShowFileActivity: $filePath")
             startActivity(intent)
             finish()
         }
