@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebView
@@ -35,7 +34,6 @@ class SaveFileActivity : AppCompatActivity() {
     lateinit var btnUpload : Button
     lateinit var btnMemo : ImageView
     lateinit var tvMemoContent : TextView
-//    lateinit var btnRoutine : Button
     lateinit var btnSave : Button
     lateinit var btnBack : ImageButton
     lateinit var filePath: String
@@ -49,7 +47,6 @@ class SaveFileActivity : AppCompatActivity() {
         btnUpload = findViewById(R.id.btnUpload)
         btnMemo = findViewById(R.id.ivMemo)
         tvMemoContent = findViewById(R.id.tvMemoContent)
-//        btnRoutine = findViewById(R.id.btnRoutine)
         btnSave = findViewById(R.id.btnSave)
         btnBack = findViewById(R.id.btnBack)
 
@@ -75,10 +72,8 @@ class SaveFileActivity : AppCompatActivity() {
             intent.putExtra("fileName", fileName.text)
             intent.putExtra("dirName", dirName)
             intent.putExtra("filePath", filePath)
-            Log.d("인텐트", "SaveFileActivity->MemoActivity: $filePath")
             startActivity(intent)
         }
-
 
         /* 저장 버튼 클릭 시 */
         btnSave.setOnClickListener {
@@ -105,8 +100,6 @@ class SaveFileActivity : AppCompatActivity() {
             if(cursor.count == 1){
                 Toast.makeText(this@SaveFileActivity, "이미 존재하는 파일입니다.", Toast.LENGTH_SHORT).show()
             }else{
-                //sqliteDB = dbManager.writableDatabase
-                //sqliteDB.saveFile(fileName, dirName, addFile, sttContent, routine)
                 Toast.makeText(this@SaveFileActivity, "${fileName.text},$dirName 이(가) 저장되었습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, FileListDetailActivity::class.java)
                 intent.putExtra("fileName", fileName.text)
