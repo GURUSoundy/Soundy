@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.RecognitionListener
-import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.util.Log
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -72,38 +72,23 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
         sqliteDB.close()
         dbManager.close()
 
-//        requestPermission()
-
-        var intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, packageName)
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR")
 
         /* 투두리스트 추가 버튼 */
         btnPlusTodo = findViewById(R.id.btnPlusTodo)
         btnPlusTodo.setOnClickListener {
 
-            setListener()
-            /* speechRecogniser 호출 */
-            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
-            speechRecognizer.setRecognitionListener(recognitionListener)
-            speechRecognizer.startListening(intent)
-
-            dbManager = DBManager(this, "TodoList", null, 1)
-            sqliteDB = dbManager.writableDatabase
-            sqliteDB.execSQL("INSERT INTO TodoList VALUES('$date', '$tvResult', 0);")
-
-            sqliteDB.close()
-            dbManager.close()
-
-
-            /* 투두리스트 추가 후 액티비티 새로고침(추가한 투두리스트 보이게) */
-            val intent = intent
-            finish()
-            overridePendingTransition(0, 0)
-            startActivity(intent)
-            overridePendingTransition(0, 0)
-
-            Toast.makeText(this, "투두리스트 추가 완료", Toast.LENGTH_SHORT).show()
+            val sttIntent = Intent(this, ToDoSTTActivity::class.java)
+            sttIntent.putExtra("date", date)
+            startActivity(sttIntent)
+//
+//            /* 투두리스트 추가 후 액티비티 새로고침(추가한 투두리스트 보이게) */
+//            val intent = intent
+//            finish()
+//            overridePendingTransition(0, 0)
+//            startActivity(intent)
+//            overridePendingTransition(0, 0)
+//
+//            Toast.makeText(this, "투두리스트 추가 완료", Toast.LENGTH_SHORT).show()
         }
 
         /*뒤로가기 버튼 */
