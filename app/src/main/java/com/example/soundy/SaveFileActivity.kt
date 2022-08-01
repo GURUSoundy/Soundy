@@ -1,6 +1,5 @@
 package com.example.soundy
 
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
@@ -13,7 +12,6 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.widget.*
 import androidx.annotation.RequiresApi
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -25,8 +23,6 @@ class SaveFileActivity : AppCompatActivity() {
     lateinit var sqliteDB: SQLiteDatabase
     lateinit var routineSqliteDB: SQLiteDatabase
 
-    lateinit var sttContent : String
-    lateinit var routine : String
     lateinit var dirName : String
 
     lateinit var mWebView: WebView
@@ -36,8 +32,8 @@ class SaveFileActivity : AppCompatActivity() {
     lateinit var btnMypage : ImageButton
     lateinit var fileName : TextView
     lateinit var btnUpload : Button
-    lateinit var btnStt : ImageView
-    lateinit var tvSttContent : TextView
+    lateinit var btnMemo : ImageView
+    lateinit var tvMemoContent : TextView
 //    lateinit var btnRoutine : Button
     lateinit var btnSave : Button
     lateinit var btnBack : ImageButton
@@ -49,8 +45,8 @@ class SaveFileActivity : AppCompatActivity() {
 
         fileName = findViewById(R.id.fileName)
         btnUpload = findViewById(R.id.btnUpload)
-        btnStt = findViewById(R.id.ivStt)
-        tvSttContent = findViewById(R.id.tvSttContent)
+        btnMemo = findViewById(R.id.ivMemo)
+        tvMemoContent = findViewById(R.id.tvMemoContent)
 //        btnRoutine = findViewById(R.id.btnRoutine)
         btnSave = findViewById(R.id.btnSave)
         btnBack = findViewById(R.id.btnBack)
@@ -66,32 +62,17 @@ class SaveFileActivity : AppCompatActivity() {
         setmWebViewFileUploadPossible()
         with(mWebView) { this.loadUrl("file:///android_asset/upload.html") }
 
-        /* 업로드 버튼 클릭 시
-        btnUpload.setOnClickListener {
-            // 파일 목록이 팝업으로 떠서 사용자가 직접 고를 수 있게
-            // 그리고 버튼 텍스트가 해당 파일명으로 바뀜
-        } */
-
-        /* 인텐트로 stt 내용 받아와서 stt 텍스트뷰를 통해 일부 내용을 보여줌 */
-        sttContent = "아직 없어요.."
-        //val sttContent = intent.getStringExtra("sttContent")
-        tvSttContent.setText(sttContent)
-
-        /*
-        /* 복습 루틴 버튼 클릭 시 */
-        btnRoutine.setOnClickListener {
-
-            val cal = Calendar.getInstance()
-            val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                routine = "${year}-${month+1}-${dayOfMonth}"
-                Toast.makeText(this@SaveFileActivity, "${year}년 ${month+1}월 ${dayOfMonth}일로 설정되었습니다.", Toast.LENGTH_SHORT).show()
-            }
-            DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH)).show()
-
-        }*/
-
         dirName = intent.getStringExtra("dirName").toString()
         fileName.setText(intent.getStringExtra("fileName"))
+
+        /* 메모 부분 클릭 시 */
+        tvMemoContent.setOnClickListener {
+            val intent = Intent(this, MemoActivity::class.java)
+            intent.putExtra("fileName", fileName.text)
+            intent.putExtra("dirName", dirName)
+            startActivity(intent)
+        }
+
 
         /* 저장 버튼 클릭 시 */
         btnSave.setOnClickListener {
@@ -121,6 +102,8 @@ class SaveFileActivity : AppCompatActivity() {
                 //sqliteDB = dbManager.writableDatabase
                 //sqliteDB.saveFile(fileName, dirName, addFile, sttContent, routine)
                 Toast.makeText(this@SaveFileActivity, "${fileName.text},$dirName 이(가) 저장되었습니다.", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, FileListDetailActivity::class.java)
+                intent.putExtra("dirName", dirName)
                 finish()
             }
         }

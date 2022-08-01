@@ -7,11 +7,11 @@
     android:layout_height="match_parent"
     android:background="@color/beige"
     android:orientation="vertical"
-    tools:context=".SttActivity"
+    tools:context=".MemoActivity"
     tools:layout_editor_absoluteY="25dp">
 
     <Button
-        android:id="@+id/btnSaveStt"
+        android:id="@+id/btnSaveMemo"
         android:layout_width="340dp"
         android:layout_height="55dp"
         android:layout_marginBottom="35dp"
@@ -56,7 +56,7 @@
             android:layout_height="match_parent"
             android:backgroundTint="@color/beige"
             android:gravity="center"
-            android:text="STT 수정"
+            android:text="메모"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -83,13 +83,10 @@
 
     <ImageView
         android:id="@+id/Imgsttback"
-        android:layout_width="355dp"
-        android:layout_height="464dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_width="370dp"
+        android:layout_height="490dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         app:srcCompat="@drawable/sttback" />
@@ -105,12 +102,12 @@
         app:srcCompat="@drawable/stt_icon" />
 
     <TextView
-        android:id="@+id/textStt"
+        android:id="@+id/textMemo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="15dp"
-        android:text="STT(Speach To Text)"
+        android:text="메모"
         android:textColor="#797A7E"
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/bar"
@@ -122,15 +119,15 @@
         android:layout_height="2px"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="41dp"
-        android:layout_marginBottom="407dp"
+        android:layout_marginBottom="428dp"
         android:background="#797A7E"
         app:layout_constraintBottom_toBottomOf="@+id/Imgsttback"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/EditStt"
+        android:id="@+id/editMemo"
         android:layout_width="316dp"
         android:layout_height="373dp"
         android:layout_marginStart="100dp"
