@@ -6,6 +6,10 @@
   노래를 듣는 것처럼 '들으면서' 복습할 수 없을까?  
   타인에게 수업하듯이 설명하면서 나만의 언어로 공부하자!  
   
+  ## 기본 데이터베이스
+[Soundy Initial DB.zip](https://github.com/GURUSoundy/Soundy/files/9244063/Soundy.Initial.DB.zip)
+
+  
 ## 시연 영상(유튜브 링크)
 [![[서울여자대학교] Programming GURU2 | Android 19조 | Soundy](http://img.youtube.com/vi/gnjjecICp44/0.jpg)](https://youtu.be/gnjjecICp44) 
 
