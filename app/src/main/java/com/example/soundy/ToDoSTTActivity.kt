@@ -29,6 +29,8 @@ class ToDoSTTActivity : AppCompatActivity() {
 
     lateinit var btnRecord : Button
     lateinit var tvResult : TextView
+    lateinit var btnBack : Button
+    lateinit var btnMyPage : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,20 @@ class ToDoSTTActivity : AppCompatActivity() {
 
         btnRecord = findViewById(R.id.btnStart)
         tvResult = findViewById(R.id.tvResult)
+
+        btnBack = findViewById(R.id.btnBack)
+        btnMyPage = findViewById(R.id.btnMypage)
+
+        /* 뒤로가기 버튼 */
+        btnBack.setOnClickListener {
+            finish()
+        }
+
+        /* 마이페이지 이동 버튼 */
+        btnMyPage.setOnClickListener {
+            val intent = Intent(this, MyPageActivity::class.java)
+            startActivity(intent)
+        }
 
         requestPermission()
 

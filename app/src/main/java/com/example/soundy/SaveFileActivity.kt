@@ -92,6 +92,7 @@ class SaveFileActivity : AppCompatActivity() {
             intent.putExtra("dirName", dirName)
             intent.putExtra("filePath", filePath)
             startActivity(intent)
+            finish()
         }
 
         /* 저장 버튼 클릭 시 */
