@@ -1,10 +1,9 @@
 package com.example.soundy
 
-import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.provider.BaseColumns
+import android.speech.RecognitionListener
 
 class DBManager(
     context: Context?,
@@ -15,7 +14,7 @@ class DBManager(
     override fun onCreate(db: SQLiteDatabase?) {
         db!!.execSQL("CREATE TABLE User (id text PRIMARY KEY, nickname text, password text)")
         db!!.execSQL("CREATE TABLE Directory (dirname text, endDate text)")
-        db!!.execSQL("CREATE TABLE File (fileName text PRIMARY KEY, dirName text, addFile text, stt text, routine text)")
+        db!!.execSQL("CREATE TABLE File (fileName text PRIMARY KEY, dirName text, addFile text, memo text)")
         db!!.execSQL("CREATE TABLE TodoList(date DATE not null, list text, isChecked int)")  // isChecked: 0 - 체크X / 1 - 체크O
     }
 

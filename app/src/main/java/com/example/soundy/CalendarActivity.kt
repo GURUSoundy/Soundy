@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -162,9 +161,13 @@ class CalendarActivity : AppCompatActivity(), OnItemListner {
 
         val intent = Intent(this, ToDoListActivity::class.java)
         intent.putExtra("month", yearMonthFromDate(selectedDate))
-        intent.putExtra("day", dayText)
+        if (dayText.length == 1) {
+            var formattedDayText: String = "0$dayText"
+            intent.putExtra("day", formattedDayText)
+        } else {
+            intent.putExtra("day", dayText)
+        }
         startActivity(intent)
-        finish()
     }
 
 }

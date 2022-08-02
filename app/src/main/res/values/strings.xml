@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Soundy</string>
     <string name="btn_forget_password"><u>비밀번호를 잊었다면?</u></string>
+    <string name="routine_description">* 복습 루틴은 에빙하우스 망각 곡선 가설에 의거하여 녹음 파일이 저장된 날로부터 <b>하루 뒤, 일주일 뒤, 한달 뒤</b>로 설정되며, <u>복습 루틴은 자동으로 투두리스트에 추가됩니다.</u></string>
 </resources>
