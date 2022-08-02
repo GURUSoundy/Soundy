@@ -15,11 +15,11 @@
 
   
 ## 프로토타입
-![proto_2](https://user-images.githubusercontent.com/63189595/182382469-527494d0-0b72-4ba2-962b-2024073ad474.png)
 ![proto_1](https://user-images.githubusercontent.com/63189595/182382477-8270f2bf-4a4a-48b6-b69c-21b9752027ac.png)
+![proto_2](https://user-images.githubusercontent.com/63189595/182382469-527494d0-0b72-4ba2-962b-2024073ad474.png)
 
 
 ## 정보구조도
 <p align="center">
 <img width="500" alt="Soundy IA (Editted)" src="https://user-images.githubusercontent.com/63189595/182383352-b623c155-7643-49cc-ab3d-1cf3bb1ff032.png">
-</
+</p>
