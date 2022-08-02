@@ -78,8 +78,10 @@ class SaveFileActivity : AppCompatActivity() {
 
             if (img.visibility == View.GONE) {
                 img.visibility = View.VISIBLE
+                btnSave.visibility=View.GONE
             } else {
                 img.visibility = View.GONE
+                btnSave.visibility=View.VISIBLE
             }
         }
 
