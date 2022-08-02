@@ -1,7 +1,6 @@
 package com.example.soundy
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.sqlite.SQLiteDatabase
@@ -12,6 +11,7 @@ import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -24,13 +24,13 @@ class ToDoSTTActivity : AppCompatActivity() {
     private lateinit var speechRecognizer: SpeechRecognizer
     private lateinit var recognitionListener: RecognitionListener
 
-    lateinit var dbManager: DBManager
-    lateinit var sqliteDB: SQLiteDatabase
+    lateinit var dbManager : DBManager
+    lateinit var sqliteDB : SQLiteDatabase
 
     lateinit var btnRecord : Button
     lateinit var tvResult : TextView
-    lateinit var btnBack : Button
-    lateinit var btnMyPage : Button
+    lateinit var btnBack : ImageButton
+    lateinit var btnMyPage : ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

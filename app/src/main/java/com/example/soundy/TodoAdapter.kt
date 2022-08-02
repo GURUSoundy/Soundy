@@ -24,7 +24,7 @@ class TodoAdapter(val todoList: ArrayList<Todos>) : RecyclerView.Adapter<TodoAda
         }
 
     override fun onBindViewHolder(holder: TodoAdapter.TodoViewHolder, position: Int) {
-        var todoText = todoList.get(position).todoText
+        var todoText = todoList[position].todoText
         holder.todoText.text = todoText
 
         /* DB에 저장된 todoChecked 값이 0이면 false, 1이면 true 상태로 출력 */

@@ -7,12 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.SpeechRecognizer
-import android.util.Log
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_todo_list.*
-
 
 class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
 
@@ -72,7 +70,6 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
         sqliteDB.close()
         dbManager.close()
 
-
         /* 투두리스트 추가 버튼 */
         btnPlusTodo = findViewById(R.id.btnPlusTodo)
         btnPlusTodo.setOnClickListener {
@@ -80,18 +77,9 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
             val sttIntent = Intent(this, ToDoSTTActivity::class.java)
             sttIntent.putExtra("date", date)
             startActivity(sttIntent)
-//
-//            /* 투두리스트 추가 후 액티비티 새로고침(추가한 투두리스트 보이게) */
-//            val intent = intent
-//            finish()
-//            overridePendingTransition(0, 0)
-//            startActivity(intent)
-//            overridePendingTransition(0, 0)
-//
-//            Toast.makeText(this, "투두리스트 추가 완료", Toast.LENGTH_SHORT).show()
         }
 
-        /*뒤로가기 버튼 */
+        /* 뒤로가기 버튼 */
         btnBack = findViewById(R.id.btnBack)
         btnBack.setOnClickListener{
             val intent = Intent(this, CalendarActivity::class.java)
@@ -139,48 +127,6 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
             overridePendingTransition(0, 0)
         }
     }
-
-//
-//    /* 오디오 접근 권한 설정 함수 */
-//    private fun requestPermission() {
-//        if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this,
-//                Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-//
-//            ActivityCompat.requestPermissions(this,
-//                arrayOf(Manifest.permission.RECORD_AUDIO), 0)
-//            Toast.makeText(this, "오디오 접근 권한이 허용되었습니다.", Toast.LENGTH_SHORT).show()
-//        }
-//    }
-//
-
-    /*
-    override fun onAddButtonClicked(todo: String) {
-        /* 투두리스트 추가 */
-        if (todo == "") {
-            Toast.makeText(this, "투두리스트 내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
-            /* 디렉토리 이름 입력 안됐을때 추가 버튼을 클릭하면 토스트 메시지와 함께 팝업 사라짐 -> 추후 수정 필요 */
-        } else {
-            dbManager = DBManager(this, "TodoList", null, 1)
-            sqliteDB = dbManager.writableDatabase
-            sqliteDB.execSQL("INSERT INTO TodoList VALUES('$date', '$todo', 0);")
-
-            sqliteDB.close()
-            dbManager.close()
-            Toast.makeText(this, "투두리스트 추가 완료", Toast.LENGTH_SHORT).show()
-
-            /* 투두리스트 추가 후 액티비티 새로고침(추가한 투두리스트 보이게) */
-            val intent = intent
-            finish();
-            overridePendingTransition(0, 0)
-            startActivity(intent)
-            overridePendingTransition(0, 0)
-        }
-    }
-
-    override fun onCancelButtonClicked() {
-    }
-    */
-
 
     /* 음성 녹음 함수 */
     private fun setListener() {
@@ -230,12 +176,10 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
                 for (i in 0 until matches.size) {
                     tvResult = matches[i]
                 }
-
             }
 
             override fun onPartialResults(partialResults: Bundle?) {}
             override fun onEvent(eventType: Int, params: Bundle?) {}
-
         }
     }
 
