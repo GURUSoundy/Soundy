@@ -24,7 +24,7 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     /* 채널 생성 */
-    private fun createNotificationChannel(context: Context) { // context : 실행하고 있는 앱의 상태나 맥락
+    private fun createNotificationChannel(context: Context) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationChannel = NotificationChannel(
@@ -50,5 +50,4 @@ class AlarmReceiver : BroadcastReceiver() {
             notify(NOTIFICATION_ID, build.build())
         }
     }
-
 }

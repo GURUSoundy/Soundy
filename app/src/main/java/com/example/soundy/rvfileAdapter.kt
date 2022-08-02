@@ -22,13 +22,13 @@ class rvfileAdapter(var records: ArrayList<audioRecord>, var listener: OnItemCli
             itemView.setOnLongClickListener(this)
         }
 
-        /*녹음파일 simpleclick*/
+        /* 녹음파일 simpleclick */
         override fun onClick(p0: View?) {
             val position=adapterPosition
             if(position != RecyclerView.NO_POSITION)
                 listener.onItemClickListener(position)
         }
-        /*녹음파일 꾹 누름 = longclick*/
+        /* 녹음파일 longclick */
         override fun onLongClick(p0: View?): Boolean {
             val position=adapterPosition
             if(position != RecyclerView.NO_POSITION)
@@ -54,7 +54,7 @@ class rvfileAdapter(var records: ArrayList<audioRecord>, var listener: OnItemCli
             var date = Date (record.timestamp)
             var strDate = sdf.format(date)
 
-            /*녹음파일에 보여질 정보(제목, 녹음길이)*/
+            /* 녹음파일에 보여질 정보(제목, 녹음길이, 날짜) */
             holder.rvFilename.text = record.filename
             holder.rvMeta.text = "${record.duration} $strDate"
         }

@@ -70,7 +70,8 @@ class ResetPasswordAvtivity() : AppCompatActivity() {
 
                 Toast.makeText(this, "비밀번호가 변경되었습니다.", Toast.LENGTH_SHORT).show()
 
-            } else { /* 아이디가 존재하지 않을 경우 */
+            } else {
+                /* 아이디가 존재하지 않을 경우 */
                 Toast.makeText(this, "존재하지 않는 아이디입니다.", Toast.LENGTH_SHORT).show()
             }
         }

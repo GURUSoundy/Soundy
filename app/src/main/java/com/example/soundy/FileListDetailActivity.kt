@@ -73,7 +73,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         dirName = passedIntent.getStringExtra("dirName").toString()
         titleText.text = dirName
 
-        /* 녹음 기능 추가 중인 코드 */
+        /* 녹음 기능 코드 */
         permissionGranted=ActivityCompat.checkSelfPermission(this,permissions[0])==PackageManager.PERMISSION_GRANTED
 
         if(!permissionGranted)
@@ -259,8 +259,10 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
         dirPath="${externalCacheDir?.absolutePath}/"
 
         var simpleDateFormat = SimpleDateFormat("yyyy.MM.DD_hh.mm.ss")
+        //var simpleDateFormat = SimpleDateFormat("yyyy.MM.DD")
         var date=simpleDateFormat.format(Date())
         filename="audioRecord"
+        //filename="audioRecord"
 
         recorder.apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)
@@ -294,7 +296,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
 
         recorder.apply {
             stop()
-            reset() // mediarecorder went away with unhandled events 해결 일단..?
+            reset()
             release()
         }
         isPaused=false

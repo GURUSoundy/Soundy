@@ -60,7 +60,7 @@ class AlarmActivity : AppCompatActivity() {
             M_ALARM_REQUEST_CODE,
             Intent(this, AlarmReceiver::class.java),
             PendingIntent.FLAG_NO_CREATE
-        ) // 있으면 가져오고 없으면 안 만든다. (null)
+        )
 
         if ((pendingIntent == null) and alarmModel.onOff) {
             //알람은 꺼져있는데, 데이터는 켜져있는 경우
@@ -125,7 +125,7 @@ class AlarmActivity : AppCompatActivity() {
                     PendingIntent.FLAG_UPDATE_CURRENT
                 ) // 있으면 새로 만든 걸로 업데이트
 
-                /* 복습 루틴에 맞게 울리도록 변경 해야됨 */
+                /* 복습 루틴에 맞게 울리도록 변경  */
                 alarmManager.setInexactRepeating( // 정시에 반복
                     AlarmManager.RTC_WAKEUP, // RTC_WAKEUP : 실제 시간 기준으로 wakeup , ELAPSED_REALTIME_WAKEUP : 부팅 시간 기준으로 wakeup
                     calender.timeInMillis, // 언제 알람이 발동할지.
@@ -136,8 +136,6 @@ class AlarmActivity : AppCompatActivity() {
                 /* off -> 알람 제거 */
                 cancelAlarm()
             }
-
-
         }
     }
 
@@ -169,7 +167,7 @@ class AlarmActivity : AppCompatActivity() {
             M_ALARM_REQUEST_CODE,
             Intent(this, AlarmReceiver::class.java),
             PendingIntent.FLAG_NO_CREATE
-        ) // 있으면 가져오고 없으면 안만든다. (null)
+        )
 
         pendingIntent?.cancel() // 기존 알람 삭제
     }

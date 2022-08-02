@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
                 editor.putString("userNickName", nickname)
                 editor.apply()
 
-                /* 로그인 잘 완료되면 목록 액티비티로 넘어감 */
+                /* 로그인 완료되면 목록 액티비티로 넘어감 */
                 val intent = Intent(this, FileListActivity::class.java)
                 startActivity(intent)
 

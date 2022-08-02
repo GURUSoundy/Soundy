@@ -39,8 +39,7 @@ class SaveFileActivity : AppCompatActivity() {
     lateinit var btnSave : Button
     lateinit var btnBack : ImageButton
     lateinit var filePath: String
-
-    lateinit var btnmark : ImageButton // 망각
+    lateinit var btnmark : ImageButton
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,8 +52,7 @@ class SaveFileActivity : AppCompatActivity() {
         tvMemoContent = findViewById(R.id.tvMemoContent)
         btnSave = findViewById(R.id.btnSave)
         btnBack = findViewById(R.id.btnBack)
-
-        btnmark=findViewById(R.id.btn_mark) // 망각
+        btnmark=findViewById(R.id.btn_mark)
 
         dbManager = DBManager(this, "File", null, 1)
         sqliteDB = dbManager.readableDatabase

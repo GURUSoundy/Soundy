@@ -81,7 +81,7 @@ class AccountWithdrawalActivity : AppCompatActivity() {
                 sqliteDB.close()
                 dbManager.close()
 
-                /* !!!!! autoLogin 값 지워주는 로직  !!!!! */
+                /* autoLogin 값 지워주는 로직 */
                 val unAuto = getSharedPreferences("autoLogin", Context.MODE_PRIVATE)
                 val editor = unAuto.edit()
                 editor.clear()

@@ -46,7 +46,6 @@ class MyPageActivity : AppCompatActivity() {
             finish()
             overridePendingTransition(R.anim.none, R.anim.horizon_exit_to_right)
         }
-        /*!!!!!각 페이지에 맞게 이름 수정해야 함!!!!!!*/
 
         /* 프로필수정 버튼 */
         btnProfile.setOnClickListener {
@@ -69,7 +68,7 @@ class MyPageActivity : AppCompatActivity() {
 
         /* 로그아웃 버튼 */
         btnLogout.setOnClickListener {
-            /* !!!!! autoLogin 값 지워주는 로직  !!!!! */
+            /* autoLogin 값 지워주는 로직 */
             val unAuto = getSharedPreferences("autoLogin", Context.MODE_PRIVATE)
             val editor = unAuto.edit()
             editor.clear()
