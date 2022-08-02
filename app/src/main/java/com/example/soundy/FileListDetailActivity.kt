@@ -36,7 +36,7 @@ class FileListDetailActivity : AppCompatActivity(),Timer.OnTimerTickListener, On
     private var permissionGranted = false
     private lateinit var recorder: MediaRecorder
     private var dirPath = ""
-    private var filename = ""
+    private var filename = "audioRecord"
     private var isRecording=false
     private var isPaused = false
     private var duration=""
