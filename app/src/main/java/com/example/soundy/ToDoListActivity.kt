@@ -82,8 +82,6 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
         /* 뒤로가기 버튼 */
         btnBack = findViewById(R.id.btnBack)
         btnBack.setOnClickListener{
-            val intent = Intent(this, CalendarActivity::class.java)
-            startActivity(intent)
             finish()
         }
 
