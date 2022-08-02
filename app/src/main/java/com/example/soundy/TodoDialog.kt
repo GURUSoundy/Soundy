@@ -25,7 +25,7 @@ class TodoDialog(context: Context, Interface: TodoDialogInterface) : Dialog(cont
         /* 배경을 투명하게 */
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        // 추가 버튼 클릭 시 onAddButtonClicked 호출 후 종료
+        /* 추가 버튼 클릭 시 onAddButtonClicked 호출 후 종료 */
         btnAdd.setOnClickListener {
             newTodoContent = findViewById(R.id.newTodoContent)
 
@@ -37,7 +37,7 @@ class TodoDialog(context: Context, Interface: TodoDialogInterface) : Dialog(cont
             dismiss()
         }
 
-        // 취소 버튼 클릭 시 onCancelButtonClicked 호출 후 종료
+        /* 취소 버튼 클릭 시 onCancelButtonClicked 호출 후 종료 */
         btnCancel.setOnClickListener {
             TodoDialogInterface.onCancelButtonClicked()
             dismiss()
