@@ -19,7 +19,6 @@ class ShowFileActivity : AppCompatActivity() {
     lateinit var fileName : String
     lateinit var dirName : String
     lateinit var memoContent : String
-    lateinit var routine : String
     lateinit var filePath: String
 
     lateinit var titleText : TextView

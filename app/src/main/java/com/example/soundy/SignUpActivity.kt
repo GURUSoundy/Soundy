@@ -40,7 +40,7 @@ class SignUpActivity : AppCompatActivity() {
             val pw = enterPw.text.toString()
             val pw_re = rePw.text.toString()
 
-            /* 유저가 항목을 다 채우지 않았을 경우*/
+            /* 유저가 항목을 다 채우지 않았을 경우 */
             if (nick.length == 0 || id.length == 0 || pw.length == 0 || pw_re.length == 0) {
                 Toast.makeText(this, "모든 정보를 입력해주세요", Toast.LENGTH_SHORT).show()
             }
