@@ -21,5 +21,5 @@
 
 ## 정보구조도
 <p align="center">
-<img width="500" alt="Soundy IA (Editted)" src="https://user-images.githubusercontent.com/63189595/182383352-b623c155-7643-49cc-ab3d-1cf3bb1ff032.png">
+<img width="500" alt="Soundy IA (Editted) (1)" src="https://user-images.githubusercontent.com/63189595/182431427-10721368-adc0-454a-ba56-3493cfc315f4.png">
 </p>
