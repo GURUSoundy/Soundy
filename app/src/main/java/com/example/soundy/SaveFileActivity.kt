@@ -7,11 +7,13 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.widget.*
 import androidx.annotation.RequiresApi
+import kotlinx.android.synthetic.main.activity_save_file.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -38,6 +40,8 @@ class SaveFileActivity : AppCompatActivity() {
     lateinit var btnBack : ImageButton
     lateinit var filePath: String
 
+    lateinit var btnmark : ImageButton // 망각
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +53,8 @@ class SaveFileActivity : AppCompatActivity() {
         tvMemoContent = findViewById(R.id.tvMemoContent)
         btnSave = findViewById(R.id.btnSave)
         btnBack = findViewById(R.id.btnBack)
+
+        btnmark=findViewById(R.id.btn_mark) // 망각
 
         dbManager = DBManager(this, "File", null, 1)
         sqliteDB = dbManager.readableDatabase
@@ -65,6 +71,17 @@ class SaveFileActivity : AppCompatActivity() {
         dirName = passedIntent.getStringExtra("dirName").toString()
         fileName.setText(passedIntent.getStringExtra("fileName"))
         filePath = passedIntent.getStringExtra("filePath").toString()
+
+        /*btn_mark 클릭 시 망각곡선 이미지 뜸*/
+        btn_mark.setOnClickListener {
+            val img = findViewById<View>(R.id.img_curve) as ImageView
+
+            if (img.visibility == View.GONE) {
+                img.visibility = View.VISIBLE
+            } else {
+                img.visibility = View.GONE
+            }
+        }
 
         /* 메모 부분 클릭 시 */
         tvMemoContent.setOnClickListener {
