@@ -5,6 +5,9 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.RecognitionListener
+import android.speech.SpeechRecognizer
+import android.util.Log
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -22,8 +25,12 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
     lateinit var todoDate: TextView
     lateinit var achieveProgress: ProgressBar
 
+    private lateinit var speechRecognizer: SpeechRecognizer
+    private lateinit var recognitionListener: RecognitionListener
+
     lateinit var btnPlusTodo: FloatingActionButton
     lateinit var date: String
+    var tvResult : String = ""
 
     lateinit var todoLayout: LinearLayout
 
@@ -54,25 +61,41 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
                 completedTodo += 1
             }
         }
+
         if (todoNum != 0) {
             achieveProgress.progress = ((completedTodo.toDouble() / todoNum.toDouble()) * 100).toInt()
         } else {
             achieveProgress.progress = 0
         }
 
+        cursor1.close()
         sqliteDB.close()
         dbManager.close()
+
 
         /* 투두리스트 추가 버튼 */
         btnPlusTodo = findViewById(R.id.btnPlusTodo)
         btnPlusTodo.setOnClickListener {
-            val TodoDialog = TodoDialog(this, this)
-            TodoDialog.show()
+
+            val sttIntent = Intent(this, ToDoSTTActivity::class.java)
+            sttIntent.putExtra("date", date)
+            startActivity(sttIntent)
+//
+//            /* 투두리스트 추가 후 액티비티 새로고침(추가한 투두리스트 보이게) */
+//            val intent = intent
+//            finish()
+//            overridePendingTransition(0, 0)
+//            startActivity(intent)
+//            overridePendingTransition(0, 0)
+//
+//            Toast.makeText(this, "투두리스트 추가 완료", Toast.LENGTH_SHORT).show()
         }
 
-        /*뒤로가기 버튼*/
+        /*뒤로가기 버튼 */
         btnBack = findViewById(R.id.btnBack)
         btnBack.setOnClickListener{
+            val intent = Intent(this, CalendarActivity::class.java)
+            startActivity(intent)
             finish()
         }
 
@@ -98,6 +121,7 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
             todoList.add(Todos(todoText, todoChecked))
         }
 
+        cursor.close()
         sqliteDB.close()
         dbManager.close()
 
@@ -109,13 +133,27 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
         todoLayout = findViewById(R.id.todoLayout)
         todoLayout.setOnClickListener {
             val intent = intent
-            finish();
+            finish()
             overridePendingTransition(0, 0)
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
     }
 
+//
+//    /* 오디오 접근 권한 설정 함수 */
+//    private fun requestPermission() {
+//        if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this,
+//                Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+//
+//            ActivityCompat.requestPermissions(this,
+//                arrayOf(Manifest.permission.RECORD_AUDIO), 0)
+//            Toast.makeText(this, "오디오 접근 권한이 허용되었습니다.", Toast.LENGTH_SHORT).show()
+//        }
+//    }
+//
+
+    /*
     override fun onAddButtonClicked(todo: String) {
         /* 투두리스트 추가 */
         if (todo == "") {
@@ -141,6 +179,69 @@ class ToDoListActivity : AppCompatActivity(), TodoDialogInterface {
 
     override fun onCancelButtonClicked() {
     }
+    */
 
 
+    /* 음성 녹음 함수 */
+    private fun setListener() {
+        recognitionListener = object: RecognitionListener {
+            override fun onReadyForSpeech(params: Bundle?) {
+                Toast.makeText(applicationContext, "음성 녹음을 시작합니다.", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onBeginningOfSpeech() {}
+            override fun onRmsChanged(rmsdB: Float) {}
+            override fun onBufferReceived(buffer: ByteArray?) {}
+            override fun onEndOfSpeech() {}
+
+            /* 에러 발생 시 호출 */
+            override fun onError(error: Int) {
+                var message: String
+
+                when (error) {
+                    SpeechRecognizer.ERROR_AUDIO ->
+                        message = "오디오 에러"
+                    SpeechRecognizer.ERROR_CLIENT ->
+                        message = "클라이언트 에러"
+                    SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS ->
+                        message = "퍼미션 없음"
+                    SpeechRecognizer.ERROR_NETWORK ->
+                        message = "네트워크 에러"
+                    SpeechRecognizer.ERROR_NETWORK_TIMEOUT ->
+                        message = "네트워크 타임아웃"
+                    SpeechRecognizer.ERROR_NO_MATCH ->
+                        message = "찾을 수 없음"
+                    SpeechRecognizer.ERROR_RECOGNIZER_BUSY ->
+                        message = "RECOGNIZER 실행중"
+                    SpeechRecognizer.ERROR_SERVER ->
+                        message = "서버가 이상함"
+                    SpeechRecognizer.ERROR_SPEECH_TIMEOUT ->
+                        message = "말하는 시간초과"
+                    else ->
+                        message = "알 수 없는 오류"
+                }
+                Toast.makeText(applicationContext, "에러 발생 $message", Toast.LENGTH_SHORT).show()
+            }
+
+            /* STT 값 배열에 저장하여 String으로 변환하기 */
+            override fun onResults(results: Bundle?) {
+                var matches: java.util.ArrayList<String> = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION) as java.util.ArrayList<String>
+
+                for (i in 0 until matches.size) {
+                    tvResult = matches[i]
+                }
+
+            }
+
+            override fun onPartialResults(partialResults: Bundle?) {}
+            override fun onEvent(eventType: Int, params: Bundle?) {}
+
+        }
+    }
+
+    override fun onAddButtonClicked(todoContent: String) {
+    }
+
+    override fun onCancelButtonClicked() {
+    }
 }

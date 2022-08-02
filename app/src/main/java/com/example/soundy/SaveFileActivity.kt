@@ -7,13 +7,11 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.widget.*
 import androidx.annotation.RequiresApi
-import kotlinx.android.synthetic.main.activity_save_file.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -36,23 +34,19 @@ class SaveFileActivity : AppCompatActivity() {
     lateinit var btnUpload : Button
     lateinit var btnMemo : ImageView
     lateinit var tvMemoContent : TextView
-    //    lateinit var btnRoutine : Button
     lateinit var btnSave : Button
     lateinit var btnBack : ImageButton
-    lateinit var btnmark : ImageButton // 망각
+    lateinit var filePath: String
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_save_file)
 
-        btnmark=findViewById(R.id.btn_mark) // 망각
-
         fileName = findViewById(R.id.fileName)
         btnUpload = findViewById(R.id.btnUpload)
         btnMemo = findViewById(R.id.ivMemo)
         tvMemoContent = findViewById(R.id.tvMemoContent)
-//        btnRoutine = findViewById(R.id.btnRoutine)
         btnSave = findViewById(R.id.btnSave)
         btnBack = findViewById(R.id.btnBack)
 
@@ -67,28 +61,19 @@ class SaveFileActivity : AppCompatActivity() {
         setmWebViewFileUploadPossible()
         with(mWebView) { this.loadUrl("file:///android_asset/upload.html") }
 
-        dirName = intent.getStringExtra("dirName").toString()
-        fileName.setText(intent.getStringExtra("fileName"))
-
-        /*btn_mark 클릭 시 망각곡선 이미지 뜸*/
-        btn_mark.setOnClickListener {
-            val img = findViewById<View>(R.id.img_curve) as ImageView
-
-            if (img.visibility == View.GONE) {
-                img.visibility = View.VISIBLE
-            } else {
-                img.visibility = View.GONE
-            }
-        }
+        var passedIntent : Intent = intent
+        dirName = passedIntent.getStringExtra("dirName").toString()
+        fileName.setText(passedIntent.getStringExtra("fileName"))
+        filePath = passedIntent.getStringExtra("filePath").toString()
 
         /* 메모 부분 클릭 시 */
         tvMemoContent.setOnClickListener {
             val intent = Intent(this, MemoActivity::class.java)
             intent.putExtra("fileName", fileName.text)
             intent.putExtra("dirName", dirName)
+            intent.putExtra("filePath", filePath)
             startActivity(intent)
         }
-
 
         /* 저장 버튼 클릭 시 */
         btnSave.setOnClickListener {
@@ -115,11 +100,11 @@ class SaveFileActivity : AppCompatActivity() {
             if(cursor.count == 1){
                 Toast.makeText(this@SaveFileActivity, "이미 존재하는 파일입니다.", Toast.LENGTH_SHORT).show()
             }else{
-                //sqliteDB = dbManager.writableDatabase
-                //sqliteDB.saveFile(fileName, dirName, addFile, sttContent, routine)
                 Toast.makeText(this@SaveFileActivity, "${fileName.text},$dirName 이(가) 저장되었습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, FileListDetailActivity::class.java)
+                intent.putExtra("fileName", fileName.text)
                 intent.putExtra("dirName", dirName)
+                intent.putExtra("filePath", filePath)
                 finish()
             }
         }

@@ -4,10 +4,8 @@ import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
-import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-
 
 class MemoActivity : AppCompatActivity() {
 
@@ -45,7 +43,7 @@ class MemoActivity : AppCompatActivity() {
         val dirName : String? = intent.getStringExtra("dirName")
         val filePath: String ?= intent.getStringExtra("filePath")
 
-        titleText.setText(fileName)
+        titleText.text = fileName
 
         /* 파일 테이블에서 메모 값 읽어오기 */
         dbManager = DBManager(this, "File", null, 1)
@@ -62,7 +60,6 @@ class MemoActivity : AppCompatActivity() {
         }
 
         editMemo.setText(validMemo)
-        Log.d("메모", "validMemo: $validMemo")
 
         cursor.close()
 
